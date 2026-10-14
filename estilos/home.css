@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+.apresentacao {
+    margin-bottom: 56px;
+}
+
+.apresentacao h2 {
+    font-size: 2.6em;
+    margin-bottom: 20px;
+}
+
+.apresentacao p {
+    max-width: 36em;
+    font-size: 1.15em;
+}
+
+.generos h2 {
+    margin-bottom: 24px;
+}
+
+.lista-generos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 24px;
+}
+
+.lista-generos .lirico   { --cor-genero: var(--cor-lirico); }
+.lista-generos .satirico { --cor-genero: var(--cor-satirico); }
+.lista-generos .cordel   { --cor-genero: var(--cor-cordel); }
+
+.lista-generos article {
+    position: relative;
+    padding: 24px;
+    background-color: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-top: 10px solid var(--cor-genero, var(--destaque));
+    border-radius: var(--raio);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.lista-generos article:hover {
+    box-shadow: 0 6px 16px rgba(44, 30, 17, 0.15);
+    transform: translateY(-3px);
+}
+
+.lista-generos img {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 5px;
+}
+
+.lista-generos h3 {
+    font-size: 1.7em;
+    margin-bottom: 12px;
+}
+
+.lista-generos h3 a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.lista-generos article:hover h3 a {
+    text-decoration: underline;
+}
+
+.lista-generos h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.lista-generos article:focus-within {
+    outline: 3px solid var(--foco);
+    outline-offset: 4px;
+}
+
+.lista-generos h3 a:focus-visible {
+    outline: none;
+}
+
+.lista-generos p {
+    font-size: 0.95em;
+}

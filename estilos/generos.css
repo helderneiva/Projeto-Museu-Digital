@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+body {
+    --cor-genero: var(--destaque);
+    --texto-genero: var(--texto-inverso);
+}
+
+body:has(.menu a[aria-current="page"][href="lirico.html"]) {
+    --cor-genero: var(--cor-lirico);
+    --texto-genero: var(--texto);
+}
+
+body:has(.menu a[aria-current="page"][href="satirico.html"]) {
+    --cor-genero: var(--cor-satirico);
+    --texto-genero: var(--texto);
+}
+
+body:has(.menu a[aria-current="page"][href="cordel.html"]) {
+    --cor-genero: var(--cor-cordel);
+    --texto-genero: var(--texto-inverso);
+}
+
+.introducao {
+    margin-bottom: 48px;
+}
+
+.introducao p {
+    max-width: 36em;
+    padding: 24px;
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+    border-radius: var(--raio);
+    font-size: 1.3em;
+    line-height: 1.5;
+}
+
+.historia,
+.subgeneros {
+    margin-bottom: 40px;
+}
+
+.historia p,
+.subgeneros p,
+main > section[id] > p {
+    max-width: 42em;
+}
+
+.historia h2,
+.subgeneros h2,
+main > section[id] > h2 {
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 4px solid var(--cor-genero);
+}
+
+.indice-subgeneros ul,
+.outros-generos ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.indice-subgeneros a,
+.outros-generos a {
+    --cor-chip: var(--cor-genero);
+    --texto-chip: var(--texto-genero);
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--fundo-card);
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: 700;
+    border: 2px solid var(--cor-chip);
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.indice-subgeneros a:hover,
+.outros-generos a:hover {
+    background-color: var(--cor-chip);
+    color: var(--texto-chip);
+}
+
+.indice-subgeneros {
+    margin-bottom: 48px;
+}
+
+main > section[id] {
+    margin-bottom: 56px;
+}
+
+main > section[id] > p:last-of-type {
+    margin-top: 28px;
+    margin-bottom: 16px;
+    font-family: var(--fonte-titulo);
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--destaque-inverso);
+}
+
+.lista-cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 20px;
+}
+
+.card {
+    position: relative; 
+    padding: 20px;
+    background-color: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-top: 8px solid var(--cor-genero);
+    border-radius: var(--raio);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(44, 30, 17, 0.15);
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    margin-bottom: 4px;
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+}
+
+.card h3 a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.card:hover h3 a {
+    text-decoration: underline;
+}
+
+.card h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.card:focus-within {
+    outline: 3px solid var(--foco);
+    outline-offset: 4px;
+}
+
+.card h3 a:focus-visible {
+    outline: none;
+}
+
+.card .autor {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--destaque-inverso);
+}
+
+.card p {
+    font-size: 0.95em;
+}
+
+.card p + p {
+    margin-top: 10px;
+}
+
+.outros-generos {
+    margin-top: 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--borda);
+}
+
+.outros-generos h2 {
+    margin-bottom: 12px;
+    font-size: 1.4em;
+}
+
+.outros-generos a[href="lirico.html"] {
+    --cor-chip: var(--cor-lirico);
+    --texto-chip: var(--texto);
+}
+
+.outros-generos a[href="satirico.html"] {
+    --cor-chip: var(--cor-satirico);
+    --texto-chip: var(--texto);
+}
+
+.outros-generos a[href="cordel.html"] {
+    --cor-chip: var(--cor-cordel);
+    --texto-chip: var(--texto-inverso);
+}
