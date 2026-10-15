@@ -1,0 +1,251 @@
+@charset "UTF-8";
+
+body {
+    --cor-genero: var(--destaque);
+    --texto-genero: var(--texto-inverso);
+    --genero-claro: var(--fundo-card);
+    --genero-escuro: var(--destaque-inverso);
+    --faixa: 1px solid var(--borda);
+    --titulo-cabecalho: var(--texto);
+    --sublinhado-menu: var(--destaque);
+}
+
+body:has(.menu a[aria-current="page"][href="lirico.html"]) {
+    --fundo-principal: #FFFBF3;
+    --texto: #28200C;
+    --fundo-card: #FFEFC8;
+    --texto-inverso: #FFFBF3;
+    --destaque: #856700;
+    --destaque-inverso: #42330A;
+    --borda: #F2DBA4;
+    --foco: #856700;
+
+    --cor-genero: var(--cor-lirico);
+    --texto-genero: var(--texto);
+    --genero-claro: var(--fundo-card);
+    --genero-escuro: var(--destaque-inverso);
+    --faixa: 8px solid var(--cor-genero);
+    --titulo-cabecalho: var(--genero-escuro);
+    --sublinhado-menu: var(--genero-escuro);
+}
+
+body:has(.menu a[aria-current="page"][href="satirico.html"]) {
+    --fundo-principal: #FFFBF6;
+    --texto: #2A1F11;
+    --fundo-card: #FEEDD6;
+    --texto-inverso: #FFFBF6;
+    --destaque: #856537;
+    --destaque-inverso: #463111;
+    --borda: #F1D9B9;
+    --foco: #856537;
+
+    --cor-genero: var(--cor-satirico);
+    --texto-genero: var(--texto);
+    --genero-claro: var(--fundo-card);
+    --genero-escuro: var(--destaque-inverso);
+    --faixa: 8px solid var(--cor-genero);
+    --titulo-cabecalho: var(--genero-escuro);
+    --sublinhado-menu: var(--genero-escuro);
+}
+
+body:has(.menu a[aria-current="page"][href="cordel.html"]) {
+    --fundo-principal: #FBFBFE;
+    --texto: #1E2030;
+    --fundo-card: #ECEFFF;
+    --texto-inverso: #FBFBFE;
+    --destaque: #626699;
+    --destaque-inverso: #30334F;
+    --borda: #D8DCF4;
+    --foco: #626699;
+
+    --cor-genero: var(--cor-cordel);
+    --texto-genero: var(--texto-inverso);
+    --genero-claro: var(--fundo-card);
+    --genero-escuro: var(--destaque-inverso);
+    --faixa: 8px solid var(--cor-genero);
+    --titulo-cabecalho: var(--genero-escuro);
+    --sublinhado-menu: var(--genero-escuro);
+}
+
+header {
+    border-bottom: var(--faixa);
+}
+
+header h1 {
+    color: var(--titulo-cabecalho);
+}
+
+.menu > ul > li > a[aria-current="page"] {
+    text-decoration-color: var(--sublinhado-menu);
+}
+
+.tema-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    padding: 8px;
+    font-family: var(--fonte-texto);
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--texto);
+    background: none;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.tema-toggle:hover {
+    color: var(--texto-inverso);
+    background-color: var(--destaque-inverso);
+}
+
+.tema-toggle svg {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+.tema-toggle[aria-pressed="true"] .tema-toggle-texto {
+    text-decoration: underline;
+    text-decoration-color: var(--sublinhado-menu);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+}
+
+.tema-toggle[aria-pressed="true"]:hover .tema-toggle-texto {
+    text-decoration-color: currentColor;
+}
+
+@media (max-width: 768px) {
+    .tema-toggle {
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0;
+        border: 2px solid var(--texto);
+    }
+
+    .tema-toggle:hover {
+        color: var(--texto);
+        background-color: var(--fundo-card);
+    }
+
+    .tema-toggle[aria-pressed="true"] {
+        background-color: var(--fundo-card);
+    }
+
+    .tema-toggle-texto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: rect(0, 0, 0, 0);
+        white-space: nowrap;
+    }
+}
+
+
+:root[data-tema="escuro"] {
+    color-scheme: dark;
+}
+
+:root[data-tema="claro"] {
+    color-scheme: light;
+}
+
+:root[data-tema="escuro"] body {
+    /* Home (base #A84E08): matiz 50° (OKLCH) da cor-base */
+    --fundo-principal: #19120F;
+    --texto: #ECE2DE;
+    --fundo-card: #221B17;
+    --texto-inverso: #ECE2DE;
+    --destaque: #F1AC86;
+    --destaque-inverso: #2D2420;
+    --borda: #443B36;
+    --foco: #F1AC86;
+
+    --cor-genero: #5A3521;
+    --texto-genero: #ECE2DE;
+    --genero-claro: #221B17;
+    --genero-escuro: #F1AC86;
+    --faixa: 1px solid var(--borda);
+}
+
+:root[data-tema="escuro"] body:has(.menu a[aria-current="page"][href="lirico.html"]) {
+    /* Lírico (base --cor-lirico #FED15C): matiz 88° (OKLCH) da cor-base */
+    --fundo-principal: #16140D;
+    --texto: #E8E4DC;
+    --fundo-card: #201D15;
+    --texto-inverso: #E8E4DC;
+    --destaque: #D8BA70;
+    --destaque-inverso: #2A261E;
+    --borda: #413D33;
+    --foco: #D8BA70;
+
+    --cor-genero: #4E3D11;
+    --texto-genero: #E8E4DC;
+    --genero-claro: #201D15;
+    --genero-escuro: #D8BA70;
+    --faixa: 8px solid var(--destaque);
+}
+
+:root[data-tema="escuro"] body:has(.menu a[aria-current="page"][href="satirico.html"]) {
+   
+    --fundo-principal: #16130F;
+    --texto: #E9E4DC;
+    --fundo-card: #201C17;
+    --texto-inverso: #E9E4DC;
+    --destaque: #DAB787;
+    --destaque-inverso: #2A2620;
+    --borda: #413C36;
+    --foco: #DAB787;
+
+    --cor-genero: #4C3D27;
+    --texto-genero: #E9E4DC;
+    --genero-claro: #201C17;
+    --genero-escuro: #DAB787;
+    --faixa: 8px solid var(--destaque);
+}
+
+:root[data-tema="escuro"] body:has(.menu a[aria-current="page"][href="cordel.html"]) {
+    
+    --fundo-principal: #131318;
+    --texto: #E3E4ED;
+    --fundo-card: #1C1C22;
+    --texto-inverso: #E3E4ED;
+    --destaque: #B3B9EE;
+    --destaque-inverso: #25262C;
+    --borda: #3B3D44;
+    --foco: #B3B9EE;
+
+    --cor-genero: #3B3E55;
+    --texto-genero: #E3E4ED;
+    --genero-claro: #1C1C22;
+    --genero-escuro: #B3B9EE;
+    --faixa: 8px solid var(--destaque);
+}
+
+:root[data-tema="escuro"] .outros-generos a[href="lirico.html"] {
+    --texto-chip: #121212;
+    --borda-chip: var(--cor-lirico);
+}
+
+:root[data-tema="escuro"] .outros-generos a[href="satirico.html"] {
+    --texto-chip: #121212;
+    --borda-chip: var(--cor-satirico);
+}
+
+:root[data-tema="escuro"] .outros-generos a[href="cordel.html"] {
+    --cor-chip: #3B3E55;
+    --texto-chip: #E3E4ED;
+    --borda-chip: #B3B9EE;
+}
+
+:root[data-tema="escuro"] img {
+    filter: brightness(0.9);
+}

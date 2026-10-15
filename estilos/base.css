@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'Grenze';
   src: url('../fontes/Grenze-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;          
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -21,10 +21,10 @@
     --fonte-texto: 'Platypi', Georgia, serif;
 
     --fundo-principal: #FDFBF7;
-    --texto: #2C1E11;           
-    --fundo-card: #F4EFE6;      
-    --texto-inverso: #FDFBF7;   
-    --destaque: #A84E08;        
+    --texto: #2C1E11;
+    --fundo-card: #F4EFE6;
+    --texto-inverso: #FDFBF7;
+    --destaque: #A84E08;
     --destaque-inverso: #4A2E16;
 
     --borda: #E4DCD0;
@@ -34,9 +34,28 @@
     --cor-satirico:#E1C7A4;
     --cor-cordel:#424453;
 
-    --largura-max: 1200px;
-    --margem-lateral: max(16px, calc((100% - var(--largura-max)) / 2));
+    --margem-lateral: 16px;
     --raio: 8px;
+}
+
+@media (min-width: 769px) {
+    :root { --margem-lateral: 32px; }
+}
+
+@media (min-width: 1280px) {
+    :root { --margem-lateral: 80px; }
+}
+
+@media (min-width: 1600px) {
+    :root { --margem-lateral: 200px; }
+}
+
+@media (min-width: 1920px) {
+    :root { --margem-lateral: 360px; }
+}
+
+@media (min-width: 2560px) {
+    :root { --margem-lateral: 680px; }
 }
 
 *{
@@ -68,6 +87,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   clip-path: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
@@ -95,8 +115,7 @@ img {
     height: auto;
 }
 
-/*Tipografia*/
-
+/* ---------- Tipografia ---------- */
 h2, h3, h4 {
     font-family: var(--fonte-titulo);
     font-weight: 700;
@@ -186,6 +205,8 @@ header h1 {
 .menu > ul > li > a[aria-current="page"]:hover {
     text-decoration-color: currentColor;
 }
+
+/* ---------- Botão hambúrguer (criado pelo script.js) ---------- */
 .menu-toggle {
   display: none;
 }
@@ -239,19 +260,41 @@ main {
 }
 
 .app-footer {
-    padding: 24px var(--margem-lateral);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 32px;
+    padding: 28px var(--margem-lateral);
     background-color: var(--destaque-inverso);
     color: var(--texto-inverso);
+    border-top: 6px solid var(--destaque);
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.app-footer p + p {
+    margin-top: 0;
 }
 
 .app-footer a {
     color: var(--texto-inverso);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: color 0.3s ease;
+}
+
+.app-footer a:hover {
+    color: var(--cor-lirico);
 }
 
 .app-footer a:focus-visible {
-    outline-color: var(--texto-inverso);
+    outline-color: var(--cor-lirico);
 }
 
+/* ---------- Mobile ---------- */
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.5em;
@@ -291,5 +334,10 @@ main {
 
     .menu-toggle[aria-expanded="false"] + .menu {
         display: none;
+    }
+
+    .app-footer {
+        flex-direction: column;
+        text-align: center;
     }
 }

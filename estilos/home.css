@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .apresentacao {
     margin-bottom: 56px;
 }
@@ -15,23 +14,29 @@
     font-size: 1.15em;
 }
 
+.generos {
+    margin-bottom: 64px;
+}
+
 .generos h2 {
     margin-bottom: 24px;
 }
 
 .lista-generos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
 }
 
+/* Cor de cada gênero */
 .lista-generos .lirico   { --cor-genero: var(--cor-lirico); }
 .lista-generos .satirico { --cor-genero: var(--cor-satirico); }
 .lista-generos .cordel   { --cor-genero: var(--cor-cordel); }
 
 .lista-generos article {
-    position: relative;
-    padding: 24px;
+    position: relative; 
+    padding: 0 0 24px;
+    overflow: hidden;
     background-color: var(--fundo-card);
     border: 1px solid var(--borda);
     border-top: 10px solid var(--cor-genero, var(--destaque));
@@ -47,8 +52,13 @@
 .lista-generos img {
     display: block;
     width: 100%;
-    margin-bottom: 16px;
-    border-radius: 5px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.lista-generos h3,
+.lista-generos p {
+    padding: 0 24px;
 }
 
 .lista-generos h3 {
@@ -82,4 +92,52 @@
 
 .lista-generos p {
     font-size: 0.95em;
+}
+
+.sobre {
+    padding: 32px;
+    background-color: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-left: 10px solid var(--destaque);
+    border-radius: var(--raio);
+}
+
+.sobre h2 {
+    font-size: 2em;
+    color: var(--destaque-inverso);
+}
+
+.sobre p {
+    max-width: 42em;
+}
+
+.tecnologias {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.tecnologias li {
+    padding: 16px 20px;
+    background-color: var(--fundo-principal);
+    border: 1px solid var(--borda);
+    border-top: 5px solid var(--destaque);
+    border-radius: var(--raio);
+    font-size: 0.95em;
+}
+
+.tecnologias strong {
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--fonte-titulo);
+    font-size: 1.4em;
+    color: var(--destaque-inverso);
+}
+
+@media (max-width: 768px) {
+    .sobre {
+        padding: 20px;
+    }
 }

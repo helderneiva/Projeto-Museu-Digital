@@ -3,21 +3,41 @@
 body {
     --cor-genero: var(--destaque);
     --texto-genero: var(--texto-inverso);
+    --genero-claro: var(--fundo-card);
+    --genero-escuro: var(--destaque-inverso);
 }
 
 body:has(.menu a[aria-current="page"][href="lirico.html"]) {
     --cor-genero: var(--cor-lirico);
     --texto-genero: var(--texto);
+    --genero-claro: #FFF4D1;
+    --genero-escuro: #6B4F00;
 }
 
 body:has(.menu a[aria-current="page"][href="satirico.html"]) {
     --cor-genero: var(--cor-satirico);
     --texto-genero: var(--texto);
+    --genero-claro: #F6EEE2;
+    --genero-escuro: #7A5028;
 }
 
 body:has(.menu a[aria-current="page"][href="cordel.html"]) {
     --cor-genero: var(--cor-cordel);
     --texto-genero: var(--texto-inverso);
+    --genero-claro: #E8E9EF;
+    --genero-escuro: var(--cor-cordel);
+}
+
+header {
+    border-bottom: 8px solid var(--cor-genero);
+}
+
+header h1 {
+    color: var(--genero-escuro);
+}
+
+.menu > ul > li > a[aria-current="page"] {
+    text-decoration-color: var(--genero-escuro);
 }
 
 .introducao {
@@ -26,7 +46,7 @@ body:has(.menu a[aria-current="page"][href="cordel.html"]) {
 
 .introducao p {
     max-width: 36em;
-    padding: 24px;
+    padding: 28px;
     background-color: var(--cor-genero);
     color: var(--texto-genero);
     border-radius: var(--raio);
@@ -34,25 +54,38 @@ body:has(.menu a[aria-current="page"][href="cordel.html"]) {
     line-height: 1.5;
 }
 
-.historia,
-.subgeneros {
+.historia {
     margin-bottom: 40px;
+    padding: 28px;
+    background-color: var(--genero-claro);
+    border-left: 10px solid var(--cor-genero);
+    border-radius: var(--raio);
 }
 
-.historia p,
-.subgeneros p,
-main > section[id] > p {
+.historia h2 {
+    color: var(--genero-escuro);
+}
+
+.historia p {
     max-width: 42em;
 }
 
-.historia h2,
-.subgeneros h2,
-main > section[id] > h2 {
-    margin-bottom: 16px;
+/* ---------- Subgêneros (texto de apresentação) ---------- */
+.subgeneros {
+    margin-bottom: 32px;
+}
+
+.subgeneros h2 {
     padding-bottom: 6px;
+    color: var(--genero-escuro);
     border-bottom: 4px solid var(--cor-genero);
 }
 
+.subgeneros p {
+    max-width: 42em;
+}
+
+/* ---------- Índice de subgêneros e "Continue explorando" ---------- */
 .indice-subgeneros ul,
 .outros-generos ul {
     list-style: none;
@@ -65,13 +98,14 @@ main > section[id] > h2 {
 .outros-generos a {
     --cor-chip: var(--cor-genero);
     --texto-chip: var(--texto-genero);
+    --borda-chip: var(--genero-escuro);
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--fundo-card);
+    background-color: var(--genero-claro);
     color: var(--texto);
     text-decoration: none;
     font-weight: 700;
-    border: 2px solid var(--cor-chip);
+    border: 2px solid var(--borda-chip);
     border-radius: 999px;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
@@ -86,9 +120,23 @@ main > section[id] > h2 {
     margin-bottom: 48px;
 }
 
+/* ---------- Seções de subgênero: faixa na cor do gênero ---------- */
 main > section[id] {
     margin-bottom: 56px;
 }
+
+main > section[id] > h2 {
+    margin-bottom: 16px;
+    padding: 10px 20px;
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+    border-radius: var(--raio);
+}
+
+main > section[id] > p {
+    max-width: 42em;
+}
+
 
 main > section[id] > p:last-of-type {
     margin-top: 28px;
@@ -96,20 +144,20 @@ main > section[id] > p:last-of-type {
     font-family: var(--fonte-titulo);
     font-size: 1.3em;
     font-weight: 700;
-    color: var(--destaque-inverso);
+    color: var(--genero-escuro);
 }
 
 .lista-cards {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
 }
 
 .card {
-    position: relative; 
+    position: relative; /* referência do link esticado */
     padding: 20px;
-    background-color: var(--fundo-card);
+    background-color: var(--genero-claro);
     border: 1px solid var(--borda);
     border-top: 8px solid var(--cor-genero);
     border-radius: var(--raio);
@@ -136,6 +184,7 @@ main > section[id] > p:last-of-type {
     text-decoration: underline;
 }
 
+/* Link esticado: o card inteiro fica clicável, com um único link no HTML */
 .card h3 a::after {
     content: "";
     position: absolute;
@@ -143,7 +192,7 @@ main > section[id] > p:last-of-type {
 }
 
 .card:focus-within {
-    outline: 3px solid var(--foco);
+    outline: 3px solid var(--genero-escuro);
     outline-offset: 4px;
 }
 
@@ -154,7 +203,7 @@ main > section[id] > p:last-of-type {
 .card .autor {
     font-size: 0.95em;
     font-weight: 700;
-    color: var(--destaque-inverso);
+    color: var(--genero-escuro);
 }
 
 .card p {
@@ -165,6 +214,20 @@ main > section[id] > p:last-of-type {
     margin-top: 10px;
 }
 
+/* Selo das obras protegidas (leitura em fonte externa) */
+.card .status {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 2px 12px;
+    background-color: var(--fundo-principal);
+    color: var(--genero-escuro);
+    border: 1px solid var(--genero-escuro);
+    border-radius: 999px;
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+/* ---------- Continue explorando ---------- */
 .outros-generos {
     margin-top: 16px;
     padding-top: 32px;
@@ -176,17 +239,32 @@ main > section[id] > p:last-of-type {
     font-size: 1.4em;
 }
 
+/* Cada link leva a cor do gênero de destino */
 .outros-generos a[href="lirico.html"] {
     --cor-chip: var(--cor-lirico);
     --texto-chip: var(--texto);
+    --borda-chip: #6B4F00;
 }
 
 .outros-generos a[href="satirico.html"] {
     --cor-chip: var(--cor-satirico);
     --texto-chip: var(--texto);
+    --borda-chip: #7A5028;
 }
 
 .outros-generos a[href="cordel.html"] {
     --cor-chip: var(--cor-cordel);
     --texto-chip: var(--texto-inverso);
+    --borda-chip: var(--cor-cordel);
+}
+
+@media (max-width: 768px) {
+    .introducao p {
+        padding: 20px;
+        font-size: 1.15em;
+    }
+
+    .historia {
+        padding: 20px;
+    }
 }
