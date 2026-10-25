@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+/* Página do poema (poema.html). As cores vêm do tema.css: a paleta do gênero
+   é escolhida pelo item ativo do menu, que o poema.js marca. */
+
+.migalhas {
+    margin-bottom: 32px;
+}
+
+.migalhas a {
+    font-weight: 700;
+}
+
+.poema {
+    max-width: 42em;
+}
+
+.poema-titulo {
+    margin-bottom: 8px;
+    font-size: 2.4em;
+}
+
+.poema-autor {
+    font-family: var(--fonte-titulo);
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--genero-escuro);
+}
+
+.poema-tag {
+    display: inline-block;
+    margin: 16px 0 28px;
+    padding: 4px 16px;
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+    border-radius: 999px;
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+/* ---------- Versos ---------- */
+.versos {
+    padding: 28px 32px;
+    background-color: var(--genero-claro);
+    border: 1px solid var(--borda);
+    border-left: 10px solid var(--cor-genero);
+    border-radius: var(--raio);
+    font-size: 1.15em;
+    line-height: 1.9;
+}
+
+.versos p {
+    white-space: pre-line;
+}
+
+.versos p + p {
+    margin-top: 24px;
+}
+
+/* Poemas em formato visual (ex.: Madrigal de um Louco) */
+.versos-figura {
+    text-align: center;
+    font-style: italic;
+}
+
+.versos-figura p {
+    line-height: 1.7;
+}
+
+/* ---------- Fonte e obras de leitura externa ---------- */
+.poema-resumo {
+    font-size: 1.1em;
+}
+
+.poema-fonte,
+.poema-nota {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.poema-fonte {
+    padding-top: 16px;
+    border-top: 1px solid var(--borda);
+}
+
+.botao-leitura {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 24px;
+    background-color: var(--destaque-inverso);
+    color: var(--texto-inverso);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--raio);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.botao-leitura:hover {
+    background-color: var(--destaque);
+    color: var(--fundo-principal);
+}
+
+/* ---------- Continue lendo (outros poemas do mesmo subgênero) ---------- */
+.mais-poemas {
+    max-width: 42em;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--borda);
+}
+
+.mais-poemas h2 {
+    margin-bottom: 12px;
+    font-size: 1.4em;
+}
+
+.mais-poemas ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.mais-poemas a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--genero-claro);
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: 700;
+    border: 2px solid var(--genero-escuro);
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.mais-poemas a:hover {
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+}
+
+@media (max-width: 768px) {
+    .poema-titulo {
+        font-size: 1.9em;
+    }
+
+    .versos {
+        padding: 20px;
+    }
+}

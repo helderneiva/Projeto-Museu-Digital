@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poema | Museu da Poesia Digital</title>
+    <meta name="description" content="Leia poemas da literatura brasileira no Museu da Poesia Digital.">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#4A2E16">
+    <link rel="stylesheet" href="estilos/base.css">
+    <link rel="stylesheet" href="estilos/tema.css">
+    <link rel="stylesheet" href="estilos/poema.css">
+    <script src="scripts/tema.js"></script>
+</head>
+<body>
+
+    <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
+
+    <header>
+        <h1>Museu da Poesia Digital</h1>
+        <nav class="menu" id="menu-principal" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="lirico.html">Lírico</a></li>
+                <li><a href="satirico.html">Satírico</a></li>
+                <li><a href="cordel.html">Cordel</a></li>
+                <li><a href="index.html#sobre">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo">
+        <nav class="migalhas" aria-label="Você está em">
+            <a id="voltar" href="index.html">&larr; Voltar</a>
+        </nav>
+
+        <article class="poema" id="poema">
+            <noscript>
+                <p>Esta página precisa de JavaScript para mostrar o poema. Volte ao <a href="index.html">início</a> para navegar pelos gêneros.</p>
+            </noscript>
+        </article>
+
+        <nav class="mais-poemas" id="mais-poemas" aria-labelledby="mais-poemas-titulo" hidden>
+            <h2 id="mais-poemas-titulo">Continue lendo</h2>
+            <ul></ul>
+        </nav>
+    </main>
+
+    <footer class="app-footer">
+        <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
+    </footer>
+
+    <script src="scripts/script.js"></script>
+    <script src="dados/poemas.js"></script>
+    <script src="scripts/poema.js"></script>
+</body>
+</html>

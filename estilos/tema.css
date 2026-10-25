@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+/* =========================================================
+   TEMA: cores por gênero (claro) + tema escuro + botão de tema
+   Usado por: index.html, páginas de gênero e poema.html
+   O tema escuro é ativado por <html data-tema="escuro"> (scripts/tema.js)
+   ========================================================= */
+
+/* ---------- Tema claro (padrão) ---------- */
 body {
     --cor-genero: var(--destaque);
     --texto-genero: var(--texto-inverso);
@@ -11,6 +18,7 @@ body {
 }
 
 body:has(.menu a[aria-current="page"][href="lirico.html"]) {
+    /* Paleta Lírico: matiz 88° da --cor-lirico, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FFFBF3;
     --texto: #28200C;
     --fundo-card: #FFEFC8;
@@ -30,6 +38,7 @@ body:has(.menu a[aria-current="page"][href="lirico.html"]) {
 }
 
 body:has(.menu a[aria-current="page"][href="satirico.html"]) {
+    /* Paleta Sátira: matiz 75° da --cor-satirico, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FFFBF6;
     --texto: #2A1F11;
     --fundo-card: #FEEDD6;
@@ -49,6 +58,7 @@ body:has(.menu a[aria-current="page"][href="satirico.html"]) {
 }
 
 body:has(.menu a[aria-current="page"][href="cordel.html"]) {
+    /* Paleta Cordel: matiz 279° da --cor-cordel, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FBFBFE;
     --texto: #1E2030;
     --fundo-card: #ECEFFF;
@@ -79,6 +89,9 @@ header h1 {
     text-decoration-color: var(--sublinhado-menu);
 }
 
+/* ---------- Botão de tema (criado pelo tema.js) ----------
+   No computador: mesmo visual dos links do menu (cores, hover, sublinhado).
+   No celular: mesmo visual do botão hambúrguer. */
 .tema-toggle {
     display: inline-flex;
     align-items: center;
@@ -109,6 +122,7 @@ header h1 {
     fill: currentColor;
 }
 
+/* Tema escuro ligado: sublinhado igual ao do item de menu da página atual */
 .tema-toggle[aria-pressed="true"] .tema-toggle-texto {
     text-decoration: underline;
     text-decoration-color: var(--sublinhado-menu);
@@ -149,7 +163,19 @@ header h1 {
     }
 }
 
-
+/* =========================================================
+   TEMA ESCURO: uma paleta própria para a home e para cada gênero
+   Mesmo molde do :root (fundo, texto, card, destaque, borda...).
+   Cada paleta nasce da cor-base da página, na matiz dela
+   (--cor-home, --cor-lirico, --cor-satirico, --cor-cordel),
+   e todas usam os mesmos degraus de luminosidade, o que mantém
+   o conjunto harmônico e com o mesmo contraste:
+     texto sobre fundo ......... ~14:1
+     acento sobre fundo ........ ~9:1
+     texto sobre o painel ...... ~8:1
+   Regras gerais: fundo nunca preto puro, texto nunca branco puro,
+   acentos claros e dessaturados.
+   ========================================================= */
 :root[data-tema="escuro"] {
     color-scheme: dark;
 }
@@ -195,7 +221,7 @@ header h1 {
 }
 
 :root[data-tema="escuro"] body:has(.menu a[aria-current="page"][href="satirico.html"]) {
-   
+    /* Sátira (base --cor-satirico #E1C7A4): matiz 75° (OKLCH) da cor-base */
     --fundo-principal: #16130F;
     --texto: #E9E4DC;
     --fundo-card: #201C17;
@@ -213,7 +239,7 @@ header h1 {
 }
 
 :root[data-tema="escuro"] body:has(.menu a[aria-current="page"][href="cordel.html"]) {
-    
+    /* Cordel (base --cor-cordel #424453): matiz 279° (OKLCH) da cor-base */
     --fundo-principal: #131318;
     --texto: #E3E4ED;
     --fundo-card: #1C1C22;
@@ -230,6 +256,7 @@ header h1 {
     --faixa: 8px solid var(--destaque);
 }
 
+/* Chips "Continue explorando": texto escuro sobre os fundos claros no hover */
 :root[data-tema="escuro"] .outros-generos a[href="lirico.html"] {
     --texto-chip: #121212;
     --borda-chip: var(--cor-lirico);
@@ -246,6 +273,7 @@ header h1 {
     --borda-chip: #B3B9EE;
 }
 
+/* Imagens um pouco menos brilhantes sobre fundo escuro */
 :root[data-tema="escuro"] img {
     filter: brightness(0.9);
 }

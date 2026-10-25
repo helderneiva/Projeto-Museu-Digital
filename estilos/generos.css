@@ -1,44 +1,6 @@
 @charset "UTF-8";
 
-body {
-    --cor-genero: var(--destaque);
-    --texto-genero: var(--texto-inverso);
-    --genero-claro: var(--fundo-card);
-    --genero-escuro: var(--destaque-inverso);
-}
-
-body:has(.menu a[aria-current="page"][href="lirico.html"]) {
-    --cor-genero: var(--cor-lirico);
-    --texto-genero: var(--texto);
-    --genero-claro: #FFF4D1;
-    --genero-escuro: #6B4F00;
-}
-
-body:has(.menu a[aria-current="page"][href="satirico.html"]) {
-    --cor-genero: var(--cor-satirico);
-    --texto-genero: var(--texto);
-    --genero-claro: #F6EEE2;
-    --genero-escuro: #7A5028;
-}
-
-body:has(.menu a[aria-current="page"][href="cordel.html"]) {
-    --cor-genero: var(--cor-cordel);
-    --texto-genero: var(--texto-inverso);
-    --genero-claro: #E8E9EF;
-    --genero-escuro: var(--cor-cordel);
-}
-
-header {
-    border-bottom: 8px solid var(--cor-genero);
-}
-
-header h1 {
-    color: var(--genero-escuro);
-}
-
-.menu > ul > li > a[aria-current="page"] {
-    text-decoration-color: var(--genero-escuro);
-}
+/* As cores de cada gênero ficam em tema.css */
 
 .introducao {
     margin-bottom: 48px;
