@@ -181,7 +181,10 @@ html {
     color: var(--texto-chip);
 }
 
-/* Barra de subgêneros fixa no topo: o leitor sempre sabe onde está */
+/* Barra de subgêneros fixa no topo: o leitor sempre sabe onde está.
+   O box-shadow gigante + clip-path pintam o fundo de ponta a ponta da tela
+   (a barra em si tem só a largura do conteúdo). O clip-path corta o excesso
+   em cima e embaixo, e o box-shadow não cria barra de rolagem horizontal. */
 .indice-subgeneros {
     position: sticky;
     top: 0;
@@ -189,7 +192,8 @@ html {
     margin-bottom: 40px;
     padding: 12px 0;
     background-color: var(--fundo-principal);
-    border-bottom: 1px solid var(--borda);
+    box-shadow: 0 0 0 100vmax var(--fundo-principal);
+    clip-path: inset(0 -100vmax);
 }
 
 /* ---------- Continue explorando ---------- */
@@ -224,7 +228,7 @@ html {
 }
 
 /* ---------- Telas pequenas ---------- */
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
     .introducao {
         grid-template-columns: 1fr;
         padding: 20px;
@@ -238,11 +242,14 @@ html {
         max-width: 22rem;
     }
 
-    /* No celular a barra de chips rola na horizontal, sem ocupar várias linhas */
+    /* No celular a barra de chips rola na horizontal, sem ocupar várias linhas.
+       O padding (compensado pela margem negativa) dá espaço para o contorno de foco
+       não ser cortado pela rolagem. */
     .indice-subgeneros ul {
         flex-wrap: nowrap;
         overflow-x: auto;
-        padding-bottom: 4px;
+        padding: 6px;
+        margin: -6px;
     }
 
     .indice-subgeneros a {

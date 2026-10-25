@@ -24,9 +24,10 @@
     font-weight: 700;
 }
 
+/* Título fluido: entre 1,9rem (celular) e 2,4rem (computador) */
 .poema-titulo {
     margin-bottom: 8px;
-    font-size: 2.4em;
+    font-size: clamp(1.9rem, 4.5vw, 2.4rem);
 }
 
 .poema-autor {
@@ -86,8 +87,11 @@
     color: var(--texto-genero);
 }
 
+/* A segunda declaração (com "/ ''") diz aos leitores de tela que o símbolo é só
+   decorativo; navegadores que não entendem essa sintaxe usam a primeira. */
 .ferramentas button[aria-pressed="true"]::before {
     content: "\2713\00a0";
+    content: "\2713\00a0" / "";
 }
 
 .ferramentas-status {
@@ -253,11 +257,7 @@
     color: var(--texto-genero);
 }
 
-@media (max-width: 768px) {
-    .poema-titulo {
-        font-size: 1.9em;
-    }
-
+@media (max-width: 48rem) {
     .versos {
         padding: 20px;
     }

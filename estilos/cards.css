@@ -9,9 +9,10 @@
 .lista-cards {
     list-style: none;
     display: grid;
-    /* auto-fit estica os cards quando a seção tem poucos poemas;
-       min(100%, 300px) evita estouro em telas muito estreitas */
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    /* auto-fill (e não auto-fit) mantém todos os cards com a mesma largura:
+       quando sobra um card na última linha, ele não se estica e fica alinhado
+       com os demais. min(100%, 16rem) evita estouro em telas muito estreitas. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
     gap: 20px;
 }
 

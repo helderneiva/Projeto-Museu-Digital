@@ -139,7 +139,8 @@ header {
     text-decoration-color: currentColor;
 }
 
-@media (max-width: 768px) {
+/* Mesmo ponto de quebra do menu hambúrguer (64rem), definido em base.css */
+@media (max-width: 64rem) {
     .menu .tema-toggle {
         display: flex;
         width: 100%;

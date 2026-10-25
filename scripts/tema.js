@@ -1,7 +1,10 @@
 // Tema claro/escuro.
 // - Lembra a escolha da pessoa (localStorage); sem escolha, segue o tema do sistema.
-// - Fica no <head> para aplicar o tema antes da página aparecer (evita "piscar").
+// - Fica no <head> como script comum (NÃO é módulo), para aplicar o tema antes da
+//   página aparecer (evita "piscar"). Módulos só rodam depois que a página carrega.
 // - Cria o botão de tema como último item do menu de navegação.
+// - Expõe window.Museu.sincronizarCor(), usada pelo poema-pagina.js depois de
+//   mudar o gênero da página (poema.html).
 (function () {
   const CHAVE_TEMA = 'tema-museu';
   const COR_NAVEGADOR_CLARO = '#4A2E16'; // mesma cor do <meta name="theme-color"> das páginas

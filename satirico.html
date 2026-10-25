@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museu da Poesia Digital | A Arte da Sátira</title>
+    <meta name="color-scheme" content="light dark">
+    <title>A Arte da Sátira | Museu da Poesia Digital</title>
     <meta name="description" content="Conheça a história da sátira na poesia brasileira, de Gregório de Matos a Oswald de Andrade, em sátiras de costumes e epigramas.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Museu da Poesia Digital">
-    <meta property="og:title" content="Museu da Poesia Digital | A Arte da Sátira">
+    <meta property="og:title" content="A Arte da Sátira | Museu da Poesia Digital">
     <meta property="og:description" content="Conheça a história da sátira na poesia brasileira, de Gregório de Matos a Oswald de Andrade, em sátiras de costumes e epigramas.">
-    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
+    <!-- Ao publicar o site, descomente e preencha com os endereços reais:
+    <link rel="canonical" href="https://SEU-DOMINIO/satirico.html">
+    <meta property="og:url" content="https://SEU-DOMINIO/satirico.html">
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/cards.css">
@@ -99,8 +104,8 @@
             <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
-        <nav class="outros-generos" aria-label="Outros gêneros">
-            <h2>Continue explorando</h2>
+        <nav class="outros-generos" aria-labelledby="outros-generos-titulo">
+            <h2 id="outros-generos-titulo">Continue explorando</h2>
             <ul role="list">
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="cordel.html">Cordel</a></li>
@@ -113,10 +118,8 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
-    <script src="scripts/util.js"></script>
-    <script src="scripts/script.js"></script>
-    <script src="dados/poemas.js"></script>
-    <script src="scripts/cards.js"></script>
-    <script src="scripts/indice.js"></script>
+    <script type="module" src="scripts/menu.js"></script>
+    <script type="module" src="scripts/cards.js"></script>
+    <script type="module" src="scripts/indice.js"></script>
 </body>
 </html>

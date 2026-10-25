@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Poema | Museu da Poesia Digital</title>
     <meta name="description" content="Leia poemas da literatura brasileira no Museu da Poesia Digital.">
     <meta property="og:type" content="article">
@@ -10,11 +11,15 @@
     <meta property="og:site_name" content="Museu da Poesia Digital">
     <meta property="og:title" content="Poema | Museu da Poesia Digital">
     <meta property="og:description" content="Leia poemas da literatura brasileira no Museu da Poesia Digital.">
-    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
+    <!-- Título, descrição e og:* são trocados pelo poema-pagina.js, mas os robôs de redes
+         sociais não executam JavaScript: a prévia de compartilhamento mostra sempre este texto.
+         Ao publicar o site, descomente e preencha com a imagem real:
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/poema.css">
@@ -39,7 +44,7 @@
 
     <main id="conteudo">
         <nav class="migalhas" aria-label="Voltar">
-            <a id="voltar" href="index.html">&larr; Voltar</a>
+            <a id="voltar" href="index.html"><span aria-hidden="true">&larr;</span> Voltar</a>
         </nav>
 
         <article class="poema" id="poema">
@@ -60,9 +65,7 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
-    <script src="scripts/util.js"></script>
-    <script src="scripts/script.js"></script>
-    <script src="dados/poemas.js"></script>
-    <script src="scripts/poema-pagina.js"></script>
+    <script type="module" src="scripts/menu.js"></script>
+    <script type="module" src="scripts/poema-pagina.js"></script>
 </body>
 </html>

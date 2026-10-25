@@ -1,8 +1,8 @@
 // Destaca, na barra de subgêneros, a seção que está na tela (IntersectionObserver).
-(function () {
-  const links = [...document.querySelectorAll('.indice-subgeneros a[href^="#"]')];
-  if (links.length === 0 || !('IntersectionObserver' in window)) return;
+// Módulo ES (não precisa importar nada).
+const links = [...document.querySelectorAll('.indice-subgeneros a[href^="#"]')];
 
+if (links.length > 0 && 'IntersectionObserver' in window) {
   const porId = new Map(links.map((link) => [link.getAttribute('href').slice(1), link]));
 
   const observador = new IntersectionObserver(
@@ -22,4 +22,4 @@
     const secao = document.getElementById(id);
     if (secao) observador.observe(secao);
   });
-})();
+}

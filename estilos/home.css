@@ -4,8 +4,9 @@
     margin-bottom: 56px;
 }
 
+/* O tamanho do h1 vem da variável --tamanho-h1 (base.css), fluida em todas as telas */
 .apresentacao h1 {
-    font-size: 2.6em;
+    font-size: var(--tamanho-h1);
     margin-bottom: 20px;
 }
 
@@ -24,7 +25,8 @@
 
 .lista-generos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* min(100%, 280px) evita estouro em telas muito estreitas */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 24px;
 }
 
@@ -34,7 +36,7 @@
 .lista-generos .cordel   { --cor-genero: var(--cor-cordel); }
 
 .lista-generos article {
-    position: relative; 
+    position: relative;
     padding: 0 0 24px;
     overflow: hidden;
     background-color: var(--fundo-card);
@@ -109,9 +111,51 @@
     grid-template-columns: minmax(0, 28rem);
 }
 
-.poema-do-dia .card[data-genero="lirico"]   { --cor-genero: var(--cor-lirico); }
-.poema-do-dia .card[data-genero="satirico"] { --cor-genero: var(--cor-satirico); }
-.poema-do-dia .card[data-genero="cordel"]   { --cor-genero: var(--cor-cordel); }
+/* Na home o <body> não tem data-genero, então cada card traz a paleta completa
+   do próprio gênero (cor da borda, fundo do card, texto e cor de destaque).
+   Os valores são os mesmos de tema.css. */
+.poema-do-dia .card[data-genero="lirico"] {
+    --cor-genero: var(--cor-lirico);
+    --texto-genero: #28200C;
+    --genero-claro: #FFEFC8;
+    --genero-escuro: #42330A;
+}
+
+.poema-do-dia .card[data-genero="satirico"] {
+    --cor-genero: var(--cor-satirico);
+    --texto-genero: #2A1F11;
+    --genero-claro: #FEEDD6;
+    --genero-escuro: #463111;
+}
+
+.poema-do-dia .card[data-genero="cordel"] {
+    --cor-genero: var(--cor-cordel);
+    --texto-genero: #FBFBFE;
+    --genero-claro: #ECEFFF;
+    --genero-escuro: #30334F;
+}
+
+/* Mesmos cards no tema escuro */
+:root[data-tema="escuro"] .poema-do-dia .card[data-genero="lirico"] {
+    --cor-genero: #4E3D11;
+    --texto-genero: #E8E4DC;
+    --genero-claro: #201D15;
+    --genero-escuro: #D8BA70;
+}
+
+:root[data-tema="escuro"] .poema-do-dia .card[data-genero="satirico"] {
+    --cor-genero: #4C3D27;
+    --texto-genero: #E9E4DC;
+    --genero-claro: #201C17;
+    --genero-escuro: #DAB787;
+}
+
+:root[data-tema="escuro"] .poema-do-dia .card[data-genero="cordel"] {
+    --cor-genero: #3B3E55;
+    --texto-genero: #E3E4ED;
+    --genero-claro: #1C1C22;
+    --genero-escuro: #B3B9EE;
+}
 
 .sobre {
     padding: 32px;
@@ -133,7 +177,7 @@
 .tecnologias {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
     gap: 16px;
     margin: 24px 0;
 }
@@ -155,7 +199,7 @@
     color: var(--genero-escuro);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
     .sobre {
         padding: 20px;
     }

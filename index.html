@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museu da Poesia Digital | A história escrita em versos</title>
+    <meta name="color-scheme" content="light dark">
+    <title>A história escrita em versos | Museu da Poesia Digital</title>
     <meta name="description" content="Museu literário digital dedicado ao poema brasileiro: conheça a história dos gêneros lírico, satírico e do cordel e leia poemas de grandes autores.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Museu da Poesia Digital">
-    <meta property="og:title" content="Museu da Poesia Digital | A história escrita em versos">
+    <meta property="og:title" content="A história escrita em versos | Museu da Poesia Digital">
     <meta property="og:description" content="Museu literário digital dedicado ao poema brasileiro: conheça a história dos gêneros lírico, satírico e do cordel e leia poemas de grandes autores.">
-    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
+    <!-- Ao publicar o site, descomente e preencha com os endereços reais:
+    <link rel="canonical" href="https://SEU-DOMINIO/index.html">
+    <meta property="og:url" content="https://SEU-DOMINIO/index.html">
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/cards.css">
@@ -26,7 +31,7 @@
     <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
 
     <header>
-        <a class="marca" href="index.html" aria-current="page">Museu da Poesia Digital</a>
+        <a class="marca" href="index.html">Museu da Poesia Digital</a>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
             <ul role="list">
                 <li><a href="index.html" aria-current="page">Início</a></li>
@@ -84,7 +89,7 @@
             <ul class="tecnologias" role="list">
                 <li><strong>HTML5</strong> Estrutura semântica, com regiões da página, hierarquia de títulos, listas nomeadas e atributos de acessibilidade.</li>
                 <li><strong>CSS3</strong> Layout fluido com Grid e Flexbox, cores e fontes em variáveis, tema claro e escuro, foco visível e respeito a quem prefere menos movimento.</li>
-                <li><strong>JavaScript</strong> Menu acessível, cards montados a partir dos dados, busca, poema do dia, tamanho da letra e marcação de poemas lidos.</li>
+                <li><strong>JavaScript</strong> Módulos ES, menu acessível, cards montados a partir dos dados, busca, poema do dia, tamanho da letra e marcação de poemas lidos.</li>
             </ul>
 
             <p>Os poemas em domínio público podem ser lidos no próprio site ou em fontes indicadas. Os protegidos por direitos autorais levam a fontes externas, respeitando os direitos dos autores e titulares.</p>
@@ -95,9 +100,7 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
-    <script src="scripts/util.js"></script>
-    <script src="scripts/script.js"></script>
-    <script src="dados/poemas.js"></script>
-    <script src="scripts/cards.js"></script>
+    <script type="module" src="scripts/menu.js"></script>
+    <script type="module" src="scripts/cards.js"></script>
 </body>
 </html>

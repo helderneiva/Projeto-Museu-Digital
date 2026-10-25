@@ -4,12 +4,15 @@
    BASE: fontes, variáveis, tipografia, cabeçalho, menu e rodapé
    ========================================================= */
 
-/* Fontes: o navegador usa o .woff2 quando ele existir e cai para o .ttf.
-   Para reduzir o peso, converta os .ttf em .woff2 e coloque-os em /fontes. */
+/* Fontes: aqui só o .ttf é declarado, para o navegador não pedir um .woff2
+   que pode não existir (isso gerava um erro 404 por fonte).
+   Se você converter os .ttf em .woff2 e colocá-los em /fontes, acrescente
+   a linha do woff2 ANTES da linha do .ttf em cada @font-face:
+     src: url('../fontes/Grenze-VariableFont_wght.woff2') format('woff2'),
+          url('../fontes/Grenze-VariableFont_wght.ttf') format('truetype'); */
 @font-face {
     font-family: 'Grenze';
-    src: url('../fontes/Grenze-VariableFont_wght.woff2') format('woff2'),
-         url('../fontes/Grenze-VariableFont_wght.ttf') format('truetype');
+    src: url('../fontes/Grenze-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -17,8 +20,7 @@
 
 @font-face {
     font-family: 'Platypi';
-    src: url('../fontes/Platypi-VariableFont_wght.woff2') format('woff2'),
-         url('../fontes/Platypi-VariableFont_wght.ttf') format('truetype');
+    src: url('../fontes/Platypi-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -48,6 +50,9 @@
     /* Largura máxima do conteúdo e medida de leitura (um só valor para todo o site) */
     --largura-max: 75rem;
     --medida: 65ch;
+
+    /* Tamanho dos títulos de página (h1): fluido, entre o mínimo e o máximo */
+    --tamanho-h1: clamp(2rem, 5vw, 2.6rem);
 
     /* Margem lateral fluida: cresce com a tela e, em telas grandes,
        trava o conteúdo no centro com a largura máxima (sem "saltos" de breakpoint) */
@@ -130,10 +135,11 @@ h1, h2, h3, h4 {
     font-family: var(--fonte-titulo);
     font-weight: 700;
     line-height: 1.2;
+    text-wrap: balance;
 }
 
 h1 {
-    font-size: 2.6em;
+    font-size: var(--tamanho-h1);
     font-weight: 800;
     margin-bottom: 20px;
 }
@@ -197,11 +203,16 @@ header {
 /* Título da página (h1 dentro do <main>) */
 .titulo-pagina {
     margin-bottom: 28px;
-    font-size: 2.6em;
+    font-size: var(--tamanho-h1);
     color: var(--texto);
 }
 
 /* ---------- Menu ---------- */
+/* margin-left: auto mantém o menu à direita mesmo que ele caia para a segunda linha */
+.menu {
+    margin-left: auto;
+}
+
 .menu ul {
     list-style: none;
     display: flex;
@@ -239,7 +250,7 @@ header {
     text-decoration-color: currentColor;
 }
 
-/* ---------- Botão hambúrguer (criado pelo script.js) ---------- */
+/* ---------- Botão hambúrguer (criado pelo menu.js) ---------- */
 .menu-toggle {
     display: none;
 }
@@ -325,17 +336,10 @@ main {
     outline-color: var(--cor-lirico);
 }
 
-/* ---------- Mobile ---------- */
-@media (max-width: 768px) {
-    .marca {
-        font-size: 1.5em;
-    }
-
-    .titulo-pagina,
-    h1 {
-        font-size: 2em;
-    }
-
+/* ---------- Menu recolhido (hambúrguer) ----------
+   O ponto de quebra do menu é maior (64rem = 1024px) que o do restante do layout,
+   porque marca + cinco links + botão de tema não cabem em uma linha em tablets. */
+@media (max-width: 64rem) {
     .menu-toggle {
         display: inline-flex;
         align-items: center;
@@ -355,6 +359,7 @@ main {
 
     .menu {
         flex-basis: 100%;
+        margin-left: 0;
     }
 
     .menu ul {
@@ -370,6 +375,13 @@ main {
 
     .menu-toggle[aria-expanded="false"] + .menu {
         display: none;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 48rem) {
+    .marca {
+        font-size: 1.5em;
     }
 
     .app-footer {

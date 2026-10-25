@@ -1,4 +1,8 @@
 // Dados dos poemas do Museu da Poesia Digital.
+// Módulo ES: exporta AUTORES e POEMAS, que cards.js e poema-pagina.js importam.
+// (Não há mais variáveis globais. Para inspecionar os dados no console, abra a página
+//  e rode: import('./dados/poemas.js').then(m => console.table(m.POEMAS.filter(p => p.revisar)))
+//  — ajuste o caminho se estiver em outra pasta.)
 //
 // Para adicionar um poema, copie um bloco { ... } da lista POEMAS e edite os campos:
 //   id             nome curto, sem acentos nem espaços (usado em poema.html?id=...)
@@ -16,11 +20,10 @@
 //   rotulo         texto do botão do link externo
 //   dominioPublico true ou false (false = obra protegida; mostra o selo no card)
 //   revisar        (opcional) pendência interna: NUNCA é exibida no site.
-//                  Para listar as pendências, rode no console: POEMAS.filter(p => p.revisar)
 //
 // A ordem da lista é a ordem dos cards em cada seção.
 
-const AUTORES = {
+export const AUTORES = {
   "goncalves-dias": "Gonçalves Dias (1823–1864)",
   "oswald-de-andrade": "Oswald de Andrade (1890–1954)",
   "mario-de-andrade": "Mário de Andrade (1893–1945)",
@@ -40,7 +43,7 @@ const AUTORES = {
   "luis-gama": "Luís Gama (1830–1882)"
 };
 
-const POEMAS = [
+export const POEMAS = [
   {
     "id": "ode-ao-burgues",
     "titulo": "Ode ao Burguês",
@@ -62,9 +65,8 @@ const POEMAS = [
     "subnome": "Ode",
     "resumo": "Grande ode de clamor social: em tom solene e eloquente, Castro Alves canta o horror da escravidão e invoca a justiça humana.",
     "externo": "https://codap.ufs.br/uploads/page_attach/path/8283/Navio_negreiro_-_Castro_Alves.pdf",
-    "rotulo": "Ler o poema (PDF da edição da Câmara dos Deputados)",
-    "dominioPublico": true,
-    "revisar": "O rótulo cita a Câmara dos Deputados, mas o PDF está em codap.ufs.br: conferir a edição."
+    "rotulo": "Ler o poema (PDF hospedado pelo Codap/UFS)",
+    "dominioPublico": true
   },
   {
     "id": "cancao-do-exilio",
@@ -79,10 +81,11 @@ const POEMAS = [
       "Nosso céu tem mais estrelas,\nNossas várzeas têm mais flores,\nNossos bosques têm mais vida,\nNossa vida mais amores.",
       "Em cismar, sozinho, à noite,\nMais prazer encontro eu lá;\nMinha terra tem palmeiras,\nOnde canta o Sabiá.",
       "Minha terra tem primores,\nQue tais não encontro eu cá;\nEm cismar — sozinho, à noite —\nMais prazer encontro eu lá;\nMinha terra tem palmeiras,\nOnde canta o Sabiá.",
-      "Não permita Deus que eu morra,\nSem que volte para lá;\nSem que desfrute os primores\nQue não encontro por cá;\nSem que ainda aviste as palmeiras,\nOnde canta o Sabiá."
+      "Não permita Deus que eu morra,\nSem que eu volte para lá;\nSem que desfrute os primores\nQue não encontro por cá;\nSem que inda aviste as palmeiras,\nOnde canta o Sabiá."
     ],
     "fonte": "Gonçalves Dias, Primeiros Cantos (1846). Texto em domínio público.",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Últimos versos ajustados para \"Sem que eu volte para lá\" e \"Sem que inda aviste\" (forma da maioria das edições). Conferir com a edição usada como fonte."
   },
   {
     "id": "ode-ao-dois-de-julho",
@@ -93,9 +96,8 @@ const POEMAS = [
     "subnome": "Ode",
     "resumo": "Homenagem ao 2 de Julho, data em que a Bahia celebra sua independência. A exaltação da liberdade e da pátria marca o Romantismo social de Castro Alves.",
     "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
-    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
-    "dominioPublico": true,
-    "revisar": "O rótulo cita a Biblioteca Nacional, mas o PDF está em biblioteca.torres.rs.gov.br: conferir a edição."
+    "rotulo": "Ler em Espumas Flutuantes (PDF da Biblioteca de Torres, RS)",
+    "dominioPublico": true
   },
   {
     "id": "canto-do-piaga",
@@ -118,9 +120,8 @@ const POEMAS = [
     "subnome": "Elegia",
     "resumo": "Poema composto em 1864 e incluído em Espumas Flutuantes (1870), em que o jovem poeta medita sobre a morte precoce, tema recorrente do Romantismo.",
     "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
-    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
-    "dominioPublico": true,
-    "revisar": "O rótulo cita a Biblioteca Nacional, mas o PDF está em biblioteca.torres.rs.gov.br: conferir a edição."
+    "rotulo": "Ler em Espumas Flutuantes (PDF da Biblioteca de Torres, RS)",
+    "dominioPublico": true
   },
   {
     "id": "cantico-do-calvario",
@@ -144,7 +145,8 @@ const POEMAS = [
     "resumo": "Poema de luto e memória dedicado à avó da autora, em oito partes, que fecha o livro Mar Absoluto (1945). Transforma a perda em homenagem ao afeto cotidiano.",
     "externo": "https://periodicos.usp.br/teresa/article/download/146124/149234/324762",
     "rotulo": "Ler o poema, com análise (artigo da revista Teresa, USP)",
-    "dominioPublico": false
+    "dominioPublico": false,
+    "revisar": "Obra protegida: confirmar que o artigo da revista Teresa tem autorização para reproduzir o poema. Se não tiver, apontar para a edição da editora ou para uma biblioteca."
   },
   {
     "id": "iracema",
@@ -479,7 +481,8 @@ const POEMAS = [
   }
 ];
 
-// Troca a chave do autor pelo nome completo (padroniza os nomes em todo o site)
+// Troca a chave do autor pelo nome completo (padroniza os nomes em todo o site).
+// Roda uma vez, quando o módulo é carregado.
 POEMAS.forEach((poema) => {
   poema.autor = AUTORES[poema.autor] || poema.autor;
 });
