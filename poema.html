@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poema | Museu da Poesia Digital</title>
     <meta name="description" content="Leia poemas da literatura brasileira no Museu da Poesia Digital.">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Museu da Poesia Digital">
+    <meta property="og:title" content="Poema | Museu da Poesia Digital">
+    <meta property="og:description" content="Leia poemas da literatura brasileira no Museu da Poesia Digital.">
+    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,9 +25,9 @@
     <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
 
     <header>
-        <h1>Museu da Poesia Digital</h1>
+        <a class="marca" href="index.html">Museu da Poesia Digital</a>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
-            <ul>
+            <ul role="list">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="satirico.html">Satírico</a></li>
@@ -32,7 +38,7 @@
     </header>
 
     <main id="conteudo">
-        <nav class="migalhas" aria-label="Você está em">
+        <nav class="migalhas" aria-label="Voltar">
             <a id="voltar" href="index.html">&larr; Voltar</a>
         </nav>
 
@@ -42,9 +48,11 @@
             </noscript>
         </article>
 
+        <nav class="anterior-proximo" id="anterior-proximo" aria-label="Poema anterior e próximo" hidden></nav>
+
         <nav class="mais-poemas" id="mais-poemas" aria-labelledby="mais-poemas-titulo" hidden>
             <h2 id="mais-poemas-titulo">Continue lendo</h2>
-            <ul></ul>
+            <ul role="list"></ul>
         </nav>
     </main>
 
@@ -52,8 +60,9 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
+    <script src="scripts/util.js"></script>
     <script src="scripts/script.js"></script>
     <script src="dados/poemas.js"></script>
-    <script src="scripts/poema.js"></script>
+    <script src="scripts/poema-pagina.js"></script>
 </body>
 </html>

@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museu da Poesia Digital | O Brasil em Cordel</title>
+    <meta name="description" content="Conheça a história do cordel brasileiro e leia romances, pelejas e poemas de cangaço de Leandro Gomes de Barros e outros poetas.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Museu da Poesia Digital">
+    <meta property="og:title" content="Museu da Poesia Digital | O Brasil em Cordel">
+    <meta property="og:description" content="Conheça a história do cordel brasileiro e leia romances, pelejas e poemas de cangaço de Leandro Gomes de Barros e outros poetas.">
+    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
+    <link rel="stylesheet" href="estilos/cards.css">
     <link rel="stylesheet" href="estilos/generos.css">
     <script src="scripts/tema.js"></script>
 </head>
-<body>
+<body data-genero="cordel">
 
     <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
 
     <header>
-        <h1>O Brasil em Cordel</h1>
+        <a class="marca" href="index.html">Museu da Poesia Digital</a>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
-            <ul>
+            <ul role="list">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="satirico.html">Satírico</a></li>
@@ -31,14 +39,25 @@
     </header>
 
     <main id="conteudo">
+        <h1 class="titulo-pagina">O Brasil em Cordel</h1>
+
         <section class="introducao" aria-label="Introdução">
             <p>O cordel é a poesia que se vende pendurada em barbante e se guarda na memória. Em versos rimados, o folheto nordestino conta histórias de amor e de coragem, desafios de cantadores e episódios da vida e da história do sertão, mantendo viva a tradição de narrar em verso.</p>
+            <img src="imagens/cordel.svg" alt="" width="600" height="360">
         </section>
 
         <section class="historia" aria-labelledby="historia-titulo">
             <h2 id="historia-titulo">O Cordel no Brasil</h2>
             <p>Os folhetos de cordel chegaram ao Brasil pela tradição ibérica de Portugal e Espanha e receberam esse nome por serem vendidos pendurados em cordões nas feiras. No Nordeste, o folheto encontrou terreno fértil na cultura dos cantadores e repentistas, que animavam feiras, engenhos e casas-grandes com desafios em versos, e a poesia oral passou a ser fixada no papel entre o fim do século XIX e o início do XX. Os pioneiros dessa primeira geração foram Silvino Pirauá de Lima (1848–1913), Leandro Gomes de Barros (1865–1918) e João Melquíades Ferreira da Silva. Coube a Leandro, o primeiro poeta-editor do país, imprimir e vender os próprios folhetos, o que lhe rendeu o título de "pai da literatura de cordel".</p>
             <p>Nas décadas seguintes, o cordel consolidou-se como a voz poética do povo nordestino. Francisco das Chagas Batista, poeta e fundador da Popular Editora, ajudou a difundir os folhetos, e autores como José Pacheco levaram ao papel histórias de humor e de lenda, como A Chegada de Lampião no Inferno. O cordel contou romances de cavalaria e de fadas, narrou desafios de cantadores, noticiou fatos, satirizou os poderosos e registrou o cangaço. Mais tarde, a xilogravura tornou-se a marca visual dos folhetos, e a tradição segue viva, com poetas que publicam seus próprios folhetos até hoje.</p>
+            <h3 id="tempo-titulo">Em linha do tempo</h3>
+            <ol class="linha-do-tempo" role="list" aria-labelledby="tempo-titulo">
+                <li><strong>Tradição ibérica</strong> Os folhetos chegam de Portugal e Espanha e são vendidos pendurados em cordões nas feiras.</li>
+                <li><strong>Fim do século XIX</strong> A poesia dos cantadores passa ao papel. Silvino Pirauá de Lima, Leandro Gomes de Barros e João Melquíades Ferreira da Silva.</li>
+                <li><strong>1905</strong> Francisco das Chagas Batista publica A Vida de Antônio Silvino, um dos primeiros folhetos do cangaço.</li>
+                <li><strong>Décadas seguintes</strong> A Popular Editora difunde os folhetos, e José Pacheco escreve A Chegada de Lampião no Inferno.</li>
+                <li><strong>Hoje</strong> A xilogravura se firma como marca visual, e poetas seguem publicando seus próprios folhetos.</li>
+            </ol>
         </section>
 
         <section class="subgeneros" aria-labelledby="subgeneros-titulo">
@@ -46,98 +65,53 @@
             <p>Três grandes caminhos marcaram o cordel narrativo. O <strong>romance</strong>, ou poesia romanceada, conta em versos histórias de aventura, de amor e de maravilhas; a <strong>peleja</strong> registra no papel os desafios de cantoria entre dois poetas; e o <strong>poema narrativo de cangaço e conflito</strong> relata, em tom de crônica ou de lenda, a vida de cangaceiros e as disputas do sertão.</p>
         </section>
 
+        <div class="busca" id="busca" role="search" hidden>
+            <label for="busca-campo">Buscar nesta página</label>
+            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
+            <p class="busca-status" id="busca-status" role="status"></p>
+        </div>
+
         <nav class="indice-subgeneros" aria-label="Subgêneros do cordel">
-            <ul>
+            <ul role="list">
                 <li><a href="#romance">Romance</a></li>
                 <li><a href="#peleja">Peleja</a></li>
                 <li><a href="#cangaco-conflito">Cangaço e Conflito</a></li>
             </ul>
         </nav>
 
-        <section id="romance">
-            <h2>Romance (Poesia Romanceada)</h2>
+        <section id="romance" class="secao-subgenero" aria-labelledby="romance-titulo">
+            <h2 id="romance-titulo">Romance (Poesia Romanceada)</h2>
             <p>O romance em versos é o caminho do cordel mais próximo dos contos tradicionais. Silvino Pirauá de Lima, um dos pioneiros do cordel, é apontado como criador do romance em versos, e Leandro Gomes de Barros levou adiante essa vertente, adaptando contos de fadas e lendas da tradição europeia ao gosto do sertão. Escritos em estrofes como a sextilha e a setilha, esses folhetos reuniam heróis, princesas, dragões e provas de coragem, e estavam entre os mais conhecidos das feiras.</p>
 
-            <p>Romances para ler:</p>
+            <p id="lista-romance" class="chamada-lista">Romances para ler:</p>
 
-            <ul class="lista-cards">
-                <li class="card">
-                    <h3><a href="poema.html?id=historia-da-princesa-rosa">História da Princesa Rosa</a></h3>
-                    <p class="autor">Silvino Pirauá de Lima (1848–1913)</p>
-                    <p>Folheto de um dos pioneiros do cordel, a quem se atribui a criação do romance em versos, no gosto das histórias de princesas e aventuras populares.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=juvenal-e-o-dragao">Juvenal e o Dragão</a></h3>
-                    <p class="autor">Leandro Gomes de Barros (1865–1918)</p>
-                    <p>Um dos grandes clássicos do cordel de maravilhas: o herói Juvenal enfrenta um dragão numa narrativa de aventura e fantasia, no estilo dos contos tradicionais.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=historia-da-donzela-teodora">História da Donzela Teodora</a></h3>
-                    <p class="autor">Leandro Gomes de Barros (1865–1918)</p>
-                    <p>Clássico do cordel que leva ao sertão uma história de tradição europeia, centrada em uma jovem de grande sabedoria.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=o-cachorro-dos-mortos">O Cachorro dos Mortos</a></h3>
-                    <p class="autor">Leandro Gomes de Barros (1865–1918)</p>
-                    <p>Um dos maiores sucessos de Leandro, a narrativa em versos tem como protagonista o cachorro Calar e figura entre os clássicos do cordel narrativo.</p>
-                </li>
-            </ul>
+            <ul class="lista-cards" id="cards-romance" role="list" aria-labelledby="lista-romance" data-sub="romance"></ul>
+            <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
-        <section id="peleja">
-            <h2>Peleja (Cantoria)</h2>
+        <section id="peleja" class="secao-subgenero" aria-labelledby="peleja-titulo">
+            <h2 id="peleja-titulo">Peleja (Cantoria)</h2>
             <p>A peleja nasce da tradição dos cantadores: um debate poético em que dois poetas se enfrentam, cada um respondendo ao verso do outro no ritmo do repente. No cordel, esses desafios foram passados para o papel, ora recriando disputas reais entre cantadores, ora inventando duelos imaginários, como o de Manoel Riachão com o Diabo, escrito por Leandro Gomes de Barros. A peleja exige memória, rima e rapidez de raciocínio, e coloca em cena o saber popular, as crenças religiosas e o humor.</p>
 
-            <p>Pelejas para ler:</p>
+            <p id="lista-peleja" class="chamada-lista">Pelejas para ler:</p>
 
-            <ul class="lista-cards">
-                <li class="card">
-                    <h3><a href="poema.html?id=peleja-de-manoel-riachao-com-o-diabo">Peleja de Manoel Riachão com o Diabo</a></h3>
-                    <p class="autor">Leandro Gomes de Barros (1865–1918)</p>
-                    <p>Em 58 estrofes de seis versos, o poeta recria por escrito um desafio de cantoria: o repentista Manoel Riachão enfrenta o Diabo e vence com astúcia, viola e conhecimento das Escrituras.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=peleja-de-vicente-sabia-com-antonio-coqueiro">Peleja de Vicente Sabiá com Antônio Coqueiro</a></h3>
-                    <p class="autor">José Pacheco (1890–1954)</p>
-                    <p>Folheto de peleja em que dois cantadores se enfrentam em desafio de versos, publicado pela editora Luzeiro do Norte, do Recife.</p>
-                </li>
-            </ul>
+            <ul class="lista-cards" id="cards-peleja" role="list" aria-labelledby="lista-peleja" data-sub="peleja"></ul>
+            <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
-        <section id="cangaco-conflito">
-            <h2>Poema Narrativo de Cangaço e Conflito</h2>
+        <section id="cangaco-conflito" class="secao-subgenero" aria-labelledby="cangaco-conflito-titulo">
+            <h2 id="cangaco-conflito-titulo">Poema Narrativo de Cangaço e Conflito</h2>
             <p>O cangaço, fenômeno do sertão nordestino, tornou-se um dos grandes temas do cordel. Já em 1905, Francisco das Chagas Batista publicou A Vida de Antônio Silvino, e Leandro Gomes de Barros também escreveu sobre o cangaceiro, que os folhetos retratam ora como justiceiro, ora como bandido. Depois vieram os folhetos sobre Lampião, como A Chegada de Lampião no Inferno, de José Pacheco, em que o medo real do cangaceiro se transforma em humor e fantasia. Nesses poemas narrativos, o cordel funciona como crônica popular e também como memória de um tempo de violência e de disputas pela terra e pelo poder.</p>
 
-            <p>Cordéis de cangaço e conflito para ler:</p>
+            <p id="lista-cangaco-conflito" class="chamada-lista">Cordéis de cangaço e conflito para ler:</p>
 
-            <ul class="lista-cards">
-                <li class="card">
-                    <h3><a href="poema.html?id=a-chegada-de-lampiao-no-inferno">A Chegada de Lampião no Inferno</a></h3>
-                    <p class="autor">José Pacheco (1890–1954)</p>
-                    <p>O cangaceiro Lampião chega ao inferno e deixa os demônios assombrados, num folheto que transforma o terror do sertão em humor e fantasia.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=a-vida-de-antonio-silvino">A Vida de Antônio Silvino</a></h3>
-                    <p class="autor">Francisco das Chagas Batista (1882–1930)</p>
-                    <p>Publicado em 1905, é um dos primeiros folhetos sobre o cangaço e acompanha a trajetória do cangaceiro Antônio Silvino, figura que dividiu o sertão entre admiradores e vítimas.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=o-nascimento-de-antonio-silvino">O Nascimento de Antônio Silvino</a></h3>
-                    <p class="autor">Leandro Gomes de Barros (1865–1918)</p>
-                    <p>Leandro Gomes de Barros narra as origens do cangaceiro Antônio Silvino, personagem que o poeta retratou em vários folhetos.</p>
-                </li>
-            </ul>
+            <ul class="lista-cards" id="cards-cangaco-conflito" role="list" aria-labelledby="lista-cangaco-conflito" data-sub="cangaco-conflito"></ul>
+            <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
         <nav class="outros-generos" aria-label="Outros gêneros">
             <h2>Continue explorando</h2>
-            <ul>
+            <ul role="list">
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="satirico.html">Satírico</a></li>
             </ul>
@@ -149,6 +123,10 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
+    <script src="scripts/util.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="dados/poemas.js"></script>
+    <script src="scripts/cards.js"></script>
+    <script src="scripts/indice.js"></script>
 </body>
 </html>

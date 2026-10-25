@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+/* =========================================================
+   CARDS DE POEMA
+   Usado por: index.html (poema do dia) e páginas de gênero.
+   Os cards são montados pelo scripts/cards.js a partir de dados/poemas.js.
+   ========================================================= */
+
+.lista-cards {
+    list-style: none;
+    display: grid;
+    /* auto-fit estica os cards quando a seção tem poucos poemas;
+       min(100%, 300px) evita estouro em telas muito estreitas */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+}
+
+.card {
+    position: relative; /* referência do link esticado */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: var(--genero-claro);
+    border: 1px solid var(--borda);
+    border-top: 8px solid var(--cor-genero);
+    border-radius: var(--raio);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(44, 30, 17, 0.15);
+}
+
+/* O card só "sobe" para quem não pediu menos movimento */
+@media (prefers-reduced-motion: no-preference) {
+    .card:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.card h3 {
+    margin-bottom: 4px;
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+}
+
+.card h3 a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.card:hover h3 a {
+    text-decoration: underline;
+}
+
+/* Link esticado: o card inteiro fica clicável, com um único link no HTML */
+.card h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* O contorno só aparece no foco por teclado, não no clique do mouse */
+.card:has(a:focus-visible) {
+    outline: 3px solid var(--genero-escuro);
+    outline-offset: 4px;
+}
+
+.card h3 a:focus-visible {
+    outline: none;
+}
+
+.card .autor {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--genero-escuro);
+}
+
+.card p {
+    font-size: 0.95em;
+}
+
+.card p + p {
+    margin-top: 10px;
+}
+
+/* Selo informativo (obra protegida ou prosa) */
+.card .status {
+    align-self: flex-start;
+    margin-top: 14px;
+    padding: 2px 12px;
+    background-color: var(--fundo-principal);
+    color: var(--genero-escuro);
+    border: 1px solid var(--genero-escuro);
+    border-radius: 999px;
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+/* Rodapé do card: ação à esquerda, selo "Lido" à direita.
+   margin-top: auto alinha o rodapé de todos os cards da mesma linha. */
+.card-rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+.card-acao {
+    color: var(--genero-escuro);
+}
+
+.card:hover .card-acao {
+    text-decoration: underline;
+}
+
+.selo-lido {
+    color: var(--genero-escuro);
+}

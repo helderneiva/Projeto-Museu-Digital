@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museu da Poesia Digital | A Arte da Sátira</title>
+    <meta name="description" content="Conheça a história da sátira na poesia brasileira, de Gregório de Matos a Oswald de Andrade, em sátiras de costumes e epigramas.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Museu da Poesia Digital">
+    <meta property="og:title" content="Museu da Poesia Digital | A Arte da Sátira">
+    <meta property="og:description" content="Conheça a história da sátira na poesia brasileira, de Gregório de Matos a Oswald de Andrade, em sátiras de costumes e epigramas.">
+    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
+    <link rel="stylesheet" href="estilos/cards.css">
     <link rel="stylesheet" href="estilos/generos.css">
     <script src="scripts/tema.js"></script>
 </head>
-<body>
+<body data-genero="satirico">
 
     <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
 
     <header>
-        <h1>A Arte da Sátira</h1>
+        <a class="marca" href="index.html">Museu da Poesia Digital</a>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
-            <ul>
+            <ul role="list">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="satirico.html" aria-current="page">Satírico</a></li>
@@ -31,14 +39,26 @@
     </header>
 
     <main id="conteudo">
+        <h1 class="titulo-pagina">A Arte da Sátira</h1>
+
         <section class="introducao" aria-label="Introdução">
             <p>Entre o riso e a crítica, a sátira transforma os vícios e as contradições de uma sociedade em poesia. Na literatura brasileira, poetas de diferentes épocas usaram a ironia e o humor para questionar costumes, poderes e valores, construindo uma tradição de expressão crítica e irreverente.</p>
+            <img src="imagens/satirico.svg" alt="" width="600" height="360">
         </section>
 
         <section class="historia" aria-labelledby="historia-titulo">
             <h2 id="historia-titulo">A Sátira no Brasil</h2>
             <p>A sátira chegou ao Brasil com a colonização portuguesa, herdeira de uma tradição que vem da Antiguidade clássica, com autores como Horácio, Juvenal e Marcial, e das cantigas de escárnio e maldizer do Trovadorismo ibérico. No século XVII, a colônia ganhou sua primeira grande voz satírica com Gregório de Matos, o "Boca do Inferno", cujos versos, difundidos em manuscritos e declamados ao som da viola, atacavam governadores, clérigos, comerciantes e os costumes da Bahia. No fim do século XVIII, as Cartas Chilenas, atribuídas a Tomás Antônio Gonzaga, usaram a sátira para criticar um governador de Minas Gerais.</p>
             <p>No Romantismo, a sátira ganhou novos tons com Luís Gama, que em Primeiras Trovas Burlescas de Getulino (1859) fez da ironia uma arma contra o preconceito racial e as hipocrisias sociais, e com Bernardo Guimarães, ligado à geração boêmia do "cancioneiro alegre". Na virada para o século XX, Emílio de Menezes, frequentador da Confeitaria Colombo, no Rio de Janeiro, fez fama com versos satíricos e trocadilhos que não poupavam nem os políticos. Já o Modernismo trouxe o poema-piada de Oswald de Andrade, que revisitou a história do Brasil com humor e concisão. Assim, a sátira atravessou os séculos como instrumento de crítica e ainda ecoa nas charges e no humor político de hoje.</p>
+            <h3 id="tempo-titulo">Em linha do tempo</h3>
+            <ol class="linha-do-tempo" role="list" aria-labelledby="tempo-titulo">
+                <li><strong>Antiguidade e Idade Média</strong> Horácio, Juvenal e Marcial, e as cantigas de escárnio e maldizer do Trovadorismo ibérico.</li>
+                <li><strong>Século XVII</strong> Gregório de Matos, o “Boca do Inferno”, ataca governadores, clérigos e comerciantes da Bahia.</li>
+                <li><strong>Fim do século XVIII</strong> As Cartas Chilenas, atribuídas a Tomás Antônio Gonzaga, criticam um governador de Minas Gerais.</li>
+                <li><strong>1859</strong> Luís Gama publica Primeiras Trovas Burlescas de Getulino e usa a ironia contra o preconceito racial.</li>
+                <li><strong>Virada para o século XX</strong> Emílio de Menezes, da Confeitaria Colombo, não poupa nem os políticos.</li>
+                <li><strong>Século XX</strong> Oswald de Andrade e o poema-piada: a história do Brasil revisitada com humor e concisão.</li>
+            </ol>
         </section>
 
         <section class="subgeneros" aria-labelledby="subgeneros-titulo">
@@ -46,82 +66,42 @@
             <p>A sátira brasileira assumiu diferentes formas ao longo da história. A <strong>sátira de costumes</strong> retrata, com ironia e humor, os hábitos, os vícios e as contradições de uma sociedade; o <strong>epigrama</strong> concentra a crítica em poucos versos, em que a brevidade e o remate inesperado dão força ao golpe. Ambos vêm da tradição clássica e foram recriados por poetas brasileiros, de Gregório de Matos aos modernistas.</p>
         </section>
 
+        <div class="busca" id="busca" role="search" hidden>
+            <label for="busca-campo">Buscar nesta página</label>
+            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
+            <p class="busca-status" id="busca-status" role="status"></p>
+        </div>
+
         <nav class="indice-subgeneros" aria-label="Subgêneros do gênero satírico">
-            <ul>
+            <ul role="list">
                 <li><a href="#satira-de-costumes">Sátira de Costumes</a></li>
                 <li><a href="#epigrama">Epigrama</a></li>
             </ul>
         </nav>
 
-        <section id="satira-de-costumes">
-            <h2>Sátira de Costumes</h2>
+        <section id="satira-de-costumes" class="secao-subgenero" aria-labelledby="satira-de-costumes-titulo">
+            <h2 id="satira-de-costumes-titulo">Sátira de Costumes</h2>
             <p>A sátira de costumes fez da vida cotidiana o seu assunto: o comércio, a justiça, o clero, a vaidade, a hipocrisia e as hierarquias sociais. No Brasil colonial, Gregório de Matos transformou-a em uma crônica ácida da Bahia, em que a cidade aparece como um corpo doente. No século XIX, Luís Gama voltou-a contra o preconceito de cor e a hipocrisia dos poderosos, dando voz a um poeta negro em uma sociedade escravista. Misturando o erudito e o popular, a linguagem desses poemas se aproxima do falar do povo, e por isso eles circularam tanto em manuscritos quanto na boca do público.</p>
 
-            <p>Sátiras para ler:</p>
+            <p id="lista-satira-de-costumes" class="chamada-lista">Sátiras para ler:</p>
 
-            <ul class="lista-cards">
-                <li class="card">
-                    <h3><a href="poema.html?id=juizo-anatomico-dos-achaques-que-padecia-o-corpo-da-republica">Juízo anatômico dos achaques que padecia o corpo da República</a></h3>
-                    <p class="autor">Gregório de Matos (1636–1696)</p>
-                    <p>Em estrofes de perguntas e respostas, o poeta examina a cidade da Bahia como um corpo doente e aponta, uma a uma, as faltas morais e as corrupções da vida colonial: a justiça, o comércio, o clero e o povo.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=a-cidade-da-bahia-triste-bahia">À Cidade da Bahia (Triste Bahia)</a></h3>
-                    <p class="autor">Gregório de Matos (1636–1696)</p>
-                    <p>O poeta lamenta o empobrecimento da Bahia, comparando o que a cidade foi ao que se tornou, num dos textos mais conhecidos de sua obra satírica.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=aos-principais-da-bahia-chamados-os-caramurus">Aos principais da Bahia chamados os Caramurus</a></h3>
-                    <p class="autor">Gregório de Matos (1636–1696)</p>
-                    <p>Dirigido aos "Caramurus", como eram chamados os mestiços do Recôncavo, o poema zomba das pretensões de nobreza de quem se dizia principal da terra, numa linguagem que mistura português, tupi e línguas africanas.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=quem-sou-eu-bodarrada">Quem sou eu? (Bodarrada)</a></h3>
-                    <p class="autor">Luís Gama (1830–1882)</p>
-                    <p>Publicado em Primeiras Trovas Burlescas de Getulino (1859), o poema responde com humor ácido aos que ofendiam o poeta por sua origem, devolvendo a ofensa a uma sociedade mestiça e cheia de hierarquias de cor e de privilégio.</p>
-                </li>
-            </ul>
+            <ul class="lista-cards" id="cards-satira-de-costumes" role="list" aria-labelledby="lista-satira-de-costumes" data-sub="satira-de-costumes"></ul>
+            <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
-        <section id="epigrama">
-            <h2>Epigrama</h2>
+        <section id="epigrama" class="secao-subgenero" aria-labelledby="epigrama-titulo">
+            <h2 id="epigrama-titulo">Epigrama</h2>
             <p>A palavra epigrama vem do grego e designava, a princípio, as inscrições gravadas em túmulos e monumentos. Com o tempo, passou a nomear o poema breve, de tom irônico e desfecho certeiro, que ganhou fama com o poeta latino Marcial. Em língua portuguesa, o gênero teve curso desde o século XVI, com nomes como Gregório de Matos, que o praticou no Brasil colonial. No Modernismo, o espírito do epigrama reaparece nos poemas curtos e irônicos de Oswald de Andrade, os chamados poemas-piada, que condensam uma crítica ou uma ideia em poucas palavras.</p>
 
-            <p>Epigramas para ler:</p>
+            <p id="lista-epigrama" class="chamada-lista">Epigramas para ler:</p>
 
-            <ul class="lista-cards">
-                <li class="card">
-                    <h3><a href="poema.html?id=retrato-do-governador-antonio-luis-da-camara-coutinho">Retrato do Governador Antônio Luís da Câmara Coutinho</a></h3>
-                    <p class="autor">Gregório de Matos (1636–1696)</p>
-                    <p>Em versos curtos e ágeis, o poeta ridiculariza fisicamente o governador da Bahia, de quem era desafeto, num retrato caricatural que rebaixa o poder pelo riso.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=amor">Amor</a></h3>
-                    <p class="autor">Oswald de Andrade (1890–1954)</p>
-                    <p>Poema de duas palavras, "amor" e "humor", que reduz o tema mais solene da lírica a uma piada e resume o espírito irônico do Modernismo. Abre o Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927).</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=erro-de-portugues">Erro de português</a></h3>
-                    <p class="autor">Oswald de Andrade (1890–1954)</p>
-                    <p>Em poucos versos, o poeta relê a chegada dos colonizadores com humor: a ironia do desfecho inverte a versão oficial da história do Brasil.</p>
-                </li>
-
-                <li class="card">
-                    <h3><a href="poema.html?id=pronominais">Pronominais</a></h3>
-                    <p class="autor">Oswald de Andrade (1890–1954)</p>
-                    <p>Publicado em Pau-Brasil (1925), o poema contrapõe a gramática ensinada nas escolas à fala real dos brasileiros, ironizando o apego às regras da norma culta.</p>
-                </li>
-            </ul>
+            <ul class="lista-cards" id="cards-epigrama" role="list" aria-labelledby="lista-epigrama" data-sub="epigrama"></ul>
+            <noscript><p>Os poemas desta seção são carregados com JavaScript. Ative-o para ver a lista.</p></noscript>
         </section>
 
         <nav class="outros-generos" aria-label="Outros gêneros">
             <h2>Continue explorando</h2>
-            <ul>
+            <ul role="list">
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="cordel.html">Cordel</a></li>
             </ul>
@@ -133,6 +113,10 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
+    <script src="scripts/util.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="dados/poemas.js"></script>
+    <script src="scripts/cards.js"></script>
+    <script src="scripts/indice.js"></script>
 </body>
 </html>

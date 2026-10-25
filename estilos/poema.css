@@ -1,7 +1,20 @@
 @charset "UTF-8";
 
-/* Página do poema (poema.html). As cores vêm do tema.css: a paleta do gênero
-   é escolhida pelo item ativo do menu, que o poema.js marca. */
+/* =========================================================
+   PÁGINA DO POEMA (poema.html)
+   As cores vêm do tema.css: a paleta do gênero é escolhida por
+   <body data-genero="...">, que o poema-pagina.js define.
+   ========================================================= */
+
+/* Uma só coluna de leitura, centralizada */
+.migalhas,
+.poema,
+.anterior-proximo,
+.mais-poemas {
+    width: 100%;
+    max-width: 44rem;
+    margin-inline: auto;
+}
 
 .migalhas {
     margin-bottom: 32px;
@@ -9,10 +22,6 @@
 
 .migalhas a {
     font-weight: 700;
-}
-
-.poema {
-    max-width: 42em;
 }
 
 .poema-titulo {
@@ -29,13 +38,62 @@
 
 .poema-tag {
     display: inline-block;
-    margin: 16px 0 28px;
+    margin: 16px 0 20px;
     padding: 4px 16px;
     background-color: var(--cor-genero);
     color: var(--texto-genero);
     border-radius: 999px;
     font-size: 0.9em;
     font-weight: 700;
+}
+
+/* ---------- Ferramentas (tamanho da letra, compartilhar, marcar como lido) ---------- */
+.ferramentas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ferramentas button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px 16px;
+    background-color: var(--genero-claro);
+    color: var(--texto);
+    border: 2px solid var(--genero-escuro);
+    border-radius: 999px;
+    font-family: var(--fonte-texto);
+    font-size: 0.9em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.ferramentas button:hover:not(:disabled) {
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+}
+
+.ferramentas button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.ferramentas button[aria-pressed="true"] {
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+}
+
+.ferramentas button[aria-pressed="true"]::before {
+    content: "\2713\00a0";
+}
+
+.ferramentas-status {
+    min-height: 1.7em;
+    margin-bottom: 20px;
+    font-size: 0.9em;
 }
 
 /* ---------- Versos ---------- */
@@ -45,8 +103,9 @@
     border: 1px solid var(--borda);
     border-left: 10px solid var(--cor-genero);
     border-radius: var(--raio);
-    font-size: 1.15em;
+    font-size: var(--tamanho-versos, 1.15em);
     line-height: 1.9;
+    text-wrap: pretty;
 }
 
 .versos p {
@@ -55,6 +114,28 @@
 
 .versos p + p {
     margin-top: 24px;
+}
+
+/* Numeração discreta das estrofes (só quando o poema tem mais de uma) */
+.versos.numerado {
+    counter-reset: estrofe;
+    padding-left: 56px;
+}
+
+.versos.numerado p {
+    position: relative;
+    counter-increment: estrofe;
+}
+
+.versos.numerado p::before {
+    content: counter(estrofe);
+    position: absolute;
+    top: 0.25em;
+    left: -30px;
+    font-size: 0.7em;
+    font-weight: 700;
+    color: var(--genero-escuro);
+    opacity: 0.8;
 }
 
 /* Poemas em formato visual (ex.: Madrigal de um Louco) */
@@ -100,9 +181,44 @@
     color: var(--fundo-principal);
 }
 
+/* ---------- Poema anterior / próximo ---------- */
+.anterior-proximo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.anterior-proximo a {
+    flex: 1 1 14rem;
+    padding: 12px 18px;
+    background-color: var(--genero-claro);
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: 700;
+    border: 2px solid var(--genero-escuro);
+    border-radius: var(--raio);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.anterior-proximo a:hover {
+    background-color: var(--cor-genero);
+    color: var(--texto-genero);
+}
+
+.anterior-proximo a[rel="next"] {
+    text-align: right;
+}
+
+.anterior-proximo small {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
 /* ---------- Continue lendo (outros poemas do mesmo subgênero) ---------- */
 .mais-poemas {
-    max-width: 42em;
     margin-top: 48px;
     padding-top: 32px;
     border-top: 1px solid var(--borda);
@@ -144,5 +260,13 @@
 
     .versos {
         padding: 20px;
+    }
+
+    .versos.numerado {
+        padding-left: 44px;
+    }
+
+    .versos.numerado p::before {
+        left: -26px;
     }
 }

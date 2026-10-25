@@ -1,18 +1,79 @@
-// Dados dos poemas. Para adicionar um poema, copie um bloco { ... } e edite os campos:
-//   id        -> nome curto sem acentos nem espaços (usado no link: poema.html?id=...)
-//   genero    -> "lirico", "satirico" ou "cordel"
-//   sub       -> id da seção na página do gênero (ex.: "ode", "epigrama")
-//   versos    -> lista de estrofes; use \n para quebrar linha dentro da estrofe
-//   externo   -> (opcional) link de leitura para obras que NÃO estão em domínio público
-//   figurado  -> (opcional) true para poemas em formato visual, centralizados
+// Dados dos poemas do Museu da Poesia Digital.
+//
+// Para adicionar um poema, copie um bloco { ... } da lista POEMAS e edite os campos:
+//   id             nome curto, sem acentos nem espaços (usado em poema.html?id=...)
+//   titulo         título do poema
+//   autor          CHAVE da tabela AUTORES (abaixo); o nome completo é resolvido no fim do arquivo
+//   genero         "lirico", "satirico" ou "cordel"
+//   sub            id da seção na página do gênero (ex.: "ode", "epigrama")
+//   subnome        nome do subgênero, como aparece na tela
+//   resumo         texto do card (ideal: até 30 palavras)
+//   formato        (opcional) "prosa", para obras em prosa de ritmo poético
+//   figurado       (opcional) true para poemas em formato visual, centralizados
+//   versos         lista de estrofes (use \n para quebrar linha) — poema lido no próprio site
+//   fonte          fonte do texto exibido no site (só para poemas com "versos")
+//   externo        link de leitura em outro site (poemas sem "versos")
+//   rotulo         texto do botão do link externo
+//   dominioPublico true ou false (false = obra protegida; mostra o selo no card)
+//   revisar        (opcional) pendência interna: NUNCA é exibida no site.
+//                  Para listar as pendências, rode no console: POEMAS.filter(p => p.revisar)
+//
+// A ordem da lista é a ordem dos cards em cada seção.
+
+const AUTORES = {
+  "goncalves-dias": "Gonçalves Dias (1823–1864)",
+  "oswald-de-andrade": "Oswald de Andrade (1890–1954)",
+  "mario-de-andrade": "Mário de Andrade (1893–1945)",
+  "antonio-francisco-da-costa-e-silva": "Antônio Francisco da Costa e Silva (1885–1950)",
+  "cecilia-meireles": "Cecília Meireles (1901–1964)",
+  "gregorio-de-matos": "Gregório de Matos (1636–1696)",
+  "castro-alves": "Castro Alves (1847–1871)",
+  "manuel-botelho-de-oliveira": "Manuel Botelho de Oliveira (1636–1711)",
+  "leandro-gomes-de-barros": "Leandro Gomes de Barros (1865–1918)",
+  "silvino-piraua-de-lima": "Silvino Pirauá de Lima (1848–1913)",
+  "jose-pacheco": "José Pacheco (1890–1954)",
+  "francisco-das-chagas-batista": "Francisco das Chagas Batista (1882–1930)",
+  "visconde-de-taunay": "Visconde de Taunay (1843–1899)",
+  "jose-de-alencar": "José de Alencar (1829–1877)",
+  "tomas-antonio-gonzaga": "Tomás Antônio Gonzaga (1744–1810)",
+  "fagundes-varela": "Fagundes Varela (1841–1875)",
+  "luis-gama": "Luís Gama (1830–1882)"
+};
+
 const POEMAS = [
   {
-    "titulo": "Canção do Exílio",
-    "autor": "Antônio Gonçalves Dias (1823–1864)",
+    "id": "ode-ao-burgues",
+    "titulo": "Ode ao Burguês",
+    "autor": "mario-de-andrade",
     "genero": "lirico",
     "sub": "ode",
     "subnome": "Ode",
-    "fonte": "Gonçalves Dias, Primeiros Cantos (1846). Texto em domínio público.",
+    "resumo": "Ataque verbal a um burguês rico e hipócrita, que põe o dinheiro acima de tudo. Mário de Andrade faz da ode um manifesto contra a mediocridade social.",
+    "externo": "https://digital.bbm.usp.br/handle/bbm/6863",
+    "rotulo": "Ler em Pauliceia Desvairada (1922, Biblioteca Brasiliana Mindlin)",
+    "dominioPublico": true
+  },
+  {
+    "id": "o-navio-negreiro",
+    "titulo": "O Navio Negreiro",
+    "autor": "castro-alves",
+    "genero": "lirico",
+    "sub": "ode",
+    "subnome": "Ode",
+    "resumo": "Grande ode de clamor social: em tom solene e eloquente, Castro Alves canta o horror da escravidão e invoca a justiça humana.",
+    "externo": "https://codap.ufs.br/uploads/page_attach/path/8283/Navio_negreiro_-_Castro_Alves.pdf",
+    "rotulo": "Ler o poema (PDF da edição da Câmara dos Deputados)",
+    "dominioPublico": true,
+    "revisar": "O rótulo cita a Câmara dos Deputados, mas o PDF está em codap.ufs.br: conferir a edição."
+  },
+  {
+    "id": "cancao-do-exilio",
+    "titulo": "Canção do Exílio",
+    "autor": "goncalves-dias",
+    "genero": "lirico",
+    "sub": "ode",
+    "subnome": "Ode",
+    "resumo": "Um dos poemas mais lembrados do Brasil. Musical e nostálgico, exalta a natureza da terra natal e pode ser lido como uma ode de exaltação patriótica.",
     "versos": [
       "Minha terra tem palmeiras,\nOnde canta o Sabiá;\nAs aves, que aqui gorjeiam,\nNão gorjeiam como lá.",
       "Nosso céu tem mais estrelas,\nNossas várzeas têm mais flores,\nNossos bosques têm mais vida,\nNossa vida mais amores.",
@@ -20,39 +81,142 @@ const POEMAS = [
       "Minha terra tem primores,\nQue tais não encontro eu cá;\nEm cismar — sozinho, à noite —\nMais prazer encontro eu lá;\nMinha terra tem palmeiras,\nOnde canta o Sabiá.",
       "Não permita Deus que eu morra,\nSem que volte para lá;\nSem que desfrute os primores\nQue não encontro por cá;\nSem que ainda aviste as palmeiras,\nOnde canta o Sabiá."
     ],
-    "id": "cancao-do-exilio"
+    "fonte": "Gonçalves Dias, Primeiros Cantos (1846). Texto em domínio público.",
+    "dominioPublico": true
   },
   {
-    "titulo": "Erro de português",
-    "autor": "Oswald de Andrade (1890–1954)",
-    "genero": "satirico",
-    "sub": "epigrama",
-    "subnome": "Epigrama",
-    "fonte": "Oswald de Andrade, Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927). Obra em domínio público no Brasil desde 2025.",
-    "versos": [
-      "Quando o português chegou\nDebaixo de uma bruta chuva\nVestiu o índio\nQue pena!\nFosse uma manhã de sol\nO índio tinha despido\nO português"
-    ],
-    "id": "erro-de-portugues"
+    "id": "ode-ao-dois-de-julho",
+    "titulo": "Ode ao Dois de Julho",
+    "autor": "castro-alves",
+    "genero": "lirico",
+    "sub": "ode",
+    "subnome": "Ode",
+    "resumo": "Homenagem ao 2 de Julho, data em que a Bahia celebra sua independência. A exaltação da liberdade e da pátria marca o Romantismo social de Castro Alves.",
+    "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
+    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
+    "dominioPublico": true,
+    "revisar": "O rótulo cita a Biblioteca Nacional, mas o PDF está em biblioteca.torres.rs.gov.br: conferir a edição."
   },
   {
-    "titulo": "Amor",
-    "autor": "Oswald de Andrade (1890–1954)",
-    "genero": "satirico",
-    "sub": "epigrama",
-    "subnome": "Epigrama",
-    "fonte": "Oswald de Andrade, Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927). Obra em domínio público no Brasil desde 2025.",
-    "versos": [
-      "amor\nhumor"
-    ],
-    "id": "amor"
+    "id": "canto-do-piaga",
+    "titulo": "Canto do Piaga",
+    "autor": "goncalves-dias",
+    "genero": "lirico",
+    "sub": "elegia",
+    "subnome": "Elegia",
+    "resumo": "Em tom de elegia heroica, o piaga (pajé) profetiza e lamenta a destruição de seu povo e de sua cultura com a chegada dos colonizadores.",
+    "externo": "https://projetos.uel.br/bibliotecacomum/bc-texto/obras/ua00119a.pdf",
+    "rotulo": "Ler em Primeiros Cantos (Biblioteca Comum UEL, PDF)",
+    "dominioPublico": true
   },
   {
-    "titulo": "Madrigal do Truco",
-    "autor": "Mário Raul de Morais Andrade (1893–1945)",
+    "id": "mocidade-e-morte",
+    "titulo": "Mocidade e Morte",
+    "autor": "castro-alves",
+    "genero": "lirico",
+    "sub": "elegia",
+    "subnome": "Elegia",
+    "resumo": "Poema composto em 1864 e incluído em Espumas Flutuantes (1870), em que o jovem poeta medita sobre a morte precoce, tema recorrente do Romantismo.",
+    "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
+    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
+    "dominioPublico": true,
+    "revisar": "O rótulo cita a Biblioteca Nacional, mas o PDF está em biblioteca.torres.rs.gov.br: conferir a edição."
+  },
+  {
+    "id": "cantico-do-calvario",
+    "titulo": "Cântico do Calvário",
+    "autor": "fagundes-varela",
+    "genero": "lirico",
+    "sub": "elegia",
+    "subnome": "Elegia",
+    "resumo": "Uma das elegias mais conhecidas do Romantismo, escrita após a morte do filho pequeno do poeta. Lamento pessoal, em tom grave e comovido.",
+    "externo": "https://digital.bbm.usp.br/handle/bbm/4927",
+    "rotulo": "Ler em Cantos e Fantasias (1865, Biblioteca Brasiliana Mindlin)",
+    "dominioPublico": true
+  },
+  {
+    "id": "elegia",
+    "titulo": "Elegia",
+    "autor": "cecilia-meireles",
+    "genero": "lirico",
+    "sub": "elegia",
+    "subnome": "Elegia",
+    "resumo": "Poema de luto e memória dedicado à avó da autora, em oito partes, que fecha o livro Mar Absoluto (1945). Transforma a perda em homenagem ao afeto cotidiano.",
+    "externo": "https://periodicos.usp.br/teresa/article/download/146124/149234/324762",
+    "rotulo": "Ler o poema, com análise (artigo da revista Teresa, USP)",
+    "dominioPublico": false
+  },
+  {
+    "id": "iracema",
+    "titulo": "Iracema",
+    "autor": "jose-de-alencar",
+    "genero": "lirico",
+    "sub": "idilio",
+    "subnome": "Idílio",
+    "resumo": "Romance de 1865 sobre o amor entre a índia Iracema e o português Martim. Prosa de ritmo poético, com a natureza como cenário.",
+    "formato": "prosa",
+    "externo": "https://www.gutenberg.org/ebooks/67740",
+    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
+    "dominioPublico": true
+  },
+  {
+    "id": "inocencia",
+    "titulo": "Inocência",
+    "autor": "visconde-de-taunay",
+    "genero": "lirico",
+    "sub": "idilio",
+    "subnome": "Idílio",
+    "resumo": "Considerado pela crítica um idílio sertanejo: o amor proibido e trágico entre Inocência e o médico Cirino, no sertão de Mato Grosso. Obra em prosa.",
+    "formato": "prosa",
+    "externo": "https://www.gutenberg.org/ebooks/68635",
+    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
+    "dominioPublico": true
+  },
+  {
+    "id": "marilia-de-dirceu",
+    "titulo": "Marília de Dirceu",
+    "autor": "tomas-antonio-gonzaga",
+    "genero": "lirico",
+    "sub": "idilio",
+    "subnome": "Idílio",
+    "resumo": "Expressão máxima do idílio pastoral no Brasil colonial: o pastor Dirceu canta seu amor idealizado por Marília em cenário de natureza perfeita.",
+    "externo": "https://www.gutenberg.org/ebooks/18082",
+    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
+    "dominioPublico": true
+  },
+  {
+    "id": "cinco-minutos",
+    "titulo": "Cinco Minutos",
+    "autor": "jose-de-alencar",
+    "genero": "lirico",
+    "sub": "idilio",
+    "subnome": "Idílio",
+    "resumo": "Romance urbano e idealizado: o atraso de cinco minutos para pegar o ônibus vira um jogo de perseguição amorosa entre o narrador e Carlota. Obra em prosa.",
+    "formato": "prosa",
+    "externo": "https://www.gutenberg.org/ebooks/44540",
+    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
+    "dominioPublico": true
+  },
+  {
+    "id": "musica-do-parnasso",
+    "titulo": "Música do Parnasso",
+    "autor": "manuel-botelho-de-oliveira",
     "genero": "lirico",
     "sub": "madrigal",
     "subnome": "Madrigal",
-    "fonte": "Mário de Andrade, Poesias completas (Itatiaia, 1987), conforme reproduzido no site Toda Matéria. Obra em domínio público no Brasil. Confira com a edição impressa antes de publicar.",
+    "resumo": "Primeiro livro de poesia de um brasileiro publicado em vida (1705). Reúne rimas em quatro línguas, entre elas madrigais em louvor à amada Anarda.",
+    "externo": "https://es.wikisource.org/wiki/M%C3%BAsica_de_el_Parnaso",
+    "rotulo": "Ler a obra (Wikisource)",
+    "dominioPublico": true
+  },
+  {
+    "id": "madrigal-do-truco",
+    "titulo": "Madrigal do Truco",
+    "autor": "mario-de-andrade",
+    "genero": "lirico",
+    "sub": "madrigal",
+    "subnome": "Madrigal",
+    "resumo": "Mário de Andrade recria o madrigal com uma cena popular brasileira: uma barulhenta partida de truco, em versos para solista e coro.",
     "versos": [
       "Um jogador solista (em parlato):\n— Truco!\n\n(cantando):\nArreda porteira! Aí vai\nOs peitos do Zé Migué\nLaranja não tem caroço\nJacaré não tem pescoço\nTruco de baralho velho!",
       "O grupo madrigalista:\n\nSeis papudo! Sai tapera\nSeis seu cara de tatu\nSeu portão de cemitério\nArapuca de bambu\nToma seis que três é pouco!",
@@ -60,39 +224,47 @@ const POEMAS = [
       "Truco mesmo! Sai perneta\nReboco de igreja velha\nEsteira de bexiguento\nSapicuá de lazarento\nSumítico arrisque o tento!",
       "Trucou, aguenta a parada\nCarrapato é bicho feio\nTem cabelo até no joeio\nMosquito não leva freio\nPernilongo não se capa!"
     ],
-    "id": "madrigal-do-truco"
+    "fonte": "Mário de Andrade (1893–1945), Madrigal do Truco. Obra em domínio público no Brasil.",
+    "dominioPublico": true,
+    "revisar": "Texto copiado do site Toda Matéria; conferir com a edição impressa (Poesias completas, Itatiaia, 1987)."
   },
   {
+    "id": "madrigal-de-um-louco",
     "titulo": "Madrigal de um Louco",
-    "autor": "Antônio Francisco da Costa e Silva (1885–1950)",
+    "autor": "antonio-francisco-da-costa-e-silva",
     "genero": "lirico",
     "sub": "madrigal",
     "subnome": "Madrigal",
+    "resumo": "Poema figurativo do simbolista Da Costa e Silva: os versos formam um losango dedicado à Lua. Por usar o espaço da página, é lembrado como antecedente do Concretismo.",
     "figurado": true,
-    "fonte": "Da Costa e Silva (1885–1950). Obra em domínio público no Brasil. Texto transcrito de fonte secundária (blog Sacrário das Plangências); confira com Poesias completas (Nova Fronteira, 1985) antes de publicar.",
     "versos": [
       "Lua!\nCamélia\nQue flutua\nNo azul. Ofélia\nSerene e dolente,\nFria, vagando pelas\nAlturas, serenamente,\nPor entre os lírios das estrelas,\nSantelmo aceso para a Saudade,\nUnge meu ser na apoteose\nDa tua luz, e eu frua,\nCismando, a pureza\nDa luz e goze\nToda a tua\nTristeza,\nLua!"
     ],
-    "id": "madrigal-de-um-louco"
+    "fonte": "Da Costa e Silva (1885–1950). Obra em domínio público no Brasil.",
+    "dominioPublico": true,
+    "revisar": "Texto transcrito do blog Sacrário das Plangências; conferir com a edição impressa (Poesias completas, Nova Fronteira, 1985)."
   },
   {
-    "titulo": "Elegia",
-    "autor": "Cecília Meireles (1901–1964)",
+    "id": "encarecimento-dos-rigores-de-anarda",
+    "titulo": "Encarecimento dos rigores de Anarda",
+    "autor": "manuel-botelho-de-oliveira",
     "genero": "lirico",
-    "sub": "elegia",
-    "subnome": "Elegia",
-    "externo": "https://periodicos.usp.br/teresa/article/download/146124/149234/324762",
-    "rotulo": "Ler o poema, com análise (artigo da revista Teresa, USP)",
-    "id": "elegia"
+    "sub": "madrigal",
+    "subnome": "Madrigal",
+    "resumo": "Madrigal de Manuel Botelho de Oliveira, pioneiro do gênero no país, em louvor a Anarda e sob forte influência do modelo barroco espanhol.",
+    "externo": "https://www.todamateria.com.br/madrigal-o-que-e-e-caracteristicas-do-genero-literario-com-exemplos/",
+    "rotulo": "Ler o madrigal (site Toda Matéria)",
+    "dominioPublico": true,
+    "revisar": "Link aponta para site escolar (Toda Matéria): trocar por fonte primária, como a Música do Parnaso no Wikisource."
   },
   {
     "id": "juizo-anatomico-dos-achaques-que-padecia-o-corpo-da-republica",
     "titulo": "Juízo anatômico dos achaques que padecia o corpo da República",
-    "autor": "Gregório de Matos (1636–1696)",
+    "autor": "gregorio-de-matos",
     "genero": "satirico",
     "sub": "satira-de-costumes",
     "subnome": "Sátira de Costumes",
-    "resumo": "Em estrofes de perguntas e respostas, o poeta examina a cidade da Bahia como um corpo doente e aponta, uma a uma, as faltas morais e as corrupções da vida colonial: a justiça, o comércio, o clero e o povo.",
+    "resumo": "Em perguntas e respostas, o poeta examina a Bahia como um corpo doente e aponta as corrupções da vida colonial: justiça, comércio, clero e povo.",
     "externo": "https://www.gutenberg.org/ebooks/71724",
     "rotulo": "Ler nas Obras poéticas de Gregório de Matos (1882, Projeto Gutenberg)",
     "dominioPublico": true
@@ -100,7 +272,7 @@ const POEMAS = [
   {
     "id": "a-cidade-da-bahia-triste-bahia",
     "titulo": "À Cidade da Bahia (Triste Bahia)",
-    "autor": "Gregório de Matos (1636–1696)",
+    "autor": "gregorio-de-matos",
     "genero": "satirico",
     "sub": "satira-de-costumes",
     "subnome": "Sátira de Costumes",
@@ -112,19 +284,31 @@ const POEMAS = [
   {
     "id": "aos-principais-da-bahia-chamados-os-caramurus",
     "titulo": "Aos principais da Bahia chamados os Caramurus",
-    "autor": "Gregório de Matos (1636–1696)",
+    "autor": "gregorio-de-matos",
     "genero": "satirico",
     "sub": "satira-de-costumes",
     "subnome": "Sátira de Costumes",
-    "resumo": "Dirigido aos \"Caramurus\", como eram chamados os mestiços do Recôncavo, o poema zomba das pretensões de nobreza de quem se dizia principal da terra, numa linguagem que mistura português, tupi e línguas africanas.",
+    "resumo": "Dirigido aos “Caramurus”, mestiços do Recôncavo, o poema zomba das pretensões de nobreza de quem se dizia principal da terra, em linguagem que mistura português, tupi e línguas africanas.",
     "externo": "https://www.gutenberg.org/ebooks/71724",
     "rotulo": "Ler nas Obras poéticas de Gregório de Matos (1882, Projeto Gutenberg)",
     "dominioPublico": true
   },
   {
+    "id": "quem-sou-eu-bodarrada",
+    "titulo": "Quem sou eu? (Bodarrada)",
+    "autor": "luis-gama",
+    "genero": "satirico",
+    "sub": "satira-de-costumes",
+    "subnome": "Sátira de Costumes",
+    "resumo": "Publicado em Primeiras Trovas Burlescas de Getulino (1859), responde com humor ácido a quem ofendia o poeta por sua origem e devolve a ofensa a uma sociedade mestiça e hierárquica.",
+    "externo": "https://digital.bbm.usp.br/bitstream/bbm/4270/1/008936_COMPLETO.pdf",
+    "rotulo": "Ler em Primeiras Trovas Burlescas (3ª ed., Biblioteca Brasiliana Mindlin, PDF)",
+    "dominioPublico": true
+  },
+  {
     "id": "retrato-do-governador-antonio-luis-da-camara-coutinho",
     "titulo": "Retrato do Governador Antônio Luís da Câmara Coutinho",
-    "autor": "Gregório de Matos (1636–1696)",
+    "autor": "gregorio-de-matos",
     "genero": "satirico",
     "sub": "epigrama",
     "subnome": "Epigrama",
@@ -134,279 +318,168 @@ const POEMAS = [
     "dominioPublico": true
   },
   {
-    "id": "o-navio-negreiro",
-    "titulo": "O Navio Negreiro",
-    "autor": "Castro Alves (1847–1871)",
-    "genero": "lirico",
-    "sub": "ode",
-    "subnome": "Ode",
-    "resumo": "Este poema monumental funciona estruturalmente como uma grande ode de clamor social. Castro Alves abandona a homenagem suave e adota o tom grandioso, solene e eloquente para cantar o horror da escravidão e invocar os deuses e a justiça humana.",
-    "externo": "https://codap.ufs.br/uploads/page_attach/path/8283/Navio_negreiro_-_Castro_Alves.pdf",
-    "rotulo": "Ler o poema (PDF da edição da Câmara dos Deputados)",
+    "id": "amor",
+    "titulo": "Amor",
+    "autor": "oswald-de-andrade",
+    "genero": "satirico",
+    "sub": "epigrama",
+    "subnome": "Epigrama",
+    "resumo": "Poema de duas palavras, “amor” e “humor”, que reduz o tema mais solene da lírica a uma piada. Abre o Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927).",
+    "versos": [
+      "amor\nhumor"
+    ],
+    "fonte": "Oswald de Andrade, Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927). Obra em domínio público no Brasil desde 2025.",
+    "dominioPublico": true
+  },
+  {
+    "id": "erro-de-portugues",
+    "titulo": "Erro de português",
+    "autor": "oswald-de-andrade",
+    "genero": "satirico",
+    "sub": "epigrama",
+    "subnome": "Epigrama",
+    "resumo": "Em poucos versos, o poeta relê a chegada dos colonizadores com humor: o desfecho inverte a versão oficial da história do Brasil.",
+    "versos": [
+      "Quando o português chegou\nDebaixo de uma bruta chuva\nVestiu o índio\nQue pena!\nFosse uma manhã de sol\nO índio tinha despido\nO português"
+    ],
+    "fonte": "Oswald de Andrade, Primeiro Caderno do Aluno de Poesia Oswald de Andrade (1927). Obra em domínio público no Brasil desde 2025.",
     "dominioPublico": true
   },
   {
     "id": "pronominais",
     "titulo": "Pronominais",
-    "autor": "Oswald de Andrade (1890–1954)",
+    "autor": "oswald-de-andrade",
     "genero": "satirico",
     "sub": "epigrama",
     "subnome": "Epigrama",
-    "fonte": "Oswald de Andrade, Pau-Brasil (1925). Obra em domínio público no Brasil desde 2025. Confira com uma edição impressa antes de publicar.",
+    "resumo": "Publicado em Pau-Brasil (1925), contrapõe a gramática escolar à fala real dos brasileiros e ironiza o apego às regras da norma culta.",
     "versos": [
       "Dê-me um cigarro\nDiz a gramática\nDo professor e do aluno\nE do mulato sabido\nMas o bom negro e o bom branco\nDa Nação Brasileira\nDizem todos os dias\nDeixa disso camarada\nMe dá um cigarro"
-    ]
-  },
-  {
-    "id": "ode-ao-dois-de-julho",
-    "titulo": "Ode ao Dois de Julho",
-    "autor": "Castro Alves (1847–1871)",
-    "genero": "lirico",
-    "sub": "ode",
-    "subnome": "Ode",
-    "resumo": "Ode do poeta baiano em homenagem ao 2 de Julho, data em que a Bahia celebra sua independência. A exaltação da liberdade e da pátria é uma das marcas do Romantismo social de Castro Alves.",
-    "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
-    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
-    "dominioPublico": true
-  },
-  {
-    "id": "mocidade-e-morte",
-    "titulo": "Mocidade e Morte",
-    "autor": "Castro Alves (1847–1871)",
-    "genero": "lirico",
-    "sub": "elegia",
-    "subnome": "Elegia",
-    "resumo": "Poema composto em 1864 e incluído em Espumas Flutuantes (1870), em que o jovem poeta medita sobre a morte precoce, tema recorrente do Romantismo.",
-    "externo": "https://biblioteca.torres.rs.gov.br/wp-content/uploads/2021/10/alves-castro-espumas-flutuantes.pdf",
-    "rotulo": "Ler em Espumas Flutuantes (edição da Biblioteca Nacional, PDF)",
-    "dominioPublico": true
-  },
-  {
-    "id": "encarecimento-dos-rigores-de-anarda",
-    "titulo": "Encarecimento dos rigores de Anarda",
-    "autor": "Manuel Botelho de Oliveira (1636–1711)",
-    "genero": "lirico",
-    "sub": "madrigal",
-    "subnome": "Madrigal",
-    "resumo": "O autor baiano foi o primeiro brasileiro a publicar um livro de poesia em vida (Música do Parnaso, 1705). Ele é considerado o grande pioneiro do madrigal no país, fortemente influenciado pelo modelo barroco espanhol.",
-    "externo": "https://www.todamateria.com.br/madrigal-o-que-e-e-caracteristicas-do-genero-literario-com-exemplos/",
-    "rotulo": "Ler o madrigal (site Toda Matéria)",
-    "dominioPublico": true
-  },
-  {
-    "id": "juvenal-e-o-dragao",
-    "titulo": "Juvenal e o Dragão",
-    "autor": "Leandro Gomes de Barros (1865–1918)",
-    "genero": "cordel",
-    "sub": "romance",
-    "subnome": "Romance",
-    "resumo": "Um dos grandes clássicos do cordel de maravilhas: o herói Juvenal enfrenta um dragão numa narrativa de aventura e fantasia, no estilo dos contos tradicionais.",
-    "externo": "http://dspace.bc.uepb.edu.br/jspui/handle/123456789/27380",
-    "rotulo": "Ler o folheto no Repositório Digital da UEPB",
-    "dominioPublico": true
-  },
-  {
-    "id": "peleja-de-manoel-riachao-com-o-diabo",
-    "titulo": "Peleja de Manoel Riachão com o Diabo",
-    "autor": "Leandro Gomes de Barros (1865–1918)",
-    "genero": "cordel",
-    "sub": "peleja",
-    "subnome": "Peleja",
-    "resumo": "Em 58 estrofes de seis versos, o poeta recria por escrito um desafio de cantoria: o repentista Manoel Riachão enfrenta o Diabo e vence com astúcia, viola e conhecimento das Escrituras.",
-    "externo": "http://dspace.bc.uepb.edu.br/jspui/handle/123456789/27764",
-    "rotulo": "Ler o folheto no Repositório Digital da UEPB",
-    "dominioPublico": true
+    ],
+    "fonte": "Oswald de Andrade, Pau-Brasil (1925). Obra em domínio público no Brasil desde 2025.",
+    "dominioPublico": true,
+    "revisar": "Conferir o texto com uma edição impressa."
   },
   {
     "id": "historia-da-princesa-rosa",
     "titulo": "História da Princesa Rosa",
-    "autor": "Silvino Pirauá de Lima (1848–1913)",
+    "autor": "silvino-piraua-de-lima",
     "genero": "cordel",
     "sub": "romance",
     "subnome": "Romance",
     "resumo": "Folheto de um dos pioneiros do cordel, a quem se atribui a criação do romance em versos, no gosto das histórias de princesas e aventuras populares.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
+  },
+  {
+    "id": "juvenal-e-o-dragao",
+    "titulo": "Juvenal e o Dragão",
+    "autor": "leandro-gomes-de-barros",
+    "genero": "cordel",
+    "sub": "romance",
+    "subnome": "Romance",
+    "resumo": "Um dos grandes clássicos do cordel de maravilhas: o herói Juvenal enfrenta um dragão numa narrativa de aventura e fantasia, no estilo dos contos tradicionais.",
+    "externo": "https://dspace.bc.uepb.edu.br/jspui/handle/123456789/27380",
+    "rotulo": "Ler o folheto no Repositório Digital da UEPB",
+    "dominioPublico": true,
+    "revisar": "Confirmar que o endereço abre em https."
   },
   {
     "id": "historia-da-donzela-teodora",
     "titulo": "História da Donzela Teodora",
-    "autor": "Leandro Gomes de Barros (1865–1918)",
+    "autor": "leandro-gomes-de-barros",
     "genero": "cordel",
     "sub": "romance",
     "subnome": "Romance",
     "resumo": "Clássico do cordel que leva ao sertão uma história de tradição europeia, centrada em uma jovem de grande sabedoria.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
   },
   {
     "id": "o-cachorro-dos-mortos",
     "titulo": "O Cachorro dos Mortos",
-    "autor": "Leandro Gomes de Barros (1865–1918)",
+    "autor": "leandro-gomes-de-barros",
     "genero": "cordel",
     "sub": "romance",
     "subnome": "Romance",
     "resumo": "Um dos maiores sucessos de Leandro, a narrativa em versos tem como protagonista o cachorro Calar e figura entre os clássicos do cordel narrativo.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
+  },
+  {
+    "id": "peleja-de-manoel-riachao-com-o-diabo",
+    "titulo": "Peleja de Manoel Riachão com o Diabo",
+    "autor": "leandro-gomes-de-barros",
+    "genero": "cordel",
+    "sub": "peleja",
+    "subnome": "Peleja",
+    "resumo": "Em 58 estrofes de seis versos, o poeta recria por escrito um desafio de cantoria: o repentista Manoel Riachão enfrenta o Diabo e vence com astúcia, viola e conhecimento das Escrituras.",
+    "externo": "https://dspace.bc.uepb.edu.br/jspui/handle/123456789/27764",
+    "rotulo": "Ler o folheto no Repositório Digital da UEPB",
+    "dominioPublico": true,
+    "revisar": "Confirmar que o endereço abre em https."
   },
   {
     "id": "peleja-de-vicente-sabia-com-antonio-coqueiro",
     "titulo": "Peleja de Vicente Sabiá com Antônio Coqueiro",
-    "autor": "José Pacheco (1890–1954)",
+    "autor": "jose-pacheco",
     "genero": "cordel",
     "sub": "peleja",
     "subnome": "Peleja",
     "resumo": "Folheto de peleja em que dois cantadores se enfrentam em desafio de versos, publicado pela editora Luzeiro do Norte, do Recife.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
   },
   {
     "id": "a-chegada-de-lampiao-no-inferno",
     "titulo": "A Chegada de Lampião no Inferno",
-    "autor": "José Pacheco (1890–1954)",
+    "autor": "jose-pacheco",
     "genero": "cordel",
     "sub": "cangaco-conflito",
     "subnome": "Cangaço e Conflito",
     "resumo": "O cangaceiro Lampião chega ao inferno e deixa os demônios assombrados, num folheto que transforma o terror do sertão em humor e fantasia.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
   },
   {
     "id": "a-vida-de-antonio-silvino",
     "titulo": "A Vida de Antônio Silvino",
-    "autor": "Francisco das Chagas Batista (1882–1930)",
+    "autor": "francisco-das-chagas-batista",
     "genero": "cordel",
     "sub": "cangaco-conflito",
     "subnome": "Cangaço e Conflito",
     "resumo": "Publicado em 1905, é um dos primeiros folhetos sobre o cangaço e acompanha a trajetória do cangaceiro Antônio Silvino, figura que dividiu o sertão entre admiradores e vítimas.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
   },
   {
     "id": "o-nascimento-de-antonio-silvino",
     "titulo": "O Nascimento de Antônio Silvino",
-    "autor": "Leandro Gomes de Barros (1865–1918)",
+    "autor": "leandro-gomes-de-barros",
     "genero": "cordel",
     "sub": "cangaco-conflito",
     "subnome": "Cangaço e Conflito",
     "resumo": "Leandro Gomes de Barros narra as origens do cangaceiro Antônio Silvino, personagem que o poeta retratou em vários folhetos.",
-    "externo": "http://cordel.casaruibarbosa.gov.br/",
+    "externo": "https://cordel.casaruibarbosa.gov.br/",
     "rotulo": "Procurar o folheto no acervo digital da Casa de Rui Barbosa",
-    "dominioPublico": true
-  },
-  {
-    "id": "inocencia",
-    "titulo": "Inocência",
-    "autor": "Visconde de Taunay (1843–1899)",
-    "genero": "lirico",
-    "sub": "idilio",
-    "subnome": "Idílio",
-    "resumo": "É considerado pela crítica o mais perfeito idílio sertanejo da literatura nacional. A trama acompanha o amor proibido, puro e trágico entre a jovem Inocência e o médico itinerante Cirino no cenário bucólico do sertão de Mato Grosso.",
-    "externo": "https://www.gutenberg.org/ebooks/68635",
-    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
-    "dominioPublico": true
-  },
-  {
-    "id": "cinco-minutos",
-    "titulo": "Cinco Minutos",
-    "autor": "José de Alencar (1829–1877)",
-    "genero": "lirico",
-    "sub": "idilio",
-    "subnome": "Idílio",
-    "resumo": "É frequentemente classificado pela crítica como um idílio urbano e idealizado. A narrativa, que se inicia com o atraso de cinco minutos para pegar um ônibus, transforma-se em um terno e poético jogo de perseguição amorosa e devoção romântica pura entre o narrador e a misteriosa Carlota.",
-    "externo": "https://www.gutenberg.org/ebooks/44540",
-    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
-    "dominioPublico": true
-  },
-  {
-    "id": "marilia-de-dirceu",
-    "titulo": "Marília de Dirceu",
-    "autor": "Tomás Antônio Gonzaga (1744–1810)",
-    "genero": "lirico",
-    "sub": "idilio",
-    "subnome": "Idílio",
-    "resumo": "Representa a expressão máxima do idílio pastoral e amoroso do Brasil Colonial. O pastor Dirceu canta seu amor idealizado por Marília em um cenário de natureza perfeita (locus amoenus), típico do Arcadismo brasileiro.",
-    "externo": "https://www.gutenberg.org/ebooks/18082",
-    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
-    "dominioPublico": true
-  },
-  {
-    "id": "canto-do-piaga",
-    "titulo": "Canto do Piaga",
-    "autor": "Gonçalves Dias (1823–1864)",
-    "genero": "lirico",
-    "sub": "elegia",
-    "subnome": "Elegia",
-    "resumo": "Embora muito conhecido por sua poesia indianista e patriótica, o autor romântico compôs este poema com o mais puro tom de elegia heroica e lamento. Nele, o piaga (pajé) profetiza e lamenta antecipadamente a destruição de sua cultura e a perda da soberania de seu povo com a chegada dos colonizadores.",
-    "externo": "https://projetos.uel.br/bibliotecacomum/bc-texto/obras/ua00119a.pdf",
-    "rotulo": "Ler em Primeiros Cantos (Biblioteca Comum UEL, PDF)",
-    "dominioPublico": true
-  },
-  {
-    "id": "cantico-do-calvario",
-    "titulo": "Cântico do Calvário",
-    "autor": "Fagundes Varela (1841–1875)",
-    "genero": "lirico",
-    "sub": "elegia",
-    "subnome": "Elegia",
-    "resumo": "Uma das elegias mais conhecidas do Romantismo brasileiro, escrita após a morte do filho pequeno do poeta. O lamento pessoal, em tom grave e comovido, tornou-se referência da poesia elegíaca nacional.",
-    "externo": "https://digital.bbm.usp.br/handle/bbm/4927",
-    "rotulo": "Ler em Cantos e Fantasias (1865, Biblioteca Brasiliana Mindlin)",
-    "dominioPublico": true
-  },
-  {
-    "id": "ode-ao-burgues",
-    "titulo": "Ode ao Burguês",
-    "autor": "Mário Raul de Morais Andrade (1893–1945)",
-    "genero": "lirico",
-    "sub": "ode",
-    "subnome": "Ode",
-    "resumo": "Ode ao Burguês é um violento ataque verbal contra um homem rico, gordo e hipócrita, que coloca o dinheiro acima de tudo. O texto descreve os hábitos vazios e o egoísmo dessa elite materialista para expor sua total falta de sensibilidade humana, transformando-se em um manifesto poético de repúdio à mediocridade social.",
-    "externo": "https://digital.bbm.usp.br/handle/bbm/6863",
-    "rotulo": "Ler em Pauliceia Desvairada (1922, Biblioteca Brasiliana Mindlin)",
-    "dominioPublico": true
-  },
-  {
-    "id": "quem-sou-eu-bodarrada",
-    "titulo": "Quem sou eu? (Bodarrada)",
-    "autor": "Luís Gama (1830–1882)",
-    "genero": "satirico",
-    "sub": "satira-de-costumes",
-    "subnome": "Sátira de Costumes",
-    "resumo": "Publicado em Primeiras Trovas Burlescas de Getulino (1859), o poema responde com humor ácido aos que ofendiam o poeta por sua origem, devolvendo a ofensa a uma sociedade mestiça e cheia de hierarquias de cor e de privilégio.",
-    "externo": "https://digital.bbm.usp.br/bitstream/bbm/4270/1/008936_COMPLETO.pdf",
-    "rotulo": "Ler em Primeiras Trovas Burlescas (3ª ed., Biblioteca Brasiliana Mindlin, PDF)",
-    "dominioPublico": true
-  },
-  {
-    "id": "iracema",
-    "titulo": "Iracema",
-    "autor": "José de Alencar (1829–1877)",
-    "genero": "lirico",
-    "sub": "idilio",
-    "subnome": "Idílio",
-    "resumo": "Romance de 1865 que conta o amor entre a índia Iracema e o colonizador português Martim, em uma prosa de ritmo poético e com a natureza como cenário. A linguagem lírica e a atmosfera de amor puro e natural aproximam o texto do idílio.",
-    "externo": "https://www.gutenberg.org/ebooks/67740",
-    "rotulo": "Ler a obra completa (Projeto Gutenberg)",
-    "dominioPublico": true
-  },
-  {
-    "id": "musica-do-parnasso",
-    "titulo": "Música do Parnasso",
-    "autor": "Manuel Botelho de Oliveira (1636–1711)",
-    "genero": "lirico",
-    "sub": "madrigal",
-    "subnome": "Madrigal",
-    "resumo": "Primeiro livro de poesia de um brasileiro publicado em vida (1705). Reúne rimas em português, castelhano, italiano e latim, entre elas madrigais em louvor à amada Anarda.",
-    "externo": "https://es.wikisource.org/wiki/M%C3%BAsica_de_el_Parnaso",
-    "rotulo": "Ler a obra (Wikisource)",
-    "dominioPublico": true
+    "dominioPublico": true,
+    "revisar": "Link genérico da página inicial do acervo: trocar pelo endereço direto do folheto e confirmar que abre em https."
   }
 ];
+
+// Troca a chave do autor pelo nome completo (padroniza os nomes em todo o site)
+POEMAS.forEach((poema) => {
+  poema.autor = AUTORES[poema.autor] || poema.autor;
+});

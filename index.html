@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museu da Poesia Digital | História dos Poemas</title>
+    <title>Museu da Poesia Digital | A história escrita em versos</title>
+    <meta name="description" content="Museu literário digital dedicado ao poema brasileiro: conheça a história dos gêneros lírico, satírico e do cordel e leia poemas de grandes autores.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Museu da Poesia Digital">
+    <meta property="og:title" content="Museu da Poesia Digital | A história escrita em versos">
+    <meta property="og:description" content="Museu literário digital dedicado ao poema brasileiro: conheça a história dos gêneros lírico, satírico e do cordel e leia poemas de grandes autores.">
+    <!-- Para prévia em redes sociais, adicione: <meta property="og:image" content="URL-completa-da-imagem.png"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
+    <link rel="stylesheet" href="estilos/cards.css">
     <link rel="stylesheet" href="estilos/home.css">
     <script src="scripts/tema.js"></script>
 </head>
@@ -18,9 +26,9 @@
     <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
 
     <header>
-        <h1>Museu da Poesia Digital</h1>
+        <a class="marca" href="index.html" aria-current="page">Museu da Poesia Digital</a>
         <nav class="menu" id="menu-principal" aria-label="Navegação principal">
-            <ul>
+            <ul role="list">
                 <li><a href="index.html" aria-current="page">Início</a></li>
                 <li><a href="lirico.html">Lírico</a></li>
                 <li><a href="satirico.html">Satírico</a></li>
@@ -31,34 +39,39 @@
     </header>
 
     <main id="conteudo">
-        <section class="apresentacao">
-            <h2>A história escrita em versos</h2>
+        <section class="apresentacao" aria-labelledby="apresentacao-titulo">
+            <h1 id="apresentacao-titulo">A história escrita em versos</h1>
             <p>Este é um museu literário digital dedicado à preservação, à valorização e à descoberta do poema brasileiro. Sua proposta é contar a história de três gêneros que marcaram a nossa trajetória: o lírico, o satírico e o narrativo-popular, representado pelo cordel.</p>
             <p>Esses gêneros chegaram ao Brasil trazidos por tradições de outros lugares e aqui se transformaram junto com o país, ganhando feição própria. O poema lírico deu forma à emoção e à memória, o satírico fez da crítica uma arte e o cordel levou ao sertão e às feiras o gosto de contar histórias em versos. Acompanhar esses caminhos é o propósito deste museu.</p>
             <p>Aqui, alguns poemas podem ser lidos como exemplos vivos de cada tradição, mas o centro da visita é a história dos gêneros e o que eles revelam sobre o Brasil e seu povo. Preservar essa memória é também uma forma de despertar a curiosidade por ela.</p>
         </section>
 
-        <section class="generos">
-            <h2>Versos e Tradições</h2>
+        <section class="poema-do-dia" id="poema-do-dia" aria-labelledby="poema-do-dia-titulo" hidden>
+            <h2 id="poema-do-dia-titulo">Poema do dia</h2>
+            <ul class="lista-cards" role="list"></ul>
+        </section>
+
+        <section class="generos" aria-labelledby="generos-titulo">
+            <h2 id="generos-titulo">Versos e Tradições</h2>
 
             <div class="lista-generos">
 
                 <article class="lirico">
                     <img src="imagens/lirico.svg" alt="" width="600" height="360" loading="lazy">
                     <h3><a href="lirico.html">Lírico</a></h3>
-                    <p>O gênero lírico no poema brasileiro nasceu da influência das tradições europeias e, ao longo dos séculos, desenvolveu uma identidade própria, refletindo os sentimentos, as ideias e as transformações da sociedade. De Gregório de Matos e Tomás Antônio Gonzaga a Cecília Meireles e Carlos Drummond de Andrade, grandes poetas reinventaram suas formas e expressões, marcando a história da literatura nacional. Explore a evolução do lirismo brasileiro por meio de seus autores, obras e diferentes formas de expressão poética.</p>
+                    <p>Do Barroco ao Modernismo, o lirismo brasileiro deu forma à emoção, à memória e às inquietações da existência, em poetas como Gregório de Matos, Cecília Meireles e Carlos Drummond de Andrade.</p>
                 </article>
 
                 <article class="satirico">
                     <img src="imagens/satirico.svg" alt="" width="600" height="360" loading="lazy">
                     <h3><a href="satirico.html">Satírico</a></h3>
-                    <p>O gênero satírico no poema brasileiro desenvolveu-se sob a influência das tradições europeias e ganhou características próprias ao retratar, com ironia, humor e crítica, os costumes, as relações de poder e as contradições da sociedade. De Gregório de Matos, conhecido por suas sátiras à sociedade colonial, a poetas de diferentes períodos que utilizaram os versos para questionar valores e denunciar injustiças, a sátira tornou-se uma importante forma de expressão crítica na literatura nacional. Explore a trajetória da sátira brasileira por meio de seus autores, obras e diferentes formas de contestação poética.</p>
+                    <p>Com ironia e humor, a sátira brasileira retratou costumes, poderes e contradições da sociedade, das críticas de Gregório de Matos aos poemas-piada de Oswald de Andrade.</p>
                 </article>
 
                 <article class="cordel">
                     <img src="imagens/cordel.svg" alt="" width="600" height="360" loading="lazy">
                     <h3><a href="cordel.html">Cordel</a></h3>
-                    <p>A literatura de cordel brasileira consolidou-se a partir de tradições poéticas populares, especialmente no Nordeste, onde ganhou identidade própria por meio de versos, narrativas e folhetos impressos. De histórias de amor e aventuras a relatos históricos, críticas sociais e acontecimentos do cotidiano, poetas como Leandro Gomes de Barros e Patativa do Assaré contribuíram para preservar e renovar essa expressão da cultura popular. Explore a trajetória do cordel brasileiro por meio de seus poetas, obras, temas e formas de narrar a vida em versos.</p>
+                    <p>Nascido da tradição popular, sobretudo no Nordeste, o cordel conta em folhetos rimados histórias de amor, aventura e cangaço, em poetas como Leandro Gomes de Barros.</p>
                 </article>
 
             </div>
@@ -68,13 +81,13 @@
             <h2 id="sobre-titulo">Sobre o projeto</h2>
             <p>O Museu da Poesia Digital é um projeto de portfólio de desenvolvimento web. Ele une duas paixões, a poesia brasileira e a construção de experiências na web, para mostrar como o código pode contar uma história com clareza e cuidado.</p>
 
-            <ul class="tecnologias">
-                <li><strong>HTML5</strong> Estrutura semântica, com regiões da página, hierarquia de títulos e atributos de acessibilidade.</li>
-                <li><strong>CSS3</strong> Layout responsivo com Grid e Flexbox, cores e fontes organizadas em variáveis e foco visível para quem usa teclado.</li>
-                <li><strong>JavaScript</strong> Menu de navegação para telas pequenas, acessível e operável pelo teclado.</li>
+            <ul class="tecnologias" role="list">
+                <li><strong>HTML5</strong> Estrutura semântica, com regiões da página, hierarquia de títulos, listas nomeadas e atributos de acessibilidade.</li>
+                <li><strong>CSS3</strong> Layout fluido com Grid e Flexbox, cores e fontes em variáveis, tema claro e escuro, foco visível e respeito a quem prefere menos movimento.</li>
+                <li><strong>JavaScript</strong> Menu acessível, cards montados a partir dos dados, busca, poema do dia, tamanho da letra e marcação de poemas lidos.</li>
             </ul>
 
-            <p>Os poemas em domínio público podem ser lidos no próprio site. Os protegidos por direitos autorais levam a fontes externas, respeitando os direitos dos autores e titulares.</p>
+            <p>Os poemas em domínio público podem ser lidos no próprio site ou em fontes indicadas. Os protegidos por direitos autorais levam a fontes externas, respeitando os direitos dos autores e titulares.</p>
         </section>
     </main>
 
@@ -82,6 +95,9 @@
         <p>Projeto desenvolvido por <a href="https://github.com/helderneiva" target="_blank" rel="noopener noreferrer">Helder Neiva<span class="visually-hidden"> (abre em nova aba)</span></a></p>
     </footer>
 
+    <script src="scripts/util.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="dados/poemas.js"></script>
+    <script src="scripts/cards.js"></script>
 </body>
 </html>

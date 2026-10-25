@@ -4,13 +4,13 @@
     margin-bottom: 56px;
 }
 
-.apresentacao h2 {
+.apresentacao h1 {
     font-size: 2.6em;
     margin-bottom: 20px;
 }
 
 .apresentacao p {
-    max-width: 36em;
+    max-width: var(--medida);
     font-size: 1.15em;
 }
 
@@ -46,7 +46,12 @@
 
 .lista-generos article:hover {
     box-shadow: 0 6px 16px rgba(44, 30, 17, 0.15);
-    transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .lista-generos article:hover {
+        transform: translateY(-3px);
+    }
 }
 
 .lista-generos img {
@@ -81,7 +86,8 @@
     inset: 0;
 }
 
-.lista-generos article:focus-within {
+/* O contorno só aparece no foco por teclado, não no clique do mouse */
+.lista-generos article:has(a:focus-visible) {
     outline: 3px solid var(--foco);
     outline-offset: 4px;
 }
@@ -93,6 +99,19 @@
 .lista-generos p {
     font-size: 0.95em;
 }
+
+/* ---------- Poema do dia (montado pelo cards.js) ---------- */
+.poema-do-dia {
+    margin-bottom: 56px;
+}
+
+.poema-do-dia .lista-cards {
+    grid-template-columns: minmax(0, 28rem);
+}
+
+.poema-do-dia .card[data-genero="lirico"]   { --cor-genero: var(--cor-lirico); }
+.poema-do-dia .card[data-genero="satirico"] { --cor-genero: var(--cor-satirico); }
+.poema-do-dia .card[data-genero="cordel"]   { --cor-genero: var(--cor-cordel); }
 
 .sobre {
     padding: 32px;
@@ -108,7 +127,7 @@
 }
 
 .sobre p {
-    max-width: 42em;
+    max-width: var(--medida);
 }
 
 .tecnologias {
