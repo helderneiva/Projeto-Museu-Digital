@@ -43,9 +43,11 @@ function montarLeitura(poema) {
     const paragrafo = criar('p');
     paragrafo.append(link);
 
-    const aviso = poema.dominioPublico
-      ? 'O texto desta obra está em domínio público. Leia na fonte indicada:'
-      : 'Esta obra não está em domínio público. Leia o poema na fonte indicada:';
+    // Mesmo critério do card (util.js): só é "protegida" quando dominioPublico === false
+    const protegida = poema.dominioPublico === false;
+    const aviso = protegida
+      ? 'Esta obra não está em domínio público. Leia o poema na fonte indicada:'
+      : 'O texto desta obra está em domínio público. Leia na fonte indicada:';
     const partes = [criar('p', 'poema-nota', aviso), paragrafo];
     if (poema.formato === 'prosa') {
       partes.unshift(criar('p', 'poema-nota', 'Esta é uma obra em prosa, de ritmo e linguagem poéticos.'));

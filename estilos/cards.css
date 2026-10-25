@@ -20,12 +20,26 @@
     position: relative; /* referência do link esticado */
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 28px 20px 20px; /* 8px a mais no topo: espaço da faixa colorida */
+    overflow: hidden; /* a faixa colorida acompanha o canto arredondado, sem "rebarba" */
+    /* Folga no topo quando o card sobe para o alto da tela (Tab). Somada ao scroll-padding
+       da página, deixa visível o título "Odes para ler:" que fica logo acima do primeiro card,
+       sem ficar escondido atrás da barra fixa de subgêneros. */
+    scroll-margin-top: 3.5rem;
     background-color: var(--genero-claro);
     border: 1px solid var(--borda);
-    border-top: 8px solid var(--cor-genero);
     border-radius: var(--raio);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Faixa colorida do gênero: um pseudo-elemento dentro da borda, em vez de border-top.
+   Uma borda grossa em cima com bordas finas dos lados deixa os cantos recortados. */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 8px;
+    background-color: var(--cor-genero);
 }
 
 .card:hover {
@@ -61,14 +75,18 @@
     inset: 0;
 }
 
-/* O contorno só aparece no foco por teclado, não no clique do mouse */
-.card:has(a:focus-visible) {
-    outline: 3px solid var(--genero-escuro);
-    outline-offset: 4px;
-}
+/* O contorno só aparece no foco por teclado, não no clique do mouse.
+   O @supports garante que o outline do link só é removido quando o navegador
+   entende :has(). Sem isso, navegadores antigos ficariam sem indicador de foco. */
+@supports selector(:has(*)) {
+    .card:has(a:focus-visible) {
+        outline: 3px solid var(--genero-escuro);
+        outline-offset: 4px;
+    }
 
-.card h3 a:focus-visible {
-    outline: none;
+    .card h3 a:focus-visible {
+        outline: none;
+    }
 }
 
 .card .autor {
@@ -121,4 +139,39 @@
 
 .selo-lido {
     color: var(--genero-escuro);
+}
+
+/* ---------- Botões (home e páginas de gênero) ---------- */
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 22px;
+    background-color: var(--genero-escuro);
+    color: var(--fundo-principal);
+    border: 2px solid var(--genero-escuro);
+    border-radius: 999px;
+    font-family: var(--fonte-texto);
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.botao:hover {
+    background-color: transparent;
+    color: var(--genero-escuro);
+}
+
+.botao-secundario {
+    background-color: transparent;
+    color: var(--genero-escuro);
+}
+
+.botao-secundario:hover {
+    background-color: var(--genero-escuro);
+    color: var(--fundo-principal);
 }

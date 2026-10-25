@@ -14,17 +14,22 @@
     <!-- Ao publicar o site, descomente e preencha com os endereços reais:
     <link rel="canonical" href="https://SEU-DOMINIO/satirico.html">
     <meta property="og:url" content="https://SEU-DOMINIO/satirico.html">
-    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png">
+    <meta name="twitter:card" content="summary_large_image"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Grenze-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="modulepreload" href="scripts/util.js">
+    <link rel="modulepreload" href="dados/poemas.js">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/cards.css">
     <link rel="stylesheet" href="estilos/generos.css">
     <script src="scripts/tema.js"></script>
+    <noscript><style>.busca { display: none; }</style></noscript>
 </head>
 <body data-genero="satirico">
 
@@ -45,6 +50,12 @@
 
     <main id="conteudo">
         <h1 class="titulo-pagina">A Arte da Sátira</h1>
+
+        <div class="busca" id="busca" role="search">
+            <label for="busca-campo">Buscar nesta página</label>
+            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
+            <p class="busca-status" id="busca-status" role="status"></p>
+        </div>
 
         <section class="introducao" aria-label="Introdução">
             <p>Entre o riso e a crítica, a sátira transforma os vícios e as contradições de uma sociedade em poesia. Na literatura brasileira, poetas de diferentes épocas usaram a ironia e o humor para questionar costumes, poderes e valores, construindo uma tradição de expressão crítica e irreverente.</p>
@@ -70,12 +81,6 @@
             <h2 id="subgeneros-titulo">Os Subgêneros Satíricos</h2>
             <p>A sátira brasileira assumiu diferentes formas ao longo da história. A <strong>sátira de costumes</strong> retrata, com ironia e humor, os hábitos, os vícios e as contradições de uma sociedade; o <strong>epigrama</strong> concentra a crítica em poucos versos, em que a brevidade e o remate inesperado dão força ao golpe. Ambos vêm da tradição clássica e foram recriados por poetas brasileiros, de Gregório de Matos aos modernistas.</p>
         </section>
-
-        <div class="busca" id="busca" role="search" hidden>
-            <label for="busca-campo">Buscar nesta página</label>
-            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
-            <p class="busca-status" id="busca-status" role="status"></p>
-        </div>
 
         <nav class="indice-subgeneros" aria-label="Subgêneros do gênero satírico">
             <ul role="list">

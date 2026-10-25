@@ -30,7 +30,7 @@ export function gravar(chave, valor) {
 
 // Remove acentos e maiúsculas, para a busca ignorar essas diferenças
 export function normalizar(texto) {
-  return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
 export function urlPoema(id) {

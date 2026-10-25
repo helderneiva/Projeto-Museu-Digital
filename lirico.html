@@ -14,17 +14,22 @@
     <!-- Ao publicar o site, descomente e preencha com os endereços reais:
     <link rel="canonical" href="https://SEU-DOMINIO/lirico.html">
     <meta property="og:url" content="https://SEU-DOMINIO/lirico.html">
-    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png">
+    <meta name="twitter:card" content="summary_large_image"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Grenze-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="modulepreload" href="scripts/util.js">
+    <link rel="modulepreload" href="dados/poemas.js">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/cards.css">
     <link rel="stylesheet" href="estilos/generos.css">
     <script src="scripts/tema.js"></script>
+    <noscript><style>.busca { display: none; }</style></noscript>
 </head>
 <body data-genero="lirico">
 
@@ -45,6 +50,12 @@
 
     <main id="conteudo">
         <h1 class="titulo-pagina">O Lirismo Brasileiro</h1>
+
+        <div class="busca" id="busca" role="search">
+            <label for="busca-campo">Buscar nesta página</label>
+            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
+            <p class="busca-status" id="busca-status" role="status"></p>
+        </div>
 
         <section class="introducao" aria-label="Introdução">
             <p>Entre sentimentos e palavras, o lirismo transforma experiências humanas em poesia. Na literatura brasileira, poetas de diferentes épocas deram voz ao amor, à saudade, à natureza e às inquietações da existência, construindo uma rica tradição de expressão e sensibilidade.</p>
@@ -69,12 +80,6 @@
             <h2 id="subgeneros-titulo">Os Subgêneros Líricos</h2>
             <p>Ao longo da história da poesia brasileira, diferentes subgêneros líricos expressaram emoções e experiências humanas por meio de formas próprias. A <strong>ode</strong> celebra pessoas, acontecimentos ou ideais; o <strong>idílio</strong> retrata cenas campestres e sentimentos amorosos; a <strong>elegia</strong> manifesta luto, saudade ou reflexão sobre a perda; e o <strong>madrigal</strong> combina brevidade e delicadeza, frequentemente para expressar o amor. Influenciados pela tradição clássica europeia, esses subgêneros foram incorporados e recriados por poetas brasileiros, assumindo diferentes características conforme as épocas e os estilos literários.</p>
         </section>
-
-        <div class="busca" id="busca" role="search" hidden>
-            <label for="busca-campo">Buscar nesta página</label>
-            <input type="search" id="busca-campo" placeholder="Título, autor ou palavra do resumo" autocomplete="off">
-            <p class="busca-status" id="busca-status" role="status"></p>
-        </div>
 
         <nav class="indice-subgeneros" aria-label="Subgêneros do gênero lírico">
             <ul role="list">

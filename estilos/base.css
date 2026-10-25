@@ -399,3 +399,26 @@ main {
         animation: none !important;
     }
 }
+
+/* ---------- Modo de alto contraste do sistema (forced-colors) ----------
+   O ícone do hambúrguer é feito só com background-color, que o Windows
+   sobrescreve neste modo. Usar uma cor do sistema garante que ele apareça. */
+@media (forced-colors: active) {
+    .menu-toggle-icone,
+    .menu-toggle-icone::before,
+    .menu-toggle-icone::after {
+        background-color: ButtonText;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-icone {
+        background-color: transparent;
+    }
+}
+
+/* ---------- Transição suave entre páginas (View Transitions) ----------
+   Só para quem não pediu menos movimento; navegadores sem suporte ignoram. */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}

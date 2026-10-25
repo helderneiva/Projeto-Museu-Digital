@@ -120,7 +120,9 @@
     margin-top: 24px;
 }
 
-/* Numeração discreta das estrofes (só quando o poema tem mais de uma) */
+/* Numeração discreta das estrofes (só quando o poema tem mais de uma).
+   A segunda declaração de content (com "/ \"\"") diz aos leitores de tela que o número é
+   decorativo; navegadores que não entendem essa sintaxe usam a primeira. */
 .versos.numerado {
     counter-reset: estrofe;
     padding-left: 56px;
@@ -133,6 +135,7 @@
 
 .versos.numerado p::before {
     content: counter(estrofe);
+    content: counter(estrofe) / "";
     position: absolute;
     top: 0.25em;
     left: -30px;
@@ -268,5 +271,67 @@
 
     .versos.numerado p::before {
         left: -26px;
+    }
+}
+
+/* ---------- Impressão: só o poema, em preto sobre branco ---------- */
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    .skip-link,
+    header,
+    footer,
+    .migalhas,
+    .ferramentas,
+    .ferramentas-status,
+    .anterior-proximo,
+    .mais-poemas {
+        display: none !important;
+    }
+
+    body {
+        display: block;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    .poema-autor,
+    .versos.numerado p::before {
+        color: #000000;
+    }
+
+    .poema-tag {
+        padding: 0;
+        background: none;
+        color: #000000;
+    }
+
+    .versos {
+        padding: 0 0 0 16px;
+        background: none;
+        border: 0;
+        border-left: 3px solid #000000;
+        border-radius: 0;
+        font-size: 12pt;
+    }
+
+    .versos.numerado {
+        padding-left: 40px;
+    }
+
+    .versos p {
+        break-inside: avoid;
+    }
+
+    /* Mostra o endereço dos links externos no papel */
+    .botao-leitura::after {
+        content: " (" attr(href) ")";
+        font-weight: 400;
     }
 }

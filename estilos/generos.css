@@ -66,6 +66,7 @@ html {
 
 .secao-subgenero {
     margin-bottom: 56px;
+    scroll-margin-top: 1rem; /* usado ao ir para os resultados da busca (título da seção visível) */
 }
 
 /* Chamada da lista ("Odes para ler:"): parágrafo com id, ligado à lista por aria-labelledby */
@@ -147,6 +148,61 @@ html {
     min-height: 1.7em;
     margin-top: 6px;
     font-size: 0.9em;
+}
+
+/* Contagem de poemas dentro de cada chip (criada pelo cards.js) */
+.indice-subgeneros .contagem {
+    margin-left: 0.45em;
+    font-size: 0.85em;
+    font-weight: 400;
+    opacity: 0.85;
+}
+
+/* ---------- Faixa de ações do gênero: progresso de leitura + botões (cards.js) ---------- */
+.acoes-genero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    margin: -32px 0 48px;
+    padding: 20px 24px;
+    background-color: var(--genero-claro);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+.progresso {
+    flex: 1 1 16rem;
+}
+
+.progresso-texto {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 700;
+}
+
+.progresso progress {
+    display: block;
+    width: 100%;
+    height: 12px;
+    accent-color: var(--genero-escuro);
+}
+
+.acoes-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Enquanto há um termo na busca, esconde os textos explicativos das seções
+   para os resultados aparecerem logo abaixo do campo (classe criada pelo cards.js) */
+.buscando .secao-subgenero > p:not(.chamada-lista) {
+    display: none;
+}
+
+.buscando .secao-subgenero {
+    margin-bottom: 32px;
 }
 
 /* ---------- 4. Chips: índice de subgêneros e "Continue explorando" ---------- */

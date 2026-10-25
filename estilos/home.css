@@ -2,17 +2,93 @@
 
 .apresentacao {
     margin-bottom: 56px;
+    padding-top: 28px;
+    /* Faixa com as três cores dos gêneros: lírico, satírico e cordel */
+    border-top: 10px solid;
+    border-image: linear-gradient(90deg,
+        var(--cor-lirico) 0 33.33%,
+        var(--cor-satirico) 33.33% 66.66%,
+        var(--cor-cordel) 66.66% 100%) 1;
 }
 
-/* O tamanho do h1 vem da variável --tamanho-h1 (base.css), fluida em todas as telas */
 .apresentacao h1 {
-    font-size: var(--tamanho-h1);
     margin-bottom: 20px;
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    line-height: 1.1;
 }
 
 .apresentacao p {
     max-width: var(--medida);
     font-size: 1.15em;
+}
+
+/* Uma única entrada suave do título, só para quem não pediu menos movimento */
+@media (prefers-reduced-motion: no-preference) {
+    .apresentacao h1 {
+        animation: surgir 0.7s ease-out both;
+    }
+
+    @keyframes surgir {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+}
+
+.acoes-hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+/* Números do museu (montados pelo cards.js a partir de dados/poemas.js) */
+.estatisticas {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+    gap: 16px;
+    max-width: 42rem;
+    margin-top: 32px;
+}
+
+.estatisticas li {
+    padding: 14px 16px;
+    background-color: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-left: 6px solid var(--destaque);
+    border-radius: var(--raio);
+    font-size: 0.95em;
+}
+
+.estatisticas strong {
+    display: block;
+    font-family: var(--fonte-titulo);
+    font-size: 2.2em;
+    line-height: 1.1;
+    color: var(--genero-escuro);
+}
+
+/* Parágrafos extras da apresentação, recolhidos para a home ficar mais leve */
+.saiba-mais {
+    max-width: var(--medida);
+    margin-top: 28px;
+}
+
+.saiba-mais summary {
+    padding: 10px 0;
+    font-weight: 700;
+    color: var(--genero-escuro);
+    cursor: pointer;
+}
+
+.saiba-mais p {
+    margin-top: 12px;
 }
 
 .generos {
@@ -88,14 +164,17 @@
     inset: 0;
 }
 
-/* O contorno só aparece no foco por teclado, não no clique do mouse */
-.lista-generos article:has(a:focus-visible) {
-    outline: 3px solid var(--foco);
-    outline-offset: 4px;
-}
+/* O contorno só aparece no foco por teclado, não no clique do mouse.
+   @supports: só remove o outline do link se o navegador entender :has(). */
+@supports selector(:has(*)) {
+    .lista-generos article:has(a:focus-visible) {
+        outline: 3px solid var(--foco);
+        outline-offset: 4px;
+    }
 
-.lista-generos h3 a:focus-visible {
-    outline: none;
+    .lista-generos h3 a:focus-visible {
+        outline: none;
+    }
 }
 
 .lista-generos p {
@@ -111,51 +190,9 @@
     grid-template-columns: minmax(0, 28rem);
 }
 
-/* Na home o <body> não tem data-genero, então cada card traz a paleta completa
-   do próprio gênero (cor da borda, fundo do card, texto e cor de destaque).
-   Os valores são os mesmos de tema.css. */
-.poema-do-dia .card[data-genero="lirico"] {
-    --cor-genero: var(--cor-lirico);
-    --texto-genero: #28200C;
-    --genero-claro: #FFEFC8;
-    --genero-escuro: #42330A;
-}
-
-.poema-do-dia .card[data-genero="satirico"] {
-    --cor-genero: var(--cor-satirico);
-    --texto-genero: #2A1F11;
-    --genero-claro: #FEEDD6;
-    --genero-escuro: #463111;
-}
-
-.poema-do-dia .card[data-genero="cordel"] {
-    --cor-genero: var(--cor-cordel);
-    --texto-genero: #FBFBFE;
-    --genero-claro: #ECEFFF;
-    --genero-escuro: #30334F;
-}
-
-/* Mesmos cards no tema escuro */
-:root[data-tema="escuro"] .poema-do-dia .card[data-genero="lirico"] {
-    --cor-genero: #4E3D11;
-    --texto-genero: #E8E4DC;
-    --genero-claro: #201D15;
-    --genero-escuro: #D8BA70;
-}
-
-:root[data-tema="escuro"] .poema-do-dia .card[data-genero="satirico"] {
-    --cor-genero: #4C3D27;
-    --texto-genero: #E9E4DC;
-    --genero-claro: #201C17;
-    --genero-escuro: #DAB787;
-}
-
-:root[data-tema="escuro"] .poema-do-dia .card[data-genero="cordel"] {
-    --cor-genero: #3B3E55;
-    --texto-genero: #E3E4ED;
-    --genero-claro: #1C1C22;
-    --genero-escuro: #B3B9EE;
-}
+/* As paletas de cada gênero (claro e escuro) agora ficam só em tema.css e valem para
+   qualquer elemento com data-genero. Por isso o card do poema do dia herda a paleta
+   do próprio gênero sem precisar repeti-la aqui. */
 
 .sobre {
     padding: 32px;

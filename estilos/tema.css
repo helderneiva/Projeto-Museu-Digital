@@ -3,8 +3,9 @@
 /* =========================================================
    TEMA: cores por gênero (claro) + tema escuro + botão de tema
    Usado por: index.html, páginas de gênero, poema.html e 404.html
-   A paleta do gênero vem de <body data-genero="lirico|satirico|cordel">
-   (nas páginas de gênero, no HTML; em poema.html, definido por poema-pagina.js).
+   A paleta do gênero vem de data-genero="lirico|satirico|cordel" em QUALQUER elemento:
+   no <body> das páginas de gênero (no HTML; em poema.html, definido por poema-pagina.js)
+   e nos cards de poema (criados por util.js), inclusive o "poema do dia" da home.
    O tema escuro é ativado por <html data-tema="escuro"> (scripts/tema.js)
    ========================================================= */
 
@@ -19,7 +20,7 @@ body {
     --sublinhado-menu: var(--destaque);
 }
 
-body[data-genero="lirico"] {
+[data-genero="lirico"] {
     /* Paleta Lírico: matiz 88° da --cor-lirico, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FFFBF3;
     --texto: #28200C;
@@ -39,7 +40,7 @@ body[data-genero="lirico"] {
     --sublinhado-menu: var(--genero-escuro);
 }
 
-body[data-genero="satirico"] {
+[data-genero="satirico"] {
     /* Paleta Sátira: matiz 75° da --cor-satirico, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FFFBF6;
     --texto: #2A1F11;
@@ -59,7 +60,7 @@ body[data-genero="satirico"] {
     --sublinhado-menu: var(--genero-escuro);
 }
 
-body[data-genero="cordel"] {
+[data-genero="cordel"] {
     /* Paleta Cordel: matiz 279° da --cor-cordel, no molde do :root (mesmas luminosidades) */
     --fundo-principal: #FBFBFE;
     --texto: #1E2030;
@@ -127,18 +128,6 @@ header {
     fill: currentColor;
 }
 
-/* Tema escuro ligado: sublinhado igual ao do item de menu da página atual */
-.menu .tema-toggle[aria-pressed="true"] .tema-toggle-texto {
-    text-decoration: underline;
-    text-decoration-color: var(--sublinhado-menu);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
-}
-
-.menu .tema-toggle[aria-pressed="true"]:hover .tema-toggle-texto {
-    text-decoration-color: currentColor;
-}
-
 /* Mesmo ponto de quebra do menu hambúrguer (64rem), definido em base.css */
 @media (max-width: 64rem) {
     .menu .tema-toggle {
@@ -187,7 +176,7 @@ header {
     --faixa: 1px solid var(--borda);
 }
 
-:root[data-tema="escuro"] body[data-genero="lirico"] {
+:root[data-tema="escuro"] [data-genero="lirico"] {
     /* Lírico (base --cor-lirico #FED15C): matiz 88° (OKLCH) da cor-base */
     --fundo-principal: #16140D;
     --texto: #E8E4DC;
@@ -205,7 +194,7 @@ header {
     --faixa: 8px solid var(--destaque);
 }
 
-:root[data-tema="escuro"] body[data-genero="satirico"] {
+:root[data-tema="escuro"] [data-genero="satirico"] {
     /* Sátira (base --cor-satirico #E1C7A4): matiz 75° (OKLCH) da cor-base */
     --fundo-principal: #16130F;
     --texto: #E9E4DC;
@@ -223,7 +212,7 @@ header {
     --faixa: 8px solid var(--destaque);
 }
 
-:root[data-tema="escuro"] body[data-genero="cordel"] {
+:root[data-tema="escuro"] [data-genero="cordel"] {
     /* Cordel (base --cor-cordel #424453): matiz 279° (OKLCH) da cor-base */
     --fundo-principal: #131318;
     --texto: #E3E4ED;

@@ -14,12 +14,16 @@
     <!-- Ao publicar o site, descomente e preencha com os endereços reais:
     <link rel="canonical" href="https://SEU-DOMINIO/index.html">
     <meta property="og:url" content="https://SEU-DOMINIO/index.html">
-    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png"> -->
+    <meta property="og:image" content="https://SEU-DOMINIO/imagens/capa.png">
+    <meta name="twitter:card" content="summary_large_image"> -->
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#4A2E16">
+    <link rel="preload" href="fontes/Grenze-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="fontes/Platypi-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="modulepreload" href="scripts/util.js">
+    <link rel="modulepreload" href="dados/poemas.js">
     <link rel="stylesheet" href="estilos/base.css">
     <link rel="stylesheet" href="estilos/tema.css">
     <link rel="stylesheet" href="estilos/cards.css">
@@ -47,8 +51,19 @@
         <section class="apresentacao" aria-labelledby="apresentacao-titulo">
             <h1 id="apresentacao-titulo">A história escrita em versos</h1>
             <p>Este é um museu literário digital dedicado à preservação, à valorização e à descoberta do poema brasileiro. Sua proposta é contar a história de três gêneros que marcaram a nossa trajetória: o lírico, o satírico e o narrativo-popular, representado pelo cordel.</p>
-            <p>Esses gêneros chegaram ao Brasil trazidos por tradições de outros lugares e aqui se transformaram junto com o país, ganhando feição própria. O poema lírico deu forma à emoção e à memória, o satírico fez da crítica uma arte e o cordel levou ao sertão e às feiras o gosto de contar histórias em versos. Acompanhar esses caminhos é o propósito deste museu.</p>
-            <p>Aqui, alguns poemas podem ser lidos como exemplos vivos de cada tradição, mas o centro da visita é a história dos gêneros e o que eles revelam sobre o Brasil e seu povo. Preservar essa memória é também uma forma de despertar a curiosidade por ela.</p>
+
+            <div class="acoes-hero">
+                <a class="botao" href="#generos">Explorar os gêneros</a>
+                <button type="button" class="botao botao-secundario" id="poema-aleatorio" hidden>Ler um poema aleatório</button>
+            </div>
+
+            <ul class="estatisticas" id="estatisticas" role="list" aria-label="O museu em números" hidden></ul>
+
+            <details class="saiba-mais">
+                <summary>Conheça a proposta do museu</summary>
+                <p>Esses gêneros chegaram ao Brasil trazidos por tradições de outros lugares e aqui se transformaram junto com o país, ganhando feição própria. O poema lírico deu forma à emoção e à memória, o satírico fez da crítica uma arte e o cordel levou ao sertão e às feiras o gosto de contar histórias em versos. Acompanhar esses caminhos é o propósito deste museu.</p>
+                <p>Aqui, alguns poemas podem ser lidos como exemplos vivos de cada tradição, mas o centro da visita é a história dos gêneros e o que eles revelam sobre o Brasil e seu povo. Preservar essa memória é também uma forma de despertar a curiosidade por ela.</p>
+            </details>
         </section>
 
         <section class="poema-do-dia" id="poema-do-dia" aria-labelledby="poema-do-dia-titulo" hidden>
@@ -56,7 +71,7 @@
             <ul class="lista-cards" role="list"></ul>
         </section>
 
-        <section class="generos" aria-labelledby="generos-titulo">
+        <section class="generos" id="generos" aria-labelledby="generos-titulo">
             <h2 id="generos-titulo">Versos e Tradições</h2>
 
             <div class="lista-generos">
