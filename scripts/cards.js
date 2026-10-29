@@ -36,6 +36,9 @@ function montarContagens() {
 // Enquanto vale, o foco de um card não o leva para o alto da tela (usado pela busca)
 let ignorarFoco = false;
 
+// Espera (em milissegundos) depois da última tecla antes de anunciar o resultado da busca
+const ESPERA_AVISO_BUSCA = 400;
+
 function montarBusca() {
   const bloco = document.getElementById('busca');
   const campo = document.getElementById('busca-campo');
@@ -46,6 +49,10 @@ function montarBusca() {
   const cards = [...document.querySelectorAll('.lista-cards .card')];
   const secoes = [...document.querySelectorAll('.secao-subgenero')];
   const chips = [...document.querySelectorAll('.indice-subgeneros a[href^="#"]')];
+
+  // Temporizador do aviso: o filtro é instantâneo, mas o aviso para leitores de tela
+  // só é atualizado quando a pessoa para de digitar (evita anunciar a cada tecla)
+  let avisoTimer;
 
   campo.addEventListener('input', () => {
     const termo = normalizar(campo.value.trim());
@@ -69,15 +76,18 @@ function montarBusca() {
     });
     document.documentElement.classList.toggle('buscando', Boolean(termo));
 
-    if (!termo) {
-      status.textContent = '';
-    } else if (total === 0) {
-      status.textContent = 'Nenhum poema encontrado.';
-    } else {
-      status.textContent =
-        total + (total === 1 ? ' poema encontrado' : ' poemas encontrados') +
-        '. Aperte Enter para ver.';
-    }
+    clearTimeout(avisoTimer);
+    avisoTimer = setTimeout(() => {
+      if (!termo) {
+        status.textContent = '';
+      } else if (total === 0) {
+        status.textContent = 'Nenhum poema encontrado.';
+      } else {
+        status.textContent =
+          total + (total === 1 ? ' poema encontrado' : ' poemas encontrados') +
+          '. Aperte Enter para ver.';
+      }
+    }, ESPERA_AVISO_BUSCA);
   });
 
   // Enter leva à primeira seção com resultados (o título dela fica visível)

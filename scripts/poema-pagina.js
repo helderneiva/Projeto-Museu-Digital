@@ -56,6 +56,11 @@ function montarLeitura(poema) {
     return partes;
   }
 
+  // Proteção: poema cadastrado sem "versos" (e sem "externo") não pode quebrar a página
+  if (!Array.isArray(poema.versos) || poema.versos.length === 0) {
+    return [criar('p', 'poema-nota', 'O texto deste poema ainda não está disponível.')];
+  }
+
   const versos = criar('div', poema.figurado ? 'versos versos-figura' : 'versos');
   if (poema.versos.length > 1) versos.classList.add('numerado');
   poema.versos.forEach((estrofe) => versos.append(criar('p', '', estrofe)));
@@ -126,8 +131,15 @@ function montarFerramentas(poema) {
   botaoLido.setAttribute('aria-pressed', String(lidos().includes(poema.id)));
   botaoLido.addEventListener('click', () => {
     const marcado = botaoLido.getAttribute('aria-pressed') !== 'true';
+    // marcarLido devolve false quando o navegador bloqueia o armazenamento:
+    // nesse caso o botão não muda e a pessoa é avisada, em vez de ver uma
+    // confirmação que não corresponde ao que foi salvo
+    const salvou = marcarLido(poema.id, marcado);
+    if (!salvou) {
+      status.textContent = 'Não foi possível salvar a marca neste navegador.';
+      return;
+    }
     botaoLido.setAttribute('aria-pressed', String(marcado));
-    marcarLido(poema.id, marcado);
     status.textContent = marcado ? 'Poema marcado como lido.' : 'Marca de leitura removida.';
   });
 
