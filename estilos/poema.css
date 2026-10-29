@@ -1,80 +1,80 @@
 @charset "UTF-8";
 
-/* =========================================================
-   PÁGINA DO POEMA (poema.html)
-   As cores vêm do tema.css: a paleta do gênero é escolhida por
-   <body data-genero="...">, que o poema-pagina.js define.
-   ========================================================= */
-
-/* Uma só coluna de leitura, centralizada */
 .migalhas,
 .poema,
 .anterior-proximo,
 .mais-poemas {
     width: 100%;
-    max-width: 44rem;
+    max-width: 48em;
     margin-inline: auto;
 }
 
 .migalhas {
-    margin-bottom: 32px;
+    margin-bottom: 36px;
+    font-size: 0.82em;
 }
 
 .migalhas a {
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/* Título fluido: entre 1,9rem (celular) e 2,4rem (computador) */
+.poema {
+    padding: 40px;
+    background: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-top: 6px solid var(--cor-genero);
+    border-radius: var(--raio);
+}
+
 .poema-titulo {
-    margin-bottom: 8px;
-    font-size: clamp(1.9rem, 4.5vw, 2.4rem);
+    margin-bottom: 16px;
+    font-size: clamp(2.3em, 5vw, 4em);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
 }
 
 .poema-autor {
-    font-family: var(--fonte-titulo);
-    font-size: 1.3em;
-    font-weight: 700;
     color: var(--genero-escuro);
+    font-size: 0.95em;
 }
 
 .poema-tag {
     display: inline-block;
-    margin: 16px 0 20px;
-    padding: 4px 16px;
-    background-color: var(--cor-genero);
-    color: var(--texto-genero);
-    border-radius: 999px;
-    font-size: 0.9em;
-    font-weight: 700;
+    margin: 24px 0;
+    padding: 5px 12px;
+    background: var(--genero-claro);
+    color: var(--genero-escuro);
+    font-size: 0.72em;
+    font-weight: 600;
+    border: 1px solid var(--borda);
 }
 
-/* ---------- Ferramentas (tamanho da letra, compartilhar, marcar como lido) ---------- */
 .ferramentas {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    margin-bottom: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--borda);
 }
 
 .ferramentas button {
-    min-width: 44px;
-    min-height: 44px;
-    padding: 6px 16px;
-    background-color: var(--genero-claro);
+    min-width: 2.8em;
+    min-height: 2.8em;
+    padding: 10px 14px;
+    background: transparent;
     color: var(--texto);
-    border: 2px solid var(--genero-escuro);
-    border-radius: 999px;
-    font-family: var(--fonte-texto);
-    font-size: 0.9em;
-    font-weight: 700;
-    cursor: pointer;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    font-size: 0.78em;
+    font-weight: 600;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
 }
 
-.ferramentas button:hover:not(:disabled) {
-    background-color: var(--cor-genero);
-    color: var(--texto-genero);
+.ferramentas button:hover:not(:disabled),
+.ferramentas button[aria-pressed="true"] {
+    background: var(--genero-escuro);
+    color: var(--fundo-principal);
+    border-color: var(--genero-escuro);
 }
 
 .ferramentas button:disabled {
@@ -82,50 +82,40 @@
     cursor: not-allowed;
 }
 
-.ferramentas button[aria-pressed="true"] {
-    background-color: var(--cor-genero);
-    color: var(--texto-genero);
-}
-
-/* A segunda declaração (com "/ ''") diz aos leitores de tela que o símbolo é só
-   decorativo; navegadores que não entendem essa sintaxe usam a primeira. */
 .ferramentas button[aria-pressed="true"]::before {
-    content: "\2713\00a0";
-    content: "\2713\00a0" / "";
+    content: "✓ ";
+    content: "✓ " / "";
 }
 
 .ferramentas-status {
-    min-height: 1.7em;
-    margin-bottom: 20px;
-    font-size: 0.9em;
+    min-height: 1.75em;
+    margin-top: 12px;
+    margin-bottom: 32px;
+    color: var(--texto-suave);
+    font-size: 0.78em;
+    overflow-wrap: anywhere;
 }
 
-/* ---------- Versos ---------- */
+/* A variável continua sendo controlada pelos botões A+ e A−. */
+
 .versos {
-    padding: 28px 32px;
-    background-color: var(--genero-claro);
-    border: 1px solid var(--borda);
-    border-left: 10px solid var(--cor-genero);
-    border-radius: var(--raio);
+    padding: 12px 0 24px;
     font-size: var(--tamanho-versos, 1.15em);
-    line-height: 1.9;
-    text-wrap: pretty;
+    line-height: 1.95;
 }
 
 .versos p {
     white-space: pre-line;
+    overflow-wrap: anywhere;
 }
 
 .versos p + p {
-    margin-top: 24px;
+    margin-top: 32px;
 }
 
-/* Numeração discreta das estrofes (só quando o poema tem mais de uma).
-   A segunda declaração de content (com "/ \"\"") diz aos leitores de tela que o número é
-   decorativo; navegadores que não entendem essa sintaxe usam a primeira. */
 .versos.numerado {
     counter-reset: estrofe;
-    padding-left: 56px;
+    padding-left: 32px;
 }
 
 .versos.numerado p {
@@ -134,97 +124,99 @@
 }
 
 .versos.numerado p::before {
+    position: absolute;
+    top: 0.5em;
+    left: -2.3em;
     content: counter(estrofe);
     content: counter(estrofe) / "";
-    position: absolute;
-    top: 0.25em;
-    left: -30px;
-    font-size: 0.7em;
-    font-weight: 700;
     color: var(--genero-escuro);
-    opacity: 0.8;
+    font-size: 0.6em;
+    font-weight: 600;
 }
 
-/* Poemas em formato visual (ex.: Madrigal de um Louco) */
 .versos-figura {
     text-align: center;
-    font-style: italic;
 }
 
 .versos-figura p {
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
-/* ---------- Fonte e obras de leitura externa ---------- */
 .poema-resumo {
-    font-size: 1.1em;
+    max-width: var(--medida);
+    margin-bottom: 24px;
+    line-height: 1.9;
 }
 
 .poema-fonte,
 .poema-nota {
-    margin-top: 20px;
-    font-size: 0.9em;
+    margin-top: 24px;
+    color: var(--texto-suave);
+    font-size: 0.8em;
+    overflow-wrap: anywhere;
 }
 
 .poema-fonte {
-    padding-top: 16px;
+    padding-top: 24px;
     border-top: 1px solid var(--borda);
 }
 
 .botao-leitura {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 12px 24px;
-    background-color: var(--destaque-inverso);
-    color: var(--texto-inverso);
+    display: inline-flex;
+    align-items: center;
+    min-height: 3em;
+    margin-top: 12px;
+    padding: 14px 20px;
+    background: var(--genero-escuro);
+    color: var(--fundo-principal);
+    font-size: 0.88em;
     font-weight: 700;
     text-decoration: none;
+    border: 1px solid var(--genero-escuro);
     border-radius: var(--raio);
-    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .botao-leitura:hover {
-    background-color: var(--destaque);
-    color: var(--fundo-principal);
+    background: transparent;
+    color: var(--genero-escuro);
 }
 
-/* ---------- Poema anterior / próximo ---------- */
 .anterior-proximo {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px;
 }
 
 .anterior-proximo a {
-    flex: 1 1 14rem;
-    padding: 12px 18px;
-    background-color: var(--genero-claro);
+    padding: 20px;
     color: var(--texto);
+    font-size: 0.88em;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: 700;
-    border: 2px solid var(--genero-escuro);
+    border: 1px solid var(--borda);
     border-radius: var(--raio);
-    transition: color 0.2s ease, background-color 0.2s ease;
+    overflow-wrap: anywhere;
 }
 
 .anterior-proximo a:hover {
-    background-color: var(--cor-genero);
-    color: var(--texto-genero);
+    background: var(--genero-claro);
+    border-color: var(--genero-escuro);
 }
 
 .anterior-proximo a[rel="next"] {
+    grid-column: 2;
     text-align: right;
 }
 
 .anterior-proximo small {
     display: block;
+    margin-bottom: 8px;
+    color: var(--texto-suave);
     font-size: 0.8em;
     font-weight: 400;
 }
 
-/* ---------- Continue lendo (outros poemas do mesmo subgênero) ---------- */
 .mais-poemas {
     margin-top: 48px;
     padding-top: 32px;
@@ -232,57 +224,66 @@
 }
 
 .mais-poemas h2 {
-    margin-bottom: 12px;
-    font-size: 1.4em;
+    font-size: 1.8em;
 }
 
 .mais-poemas ul {
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
+    list-style: none;
 }
 
 .mais-poemas a {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--genero-claro);
+    padding: 10px 14px;
+    background: var(--fundo-card);
     color: var(--texto);
+    font-size: 0.8em;
     text-decoration: none;
-    font-weight: 700;
-    border: 2px solid var(--genero-escuro);
-    border-radius: 999px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
 }
 
 .mais-poemas a:hover {
-    background-color: var(--cor-genero);
-    color: var(--texto-genero);
+    border-color: var(--genero-escuro);
+    color: var(--genero-escuro);
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 40em) {
+    .poema {
+        padding: 24px 20px;
+    }
+
+    .poema-titulo {
+        font-size: 2.4em;
+    }
+
     .versos {
-        padding: 20px;
+        line-height: 1.85;
     }
 
     .versos.numerado {
-        padding-left: 44px;
+        padding-left: 24px;
     }
 
-    .versos.numerado p::before {
-        left: -26px;
+    .anterior-proximo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .anterior-proximo a[rel="next"] {
+        grid-column: auto;
     }
 }
 
-/* ---------- Impressão: só o poema, em preto sobre branco ---------- */
 @media print {
     @page {
         margin: 2cm;
     }
 
     .skip-link,
-    header,
-    footer,
+    body > header,
+    .app-footer,
     .migalhas,
     .ferramentas,
     .ferramentas-status,
@@ -293,7 +294,7 @@
 
     body {
         display: block;
-        background: #ffffff;
+        background: #FFFFFF;
         color: #000000;
     }
 
@@ -301,35 +302,42 @@
         padding: 0;
     }
 
+    .poema {
+        max-width: none;
+        padding: 0;
+        background: #FFFFFF;
+        color: #000000;
+        border: 0;
+    }
+
     .poema-autor,
+    .poema-tag,
+    .poema-fonte,
+    .poema-nota,
     .versos.numerado p::before {
         color: #000000;
     }
 
     .poema-tag {
         padding: 0;
-        background: none;
-        color: #000000;
+        background: transparent;
+        border: 0;
     }
 
     .versos {
-        padding: 0 0 0 16px;
-        background: none;
-        border: 0;
-        border-left: 3px solid #000000;
-        border-radius: 0;
         font-size: 12pt;
-    }
-
-    .versos.numerado {
-        padding-left: 40px;
     }
 
     .versos p {
         break-inside: avoid;
     }
 
-    /* Mostra o endereço dos links externos no papel */
+    .botao-leitura {
+        background: transparent;
+        color: #000000;
+        border: 0;
+    }
+
     .botao-leitura::after {
         content: " (" attr(href) ")";
         font-weight: 400;

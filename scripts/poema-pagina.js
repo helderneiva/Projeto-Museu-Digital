@@ -1,108 +1,235 @@
-// Monta a página do poema a partir do link poema.html?id=...
-// Os dados ficam em dados/poemas.js (lista POEMAS).
-// Módulo ES: importa o que usa de util.js e de dados/poemas.js.
-import { criar, ler, gravar, lidos, marcarLido, urlPoema } from './util.js';
+import {
+  criar,
+  ler,
+  gravar,
+  lidos,
+  marcarLido,
+  urlPoema,
+  observarLeitura
+} from './util.js';
+
 import { POEMAS } from '../dados/poemas.js';
 
-const NOMES = { lirico: 'Lírico', satirico: 'Satírico', cordel: 'Cordel' };
-const TAMANHOS = [1, 1.15, 1.3, 1.5, 1.7]; // tamanhos da letra dos versos (em)
-const TAMANHO_PADRAO = 1; // posição do 1.15 na lista acima
+const NOMES = {
+  lirico: 'Lírico',
+  satirico: 'Satírico',
+  cordel: 'Cordel'
+};
+
+const TAMANHOS = [1, 1.15, 1.3, 1.5, 1.7];
+const TAMANHO_PADRAO = 1;
 const CHAVE_TAMANHO = 'museu-tamanho';
 
 const area = document.getElementById('poema');
 
-// Cria uma seta decorativa: leitores de tela não devem ler "seta para a esquerda"
 function criarSeta(simbolo) {
   const seta = criar('span', '', simbolo);
   seta.setAttribute('aria-hidden', 'true');
+
   return seta;
 }
 
 function mostrarNaoEncontrado() {
-  document.title = 'Poema não encontrado | Museu da Poesia Digital';
-  const aviso = criar('p', '', 'Não encontramos esse poema. ');
+  document.title =
+    'Obra não encontrada | Museu da Poesia Digital';
+
+  const aviso = criar(
+    'p',
+    '',
+    'Não encontramos essa obra. '
+  );
+
   const voltar = criar('a', '', 'Voltar para o início');
   voltar.href = 'index.html';
+
   aviso.append(voltar);
-  area.replaceChildren(criar('h1', 'poema-titulo', 'Poema não encontrado'), aviso);
+
+  area.replaceChildren(
+    criar('h1', 'poema-titulo', 'Obra não encontrada'),
+    aviso
+  );
 }
 
 function definirMeta(seletor, valor) {
   const meta = document.querySelector(seletor);
+
   if (meta) meta.setAttribute('content', valor);
 }
 
-// ---------- Leitura: versos no site ou botão para a fonte externa ----------
-function montarLeitura(poema) {
-  if (poema.externo) {
-    const link = criar('a', 'botao-leitura', poema.rotulo || 'Ler a obra');
-    link.href = poema.externo;
+/* ---------- Leitura ---------- */
+
+function montarLeitura(obra) {
+  if (obra.externo) {
+    const link = criar(
+      'a',
+      'botao-leitura',
+      obra.rotulo || 'Consultar a obra'
+    );
+
+    link.href = obra.externo;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.append(criar('span', 'visually-hidden', ' (abre em nova aba)'));
+
+    link.append(
+      criar('span', 'visually-hidden', ' (abre em nova aba)')
+    );
+
     const paragrafo = criar('p');
     paragrafo.append(link);
 
-    // Mesmo critério do card (util.js): só é "protegida" quando dominioPublico === false
-    const protegida = poema.dominioPublico === false;
-    const aviso = protegida
-      ? 'Esta obra não está em domínio público. Leia o poema na fonte indicada:'
-      : 'O texto desta obra está em domínio público. Leia na fonte indicada:';
-    const partes = [criar('p', 'poema-nota', aviso), paragrafo];
-    if (poema.formato === 'prosa') {
-      partes.unshift(criar('p', 'poema-nota', 'Esta é uma obra em prosa, de ritmo e linguagem poéticos.'));
+    const aviso = obra.dominioPublico === false
+      ? 'Leitura externa: consulte a obra na fonte indicada.'
+      : 'Consulte a obra na fonte indicada. Alguns destinos abrem livros completos ou acervos.';
+
+    const partes = [
+      criar('p', 'poema-nota', aviso),
+      paragrafo
+    ];
+
+    if (obra.formato === 'prosa') {
+      partes.unshift(
+        criar(
+          'p',
+          'poema-nota',
+          'Esta é uma obra em prosa, de ritmo e linguagem poéticos.'
+        )
+      );
     }
-    if (poema.resumo) partes.unshift(criar('p', 'poema-resumo', poema.resumo));
+
+    if (obra.tipo === 'coletanea') {
+      partes.unshift(
+        criar(
+          'p',
+          'poema-nota',
+          'Este registro apresenta uma coletânea de poemas.'
+        )
+      );
+    }
+
+    if (obra.resumo) {
+      partes.unshift(
+        criar('p', 'poema-resumo', obra.resumo)
+      );
+    }
+
     return partes;
   }
 
-  // Proteção: poema cadastrado sem "versos" (e sem "externo") não pode quebrar a página
-  if (!Array.isArray(poema.versos) || poema.versos.length === 0) {
-    return [criar('p', 'poema-nota', 'O texto deste poema ainda não está disponível.')];
+  if (obra.dominioPublico !== true) {
+    return [
+      criar(
+        'p',
+        'poema-nota',
+        'A leitura desta obra ainda não está disponível neste site.'
+      )
+    ];
   }
 
-  const versos = criar('div', poema.figurado ? 'versos versos-figura' : 'versos');
-  if (poema.versos.length > 1) versos.classList.add('numerado');
-  poema.versos.forEach((estrofe) => versos.append(criar('p', '', estrofe)));
-  return [versos, criar('p', 'poema-fonte', 'Fonte: ' + poema.fonte)];
+  if (
+    !Array.isArray(obra.versos) ||
+    obra.versos.length === 0
+  ) {
+    return [
+      criar(
+        'p',
+        'poema-nota',
+        'O texto desta obra ainda não está disponível.'
+      )
+    ];
+  }
+
+  const versos = criar(
+    'div',
+    obra.figurado ? 'versos versos-figura' : 'versos'
+  );
+
+  if (obra.versos.length > 1) {
+    versos.classList.add('numerado');
+  }
+
+  obra.versos.forEach(estrofe => {
+    versos.append(criar('p', '', estrofe));
+  });
+
+  return [
+    versos,
+    criar(
+      'p',
+      'poema-fonte',
+      'Fonte: ' + (obra.fonte || 'Fonte não informada.')
+    )
+  ];
 }
 
-// ---------- Ferramentas: tamanho da letra, compartilhar, marcar como lido ----------
-function montarFerramentas(poema) {
+/* ---------- Ferramentas ---------- */
+
+function montarFerramentas(obra) {
   const barra = criar('div', 'ferramentas');
+
   barra.setAttribute('role', 'group');
   barra.setAttribute('aria-label', 'Ferramentas de leitura');
+
   const status = criar('p', 'ferramentas-status');
   status.setAttribute('role', 'status');
 
-  // Tamanho da letra: só faz sentido quando o poema é exibido no site
-  if (poema.versos) {
-    const tamanhoSalvo = parseInt(ler(CHAVE_TAMANHO), 10);
+  const leituraInterna =
+    !obra.externo &&
+    Array.isArray(obra.versos) &&
+    obra.versos.length > 0 &&
+    obra.dominioPublico === true;
+
+  if (leituraInterna) {
+    const tamanhoSalvo = Number.parseInt(
+      ler(CHAVE_TAMANHO),
+      10
+    );
+
     let posicao =
-      tamanhoSalvo >= 0 && tamanhoSalvo < TAMANHOS.length ? tamanhoSalvo : TAMANHO_PADRAO;
+      Number.isInteger(tamanhoSalvo) &&
+      tamanhoSalvo >= 0 &&
+      tamanhoSalvo < TAMANHOS.length
+        ? tamanhoSalvo
+        : TAMANHO_PADRAO;
 
     const menos = criar('button', '', 'A−');
     const mais = criar('button', '', 'A+');
+
     menos.type = 'button';
     mais.type = 'button';
+
     menos.setAttribute('aria-label', 'Diminuir a letra');
     mais.setAttribute('aria-label', 'Aumentar a letra');
 
-    // "salvar" só é verdadeiro quando a pessoa clica: assim o tamanho padrão
-    // não é gravado como se fosse uma escolha dela
-    const aplicar = (salvar) => {
-      document.documentElement.style.setProperty('--tamanho-versos', TAMANHOS[posicao] + 'em');
+    const aplicar = salvar => {
+      document.documentElement.style.setProperty(
+        '--tamanho-versos',
+        TAMANHOS[posicao] + 'em'
+      );
+
       menos.disabled = posicao === 0;
       mais.disabled = posicao === TAMANHOS.length - 1;
-      if (salvar) gravar(CHAVE_TAMANHO, String(posicao));
+
+      if (salvar) {
+        const salvou = gravar(CHAVE_TAMANHO, String(posicao));
+
+        if (!salvou) {
+          status.textContent =
+            'O tamanho foi alterado, mas não pôde ser salvo neste navegador.';
+        }
+      }
     };
 
     menos.addEventListener('click', () => {
       posicao = Math.max(0, posicao - 1);
       aplicar(true);
     });
+
     mais.addEventListener('click', () => {
-      posicao = Math.min(TAMANHOS.length - 1, posicao + 1);
+      posicao = Math.min(
+        TAMANHOS.length - 1,
+        posicao + 1
+      );
+
       aplicar(true);
     });
 
@@ -110,122 +237,232 @@ function montarFerramentas(poema) {
     barra.append(menos, mais);
   }
 
-  const compartilhar = criar('button', '', 'Compartilhar');
+  const compartilhar = criar(
+    'button',
+    '',
+    'Compartilhar'
+  );
+
   compartilhar.type = 'button';
+
   compartilhar.addEventListener('click', async () => {
     const url = window.location.href;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: poema.titulo, url: url });
-      } else {
-        await navigator.clipboard.writeText(url);
-        status.textContent = 'Link copiado.';
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: obra.titulo,
+          url
+        });
+
+        return;
+      } catch (erro) {
+        if (erro.name === 'AbortError') return;
       }
-    } catch (erro) {
-      if (erro && erro.name !== 'AbortError') status.textContent = 'Não foi possível copiar o link.';
+    }
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Cópia indisponível');
+      }
+
+      await navigator.clipboard.writeText(url);
+      status.textContent = 'Link copiado.';
+    } catch {
+      status.textContent = 'Copie este endereço: ' + url;
     }
   });
 
-  const botaoLido = criar('button', '', 'Marcar como lido');
+  const botaoLido = criar('button');
   botaoLido.type = 'button';
-  botaoLido.setAttribute('aria-pressed', String(lidos().includes(poema.id)));
+
+  const atualizarLido = () => {
+    const marcado = lidos().includes(obra.id);
+
+    botaoLido.setAttribute(
+      'aria-pressed',
+      String(marcado)
+    );
+
+    botaoLido.textContent = marcado
+      ? 'Remover marca de leitura'
+      : 'Marcar como lida';
+  };
+
+  atualizarLido();
+  observarLeitura(atualizarLido);
+
   botaoLido.addEventListener('click', () => {
-    const marcado = botaoLido.getAttribute('aria-pressed') !== 'true';
-    // marcarLido devolve false quando o navegador bloqueia o armazenamento:
-    // nesse caso o botão não muda e a pessoa é avisada, em vez de ver uma
-    // confirmação que não corresponde ao que foi salvo
-    const salvou = marcarLido(poema.id, marcado);
+    const marcado = !lidos().includes(obra.id);
+    const salvou = marcarLido(obra.id, marcado);
+
     if (!salvou) {
-      status.textContent = 'Não foi possível salvar a marca neste navegador.';
+      status.textContent =
+        'Não foi possível salvar a marca neste navegador.';
       return;
     }
-    botaoLido.setAttribute('aria-pressed', String(marcado));
-    status.textContent = marcado ? 'Poema marcado como lido.' : 'Marca de leitura removida.';
+
+    atualizarLido();
+
+    status.textContent = marcado
+      ? 'Obra marcada como lida.'
+      : 'Marca de leitura removida.';
   });
 
   barra.append(compartilhar, botaoLido);
+
   return [barra, status];
 }
 
-// ---------- Anterior / próximo dentro do mesmo subgênero ----------
-function montarAnteriorProximo(poema) {
+/* ---------- Anterior e próximo ---------- */
+
+function montarAnteriorProximo(obra) {
   const nav = document.getElementById('anterior-proximo');
+
   if (!nav) return;
-  const irmaos = POEMAS.filter((p) => p.genero === poema.genero && p.sub === poema.sub);
-  const posicao = irmaos.findIndex((p) => p.id === poema.id);
+
+  nav.replaceChildren();
+  nav.hidden = true;
+
+  const irmaos = POEMAS.filter(item =>
+    item.genero === obra.genero &&
+    item.sub === obra.sub
+  );
+
+  const posicao = irmaos.findIndex(item =>
+    item.id === obra.id
+  );
+
   const anterior = irmaos[posicao - 1];
   const proximo = irmaos[posicao + 1];
+
   if (!anterior && !proximo) return;
 
-  // "partes" é a lista de nós do rótulo pequeno (texto e seta decorativa)
   const montar = (alvo, rel, partes) => {
     const link = criar('a');
     link.href = urlPoema(alvo.id);
     link.rel = rel;
+
     const rotulo = criar('small');
     rotulo.append(...partes);
-    link.append(rotulo, document.createTextNode(alvo.titulo));
+
+    link.append(
+      rotulo,
+      document.createTextNode(alvo.titulo)
+    );
+
     nav.append(link);
   };
 
-  if (anterior) montar(anterior, 'prev', [criarSeta('←'), document.createTextNode(' Anterior')]);
-  if (proximo) montar(proximo, 'next', [document.createTextNode('Próximo '), criarSeta('→')]);
+  if (anterior) {
+    montar(anterior, 'prev', [
+      criarSeta('←'),
+      document.createTextNode(' Anterior')
+    ]);
+  }
+
+  if (proximo) {
+    montar(proximo, 'next', [
+      document.createTextNode('Próxima '),
+      criarSeta('→')
+    ]);
+  }
+
   nav.hidden = false;
 }
 
-// ---------- Continue lendo ----------
-function montarMaisPoemas(poema) {
-  const outros = POEMAS.filter(
-    (p) => p.genero === poema.genero && p.sub === poema.sub && p.id !== poema.id
-  );
-  if (outros.length === 0) return;
+/* ---------- Continue lendo ---------- */
 
+function montarMaisPoemas(obra) {
   const bloco = document.getElementById('mais-poemas');
-  document.getElementById('mais-poemas-titulo').textContent = 'Continue lendo: ' + poema.subnome;
+  const titulo = document.getElementById('mais-poemas-titulo');
+
+  if (!bloco || !titulo) return;
+
   const lista = bloco.querySelector('ul');
-  outros.forEach((outro) => {
+
+  if (!lista) return;
+
+  lista.replaceChildren();
+  bloco.hidden = true;
+
+  const outros = POEMAS.filter(item =>
+    item.genero === obra.genero &&
+    item.sub === obra.sub &&
+    item.id !== obra.id
+  );
+
+  if (!outros.length) return;
+
+  titulo.textContent = 'Continue lendo: ' + obra.subnome;
+
+  outros.forEach(outro => {
     const item = criar('li');
     const link = criar('a', '', outro.titulo);
+
     link.href = urlPoema(outro.id);
     item.append(link);
     lista.append(item);
   });
+
   bloco.hidden = false;
 }
 
-// ---------- Início ----------
-if (area) {
-  const id = new URLSearchParams(window.location.search).get('id');
-  const poema = POEMAS.find((p) => p.id === id);
+/* ---------- Inicialização ---------- */
 
-  if (!poema) {
+if (area) {
+  const id = new URLSearchParams(
+    window.location.search
+  ).get('id');
+
+  const obra = POEMAS.find(item => item.id === id);
+
+  if (!obra) {
     mostrarNaoEncontrado();
   } else {
-    const autorCurto = poema.autor.split(' (')[0];
-    document.title = poema.titulo + ' | Museu da Poesia Digital';
-    const descricao = poema.titulo + ', de ' + autorCurto + '. Leia no Museu da Poesia Digital.';
+    document.title =
+      obra.titulo + ' | Museu da Poesia Digital';
+
+    const autorCurto = obra.autor.split(' (')[0];
+
+    const descricao =
+      `${obra.titulo}, de ${autorCurto}. Conheça a obra no Museu da Poesia Digital.`;
+
     definirMeta('meta[name="description"]', descricao);
     definirMeta('meta[property="og:title"]', document.title);
     definirMeta('meta[property="og:description"]', descricao);
 
-    // A paleta da página vem do gênero do poema (o tema.css lê este atributo)
-    document.body.dataset.genero = poema.genero;
-    // Função criada pelo tema.js (script comum no <head>)
-    if (window.Museu && window.Museu.sincronizarCor) window.Museu.sincronizarCor();
+    document.body.dataset.genero = obra.genero;
+
+    window.Museu?.sincronizarCor?.();
 
     const voltar = document.getElementById('voltar');
-    voltar.href = poema.genero + '.html#' + poema.sub;
-    voltar.replaceChildren(criarSeta('←'), document.createTextNode(' Voltar para ' + poema.subnome));
+
+    if (voltar) {
+      voltar.href =
+        obra.genero + '.html#' + obra.sub;
+
+      voltar.replaceChildren(
+        criarSeta('←'),
+        document.createTextNode(
+          ' Voltar para ' + obra.subnome
+        )
+      );
+    }
 
     area.replaceChildren(
-      criar('h1', 'poema-titulo', poema.titulo),
-      criar('p', 'poema-autor', poema.autor),
-      criar('p', 'poema-tag', NOMES[poema.genero] + ' · ' + poema.subnome),
-      ...montarFerramentas(poema),
-      ...montarLeitura(poema)
+      criar('h1', 'poema-titulo', obra.titulo),
+      criar('p', 'poema-autor', obra.autor),
+      criar(
+        'p',
+        'poema-tag',
+        NOMES[obra.genero] + ' · ' + obra.subnome
+      ),
+      ...montarFerramentas(obra),
+      ...montarLeitura(obra)
     );
 
-    montarAnteriorProximo(poema);
-    montarMaisPoemas(poema);
+    montarAnteriorProximo(obra);
+    montarMaisPoemas(obra);
   }
 }

@@ -1,253 +1,125 @@
 @charset "UTF-8";
 
-/* =========================================================
-   TEMA: cores por gênero (claro) + tema escuro + botão de tema
-   Usado por: index.html, páginas de gênero, poema.html e 404.html
-   A paleta do gênero vem de data-genero="lirico|satirico|cordel" em QUALQUER elemento:
-   no <body> das páginas de gênero (no HTML; em poema.html, definido por poema-pagina.js)
-   e nos cards de poema (criados por util.js), inclusive o "poema do dia" da home.
-   O tema escuro é ativado por <html data-tema="escuro"> (scripts/tema.js)
-   ========================================================= */
-
-/* ---------- Tema claro (padrão) ---------- */
-body {
-    --cor-genero: var(--destaque);
-    --texto-genero: var(--texto-inverso);
-    --genero-claro: var(--fundo-card);
-    --genero-escuro: var(--destaque-inverso);
-    --faixa: 1px solid var(--borda);
-    --titulo-cabecalho: var(--texto);
-    --sublinhado-menu: var(--destaque);
+:root {
+    color-scheme: light;
 }
 
-[data-genero="lirico"] {
-    /* Paleta Lírico: matiz 88° da --cor-lirico, no molde do :root (mesmas luminosidades) */
-    --fundo-principal: #FFFBF3;
-    --texto: #28200C;
-    --fundo-card: #FFEFC8;
-    --texto-inverso: #FFFBF3;
-    --destaque: #856700;
-    --destaque-inverso: #42330A;
-    --borda: #F2DBA4;
-    --foco: #856700;
-
-    --cor-genero: var(--cor-lirico);
-    --texto-genero: var(--texto);
-    --genero-claro: var(--fundo-card);
-    --genero-escuro: var(--destaque-inverso);
-    --faixa: 8px solid var(--cor-genero);
-    --titulo-cabecalho: var(--genero-escuro);
-    --sublinhado-menu: var(--genero-escuro);
-}
-
-[data-genero="satirico"] {
-    /* Paleta Sátira: matiz 75° da --cor-satirico, no molde do :root (mesmas luminosidades) */
-    --fundo-principal: #FFFBF6;
-    --texto: #2A1F11;
-    --fundo-card: #FEEDD6;
-    --texto-inverso: #FFFBF6;
-    --destaque: #856537;
-    --destaque-inverso: #463111;
-    --borda: #F1D9B9;
-    --foco: #856537;
-
-    --cor-genero: var(--cor-satirico);
-    --texto-genero: var(--texto);
-    --genero-claro: var(--fundo-card);
-    --genero-escuro: var(--destaque-inverso);
-    --faixa: 8px solid var(--cor-genero);
-    --titulo-cabecalho: var(--genero-escuro);
-    --sublinhado-menu: var(--genero-escuro);
-}
-
-[data-genero="cordel"] {
-    /* Paleta Cordel: matiz 279° da --cor-cordel, no molde do :root (mesmas luminosidades) */
-    --fundo-principal: #FBFBFE;
-    --texto: #1E2030;
-    --fundo-card: #ECEFFF;
-    --texto-inverso: #FBFBFE;
-    --destaque: #626699;
-    --destaque-inverso: #30334F;
-    --borda: #D8DCF4;
-    --foco: #626699;
-
-    --cor-genero: var(--cor-cordel);
-    --texto-genero: var(--texto-inverso);
-    --genero-claro: var(--fundo-card);
-    --genero-escuro: var(--destaque-inverso);
-    --faixa: 8px solid var(--cor-genero);
-    --titulo-cabecalho: var(--genero-escuro);
-    --sublinhado-menu: var(--genero-escuro);
-}
-
-header {
-    border-bottom: var(--faixa);
-}
-
-.marca {
-    color: var(--titulo-cabecalho);
-}
-
-.titulo-pagina {
-    color: var(--titulo-cabecalho);
-}
-
-.menu > ul > li > a[aria-current="page"] {
-    text-decoration-color: var(--sublinhado-menu);
-}
-
-/* ---------- Botão de tema (criado pelo tema.js) ----------
-   Fica como último item do menu: no computador tem o mesmo visual dos links;
-   no celular aparece dentro do menu aberto, como uma linha a mais. */
-.menu .tema-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px;
-    font-family: var(--fonte-texto);
-    font-size: 1em;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--texto);
-    background: none;
-    border: 0;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.menu .tema-toggle:hover {
-    color: var(--texto-inverso);
-    background-color: var(--destaque-inverso);
-}
-
-.menu .tema-toggle svg {
-    width: 1.25em;
-    height: 1.25em;
-    flex-shrink: 0;
-    fill: currentColor;
-}
-
-/* Mesmo ponto de quebra do menu hambúrguer (64rem), definido em base.css */
-@media (max-width: 64rem) {
-    .menu .tema-toggle {
-        display: flex;
-        width: 100%;
-        padding: 12px 8px;
-    }
-}
-
-/* =========================================================
-   TEMA ESCURO: uma paleta própria para a home e para cada gênero
-   Mesmo molde do :root (fundo, texto, card, destaque, borda...).
-   Cada paleta nasce da cor-base da página, na matiz dela
-   (--cor-home, --cor-lirico, --cor-satirico, --cor-cordel),
-   e todas usam os mesmos degraus de luminosidade, o que mantém
-   o conjunto harmônico e com o mesmo contraste:
-     texto sobre fundo ......... ~14:1
-     acento sobre fundo ........ ~9:1
-     texto sobre o painel ...... ~8:1
-   Regras gerais: fundo nunca preto puro, texto nunca branco puro,
-   acentos claros e dessaturados.
-   ========================================================= */
 :root[data-tema="escuro"] {
     color-scheme: dark;
 }
 
-:root[data-tema="claro"] {
-    color-scheme: light;
+body {
+    --cor-genero: #F2C14E;
+    --texto-genero: #291D16;
+    --genero-claro: var(--superficie);
+    --genero-escuro: var(--destaque);
 }
 
-:root[data-tema="escuro"] body {
-    /* Home (base #A84E08): matiz 50° (OKLCH) da cor-base */
-    --fundo-principal: #19120F;
-    --texto: #ECE2DE;
-    --fundo-card: #221B17;
-    --texto-inverso: #ECE2DE;
-    --destaque: #F1AC86;
-    --destaque-inverso: #2D2420;
-    --borda: #443B36;
-    --foco: #F1AC86;
+[data-genero="lirico"] {
+    --cor-genero: #F2C14E;
+    --texto-genero: #291D16;
+    --genero-claro: #F4E8C7;
+    --genero-escuro: #76520C;
+    --destaque: #76520C;
+    --foco: #76520C;
+}
 
-    --cor-genero: #5A3521;
-    --texto-genero: #ECE2DE;
-    --genero-claro: #221B17;
-    --genero-escuro: #F1AC86;
-    --faixa: 1px solid var(--borda);
+[data-genero="satirico"] {
+    --cor-genero: #A43D2D;
+    --texto-genero: #FFF8EE;
+    --genero-claro: #F3DFD5;
+    --genero-escuro: #923326;
+    --destaque: #923326;
+    --foco: #923326;
+}
+
+[data-genero="cordel"] {
+    --cor-genero: #35465C;
+    --texto-genero: #FFF8EE;
+    --genero-claro: #DFE5EA;
+    --genero-escuro: #35465C;
+    --destaque: #35465C;
+    --foco: #35465C;
+}
+
+/* Tema escuro: preserva a mesma linguagem visual. */
+
+:root[data-tema="escuro"] body {
+    --fundo-principal: #1C1815;
+    --fundo-card: #26211C;
+    --superficie: #30291F;
+    --texto: #F4EBDC;
+    --texto-inverso: #291D16;
+    --texto-suave: #C6B8A5;
+    --destaque: #F2C14E;
+    --destaque-inverso: #F2C14E;
+    --borda: #5C4E3E;
+    --foco: #F2C14E;
+    --genero-claro: #30291F;
+    --genero-escuro: #F2C14E;
 }
 
 :root[data-tema="escuro"] [data-genero="lirico"] {
-    /* Lírico (base --cor-lirico #FED15C): matiz 88° (OKLCH) da cor-base */
-    --fundo-principal: #16140D;
-    --texto: #E8E4DC;
-    --fundo-card: #201D15;
-    --texto-inverso: #E8E4DC;
-    --destaque: #D8BA70;
-    --destaque-inverso: #2A261E;
-    --borda: #413D33;
-    --foco: #D8BA70;
-
-    --cor-genero: #4E3D11;
-    --texto-genero: #E8E4DC;
-    --genero-claro: #201D15;
-    --genero-escuro: #D8BA70;
-    --faixa: 8px solid var(--destaque);
+    --cor-genero: #F2C14E;
+    --texto-genero: #291D16;
+    --genero-claro: #342C1C;
+    --genero-escuro: #F2C14E;
+    --destaque: #F2C14E;
+    --foco: #F2C14E;
 }
 
 :root[data-tema="escuro"] [data-genero="satirico"] {
-    /* Sátira (base --cor-satirico #E1C7A4): matiz 75° (OKLCH) da cor-base */
-    --fundo-principal: #16130F;
-    --texto: #E9E4DC;
-    --fundo-card: #201C17;
-    --texto-inverso: #E9E4DC;
-    --destaque: #DAB787;
-    --destaque-inverso: #2A2620;
-    --borda: #413C36;
-    --foco: #DAB787;
-
-    --cor-genero: #4C3D27;
-    --texto-genero: #E9E4DC;
-    --genero-claro: #201C17;
-    --genero-escuro: #DAB787;
-    --faixa: 8px solid var(--destaque);
+    --cor-genero: #A43D2D;
+    --texto-genero: #FFF8EE;
+    --genero-claro: #37231F;
+    --genero-escuro: #F1AB97;
+    --destaque: #F1AB97;
+    --foco: #F1AB97;
 }
 
 :root[data-tema="escuro"] [data-genero="cordel"] {
-    /* Cordel (base --cor-cordel #424453): matiz 279° (OKLCH) da cor-base */
-    --fundo-principal: #131318;
-    --texto: #E3E4ED;
-    --fundo-card: #1C1C22;
-    --texto-inverso: #E3E4ED;
-    --destaque: #B3B9EE;
-    --destaque-inverso: #25262C;
-    --borda: #3B3D44;
-    --foco: #B3B9EE;
-
-    --cor-genero: #3B3E55;
-    --texto-genero: #E3E4ED;
-    --genero-claro: #1C1C22;
-    --genero-escuro: #B3B9EE;
-    --faixa: 8px solid var(--destaque);
+    --cor-genero: #35465C;
+    --texto-genero: #FFF8EE;
+    --genero-claro: #222C38;
+    --genero-escuro: #B6CBE3;
+    --destaque: #B6CBE3;
+    --foco: #B6CBE3;
 }
 
-/* Chips "Continue explorando": texto escuro sobre os fundos claros no hover */
-:root[data-tema="escuro"] .outros-generos a[href="lirico.html"] {
-    --texto-chip: #121212;
-    --borda-chip: var(--cor-lirico);
+/* Botão inserido pelo tema.js. */
+
+.menu .tema-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 2.8em;
+    padding: 10px;
+    background: transparent;
+    color: #F8F3E8;
+    font-size: 0.88em;
+    font-weight: 600;
+    line-height: 1.4;
+    border: 1px solid #8B7357;
+    border-radius: var(--raio);
 }
 
-:root[data-tema="escuro"] .outros-generos a[href="satirico.html"] {
-    --texto-chip: #121212;
-    --borda-chip: var(--cor-satirico);
+.menu .tema-toggle:hover {
+    background: #F2C14E;
+    color: #291D16;
+    border-color: #F2C14E;
 }
 
-:root[data-tema="escuro"] .outros-generos a[href="cordel.html"] {
-    --cor-chip: #3B3E55;
-    --texto-chip: #E3E4ED;
-    --borda-chip: #B3B9EE;
+.menu .tema-toggle svg {
+    flex-shrink: 0;
+    width: 1.2em;
+    height: 1.2em;
+    fill: currentColor;
 }
 
-/* Imagens um pouco menos brilhantes sobre fundo escuro */
-:root[data-tema="escuro"] img {
-    filter: brightness(0.9);
+@media (max-width: 64rem) {
+    .menu .tema-toggle {
+        width: 100%;
+        margin-top: 12px;
+        padding: 14px;
+    }
 }

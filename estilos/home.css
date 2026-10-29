@@ -1,175 +1,250 @@
 @charset "UTF-8";
 
+/* Abertura inspirada na capa do projeto. */
+
 .apresentacao {
-    margin-bottom: 56px;
-    padding-top: 28px;
-    /* Faixa com as três cores dos gêneros: lírico, satírico e cordel */
-    border-top: 10px solid;
-    border-image: linear-gradient(90deg,
-        var(--cor-lirico) 0 33.33%,
-        var(--cor-satirico) 33.33% 66.66%,
-        var(--cor-cordel) 66.66% 100%) 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+    margin: -56px calc(-1 * var(--margem-lateral)) 0;
+    padding: 72px var(--margem-lateral);
+    background:
+        radial-gradient(ellipse at top left, #614023 0, transparent 65%),
+        #291D16;
+    color: #F8F3E8;
+    border-bottom: 1px solid #6B5137;
+}
+
+.apresentacao .sobretitulo {
+    color: #F2C14E;
 }
 
 .apresentacao h1 {
-    margin-bottom: 20px;
-    font-size: clamp(2.4rem, 7vw, 4rem);
-    line-height: 1.1;
+    max-width: 10ch;
+    margin-bottom: 24px;
+    font-size: clamp(3.2em, 7vw, 6.2em);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
 }
 
-.apresentacao p {
-    max-width: var(--medida);
-    font-size: 1.15em;
+.apresentacao h1 span {
+    color: #F2C14E;
 }
 
-/* Uma única entrada suave do título, só para quem não pediu menos movimento */
-@media (prefers-reduced-motion: no-preference) {
-    .apresentacao h1 {
-        animation: surgir 0.7s ease-out both;
-    }
-
-    @keyframes surgir {
-        from {
-            opacity: 0;
-            transform: translateY(12px);
-        }
-        to {
-            opacity: 1;
-            transform: none;
-        }
-    }
+.apresentacao .hero-descricao {
+    max-width: 43ch;
+    color: #E3D3BD;
+    font-size: 1em;
 }
 
 .acoes-hero {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 28px;
-}
-
-/* Números do museu (montados pelo cards.js a partir de dados/poemas.js) */
-.estatisticas {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
-    gap: 16px;
-    max-width: 42rem;
     margin-top: 32px;
 }
 
+.apresentacao .botao {
+    background: #F2C14E;
+    color: #291D16;
+    border-color: #F2C14E;
+}
+
+.apresentacao .botao:hover {
+    background: #F8F3E8;
+    color: #291D16;
+    border-color: #F8F3E8;
+}
+
+.apresentacao .botao-secundario {
+    background: transparent;
+    color: #F8F3E8;
+    border-color: #A58D70;
+}
+
+.apresentacao :focus-visible {
+    outline-color: #F2C14E;
+}
+
+.hero-citacao {
+    position: relative;
+    padding: 28px 0 28px 32px;
+    border-left: 3px solid #F2C14E;
+}
+
+.hero-citacao::before {
+    display: block;
+    margin-bottom: 12px;
+    content: "“";
+    color: #F2C14E;
+    font-family: var(--fonte-titulo);
+    font-size: 5em;
+    line-height: 0.5;
+}
+
+.hero-citacao blockquote p {
+    font-size: clamp(1.2em, 2.4vw, 1.7em);
+    line-height: 1.6;
+}
+
+.hero-citacao figcaption {
+    margin-top: 24px;
+    color: #F2C14E;
+    font-size: 0.74em;
+    letter-spacing: 0.05em;
+}
+
+.hero-citacao cite {
+    display: block;
+    margin-top: 6px;
+    color: #E3D3BD;
+    font-style: normal;
+}
+
+/* Números do acervo. */
+
+.estatisticas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0 calc(-1 * var(--margem-lateral)) 72px;
+    padding: 28px var(--margem-lateral);
+    background: var(--superficie);
+    list-style: none;
+    border-bottom: 1px solid var(--borda);
+}
+
 .estatisticas li {
-    padding: 14px 16px;
-    background-color: var(--fundo-card);
-    border: 1px solid var(--borda);
-    border-left: 6px solid var(--destaque);
-    border-radius: var(--raio);
-    font-size: 0.95em;
+    padding: 0 24px;
+    color: var(--texto-suave);
+    font-size: 0.8em;
+    border-left: 1px solid var(--borda);
+}
+
+.estatisticas li:first-child {
+    padding-left: 0;
+    border-left: 0;
 }
 
 .estatisticas strong {
     display: block;
+    margin-bottom: 4px;
+    color: var(--texto);
     font-family: var(--fonte-titulo);
-    font-size: 2.2em;
-    line-height: 1.1;
-    color: var(--genero-escuro);
+    font-size: 3.3em;
+    line-height: 1;
 }
 
-/* Parágrafos extras da apresentação, recolhidos para a home ficar mais leve */
-.saiba-mais {
-    max-width: var(--medida);
-    margin-top: 28px;
-}
-
-.saiba-mais summary {
-    padding: 10px 0;
-    font-weight: 700;
-    color: var(--genero-escuro);
-    cursor: pointer;
-}
-
-.saiba-mais p {
-    margin-top: 12px;
-}
+/* Entradas para as três exposições. */
 
 .generos {
-    margin-bottom: 64px;
+    margin-bottom: 80px;
+    scroll-margin-top: 2em;
 }
 
-.generos h2 {
-    margin-bottom: 24px;
+.cabecalho-secao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px 32px;
+    margin-bottom: 32px;
+}
+
+.cabecalho-secao h2 {
+    margin-bottom: 0;
+}
+
+.cabecalho-secao > p {
+    max-width: 36ch;
+    color: var(--texto-suave);
+    font-size: 0.88em;
 }
 
 .lista-generos {
     display: grid;
-    /* min(100%, 280px) evita estouro em telas muito estreitas */
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
 }
 
-/* Cor de cada gênero */
-.lista-generos .lirico   { --cor-genero: var(--cor-lirico); }
-.lista-generos .satirico { --cor-genero: var(--cor-satirico); }
-.lista-generos .cordel   { --cor-genero: var(--cor-cordel); }
-
 .lista-generos article {
     position: relative;
-    padding: 0 0 24px;
-    overflow: hidden;
-    background-color: var(--fundo-card);
-    border: 1px solid var(--borda);
-    border-top: 10px solid var(--cor-genero, var(--destaque));
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 28px;
+    background: var(--cor-categoria);
+    color: var(--texto-categoria);
     border-radius: var(--raio);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.lista-generos article:hover {
-    box-shadow: 0 6px 16px rgba(44, 30, 17, 0.15);
+.lista-generos .lirico {
+    --cor-categoria: #F2C14E;
+    --texto-categoria: #291D16;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .lista-generos article:hover {
-        transform: translateY(-3px);
-    }
+.lista-generos .satirico {
+    --cor-categoria: #A43D2D;
+    --texto-categoria: #FFF8EE;
+}
+
+.lista-generos .cordel {
+    --cor-categoria: #35465C;
+    --texto-categoria: #FFF8EE;
+}
+
+.numero-sala {
+    font-size: 0.72em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .lista-generos img {
-    display: block;
     width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.lista-generos h3,
-.lista-generos p {
-    padding: 0 24px;
+    aspect-ratio: 5 / 3;
+    margin: 24px 0;
+    object-fit: cover;
+    border: 1px solid #291D1626;
+    border-radius: 2px;
 }
 
 .lista-generos h3 {
-    font-size: 1.7em;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    font-size: 2.6em;
 }
 
 .lista-generos h3 a {
-    color: var(--texto);
+    color: inherit;
     text-decoration: none;
 }
 
-.lista-generos article:hover h3 a {
+.lista-generos h3 a::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+}
+
+.lista-generos article > p:not(.numero-sala) {
+    font-size: 0.86em;
+}
+
+.entrada-sala {
+    display: block;
+    margin-top: auto;
+    padding-top: 28px;
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.lista-generos article:hover .entrada-sala {
     text-decoration: underline;
 }
 
-.lista-generos h3 a::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-}
-
-/* O contorno só aparece no foco por teclado, não no clique do mouse.
-   @supports: só remove o outline do link se o navegador entender :has(). */
 @supports selector(:has(*)) {
     .lista-generos article:has(a:focus-visible) {
-        outline: 3px solid var(--foco);
-        outline-offset: 4px;
+        outline: 3px solid var(--texto);
+        outline-offset: 6px;
     }
 
     .lista-generos h3 a:focus-visible {
@@ -177,67 +252,158 @@
     }
 }
 
-.lista-generos p {
-    font-size: 0.95em;
-}
+/* Poema do dia: um destaque amplo, com versos. */
 
-/* ---------- Poema do dia (montado pelo cards.js) ---------- */
 .poema-do-dia {
-    margin-bottom: 56px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: 40px;
+    margin-bottom: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--borda);
 }
 
 .poema-do-dia .lista-cards {
-    grid-template-columns: minmax(0, 28rem);
+    grid-template-columns: minmax(0, 1fr);
 }
 
-/* As paletas de cada gênero (claro e escuro) agora ficam só em tema.css e valem para
-   qualquer elemento com data-genero. Por isso o card do poema do dia herda a paleta
-   do próprio gênero sem precisar repeti-la aqui. */
+.poema-do-dia .card {
+    padding: 36px;
+}
+
+.poema-do-dia .card h3 {
+    font-size: 2.5em;
+}
+
+.poema-do-dia .card-categoria {
+    margin-bottom: 20px;
+}
+
+.poema-do-dia .card-trecho {
+    max-width: 40ch;
+}
+
+.destaque-intro > p:last-child {
+    max-width: 30ch;
+    color: var(--texto-suave);
+    font-size: 0.9em;
+}
+
+/* Sobre: texto editorial em vez de uma grade de caixas técnicas. */
 
 .sobre {
-    padding: 32px;
-    background-color: var(--fundo-card);
-    border: 1px solid var(--borda);
-    border-left: 10px solid var(--destaque);
-    border-radius: var(--raio);
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--borda);
 }
 
-.sobre h2 {
-    font-size: 2em;
-    color: var(--genero-escuro);
-}
-
-.sobre p {
+.sobre-texto {
     max-width: var(--medida);
 }
 
 .tecnologias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    gap: 16px;
-    margin: 24px 0;
 }
 
 .tecnologias li {
-    padding: 16px 20px;
-    background-color: var(--fundo-principal);
+    padding: 6px 12px;
+    color: var(--texto-suave);
+    font-size: 0.76em;
     border: 1px solid var(--borda);
-    border-top: 5px solid var(--destaque);
-    border-radius: var(--raio);
-    font-size: 0.95em;
 }
 
-.tecnologias strong {
-    display: block;
-    margin-bottom: 4px;
-    font-family: var(--fonte-titulo);
-    font-size: 1.4em;
-    color: var(--genero-escuro);
+@media (max-width: 60em) {
+    .apresentacao {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+    }
+
+    .hero-citacao {
+        max-width: 38em;
+    }
+
+    .lista-generos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lista-generos article {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+        column-gap: 32px;
+    }
+
+    .lista-generos img {
+        grid-column: 1;
+        grid-row: 2 / 5;
+        margin-bottom: 0;
+    }
+
+    .lista-generos h3 {
+        grid-column: 2;
+        margin-top: 20px;
+    }
+
+    .lista-generos article > p:not(.numero-sala),
+    .entrada-sala {
+        grid-column: 2;
+    }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 40em) {
+    .apresentacao {
+        margin-top: -36px;
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .hero-citacao {
+        padding-left: 24px;
+    }
+
+    .estatisticas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        margin-bottom: 48px;
+    }
+
+    .estatisticas li {
+        padding: 0;
+        border: 0;
+    }
+
+    .lista-generos article {
+        display: flex;
+        padding: 24px;
+    }
+
+    .lista-generos img {
+        margin: 24px 0;
+    }
+
+    .lista-generos h3 {
+        margin-top: 0;
+    }
+
+    .poema-do-dia,
     .sobre {
-        padding: 20px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .poema-do-dia .card {
+        padding: 24px;
+    }
+
+    .generos,
+    .poema-do-dia {
+        margin-bottom: 56px;
     }
 }

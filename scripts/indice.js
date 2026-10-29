@@ -1,37 +1,90 @@
-// Destaca, na barra de subgêneros, a seção que está na tela (IntersectionObserver).
-// Módulo ES (não precisa importar nada).
-const links = [...document.querySelectorAll('.indice-subgeneros a[href^="#"]')];
+const links = [
+  ...document.querySelectorAll('.indice-subgeneros a[href^="#"]')
+];
 
-// No celular a barra rola na horizontal: mantém o chip ativo visível, sem rolar a página
+const pares = links.map(link => ({
+  link,
+  secao: document.getElementById(link.hash.slice(1))
+})).filter(item => item.secao);
+
 function mostrarNaBarra(link) {
   const lista = link.closest('ul');
+
   if (!lista || lista.scrollWidth <= lista.clientWidth) return;
-  const a = link.getBoundingClientRect();
-  const l = lista.getBoundingClientRect();
-  lista.scrollLeft += a.left - l.left - (l.width - a.width) / 2;
+
+  const item = link.getBoundingClientRect();
+  const barra = lista.getBoundingClientRect();
+
+  lista.scrollLeft +=
+    item.left -
+    barra.left -
+    (barra.width - item.width) / 2;
 }
 
-if (links.length > 0 && 'IntersectionObserver' in window) {
-  const porId = new Map(links.map((link) => [link.getAttribute('href').slice(1), link]));
+let agendado = false;
+let atual = null;
 
-  const observador = new IntersectionObserver(
-    (entradas) => {
-      entradas.forEach((entrada) => {
-        if (!entrada.isIntersecting) return;
-        links.forEach((link) => link.removeAttribute('aria-current'));
-        const ativo = porId.get(entrada.target.id);
-        if (ativo) {
-          ativo.setAttribute('aria-current', 'location');
-          mostrarNaBarra(ativo);
-        }
-      });
-    },
-    // considera "atual" a seção que cruza a faixa superior da tela
-    { rootMargin: '-20% 0px -70% 0px' }
+function atualizar() {
+  agendado = false;
+
+  const faixa = window.innerHeight * 0.3;
+
+  const visiveis = pares.filter(item =>
+    !item.secao.hidden
   );
 
-  porId.forEach((link, id) => {
-    const secao = document.getElementById(id);
-    if (secao) observador.observe(secao);
+  let escolhido = null;
+
+  for (const item of visiveis) {
+    const caixa = item.secao.getBoundingClientRect();
+
+    if (caixa.top <= faixa && caixa.bottom > 0) {
+      escolhido = item;
+    }
+  }
+
+  if (!escolhido) {
+    escolhido = visiveis.find(item => {
+      const caixa = item.secao.getBoundingClientRect();
+
+      return (
+        caixa.top >= 0 &&
+        caixa.top < window.innerHeight
+      );
+    }) ?? null;
+  }
+
+  links.forEach(link => {
+    if (link === escolhido?.link) {
+      link.setAttribute('aria-current', 'location');
+    } else {
+      link.removeAttribute('aria-current');
+    }
   });
+
+  if (escolhido && escolhido.link !== atual) {
+    mostrarNaBarra(escolhido.link);
+  }
+
+  atual = escolhido?.link ?? null;
+}
+
+function agendar() {
+  if (agendado) return;
+
+  agendado = true;
+  requestAnimationFrame(atualizar);
+}
+
+if (pares.length) {
+  window.addEventListener('scroll', agendar, {
+    passive: true
+  });
+
+  window.addEventListener('resize', agendar);
+  window.addEventListener('pageshow', agendar);
+
+  document.addEventListener('museu:busca', agendar);
+
+  agendar();
 }
